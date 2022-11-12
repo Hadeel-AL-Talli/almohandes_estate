@@ -1,3 +1,4 @@
+import 'package:almohandes_estate/firebase/fb_notifications.dart';
 import 'package:almohandes_estate/prefs/shared_prefrences_controller.dart';
 import 'package:almohandes_estate/screens/Auth/forget_password.dart';
 import 'package:almohandes_estate/screens/Auth/login.dart';
@@ -11,6 +12,8 @@ import 'package:almohandes_estate/screens/callus.dart';
 import 'package:almohandes_estate/screens/on_boarding.dart';
 import 'package:almohandes_estate/screens/splash.dart';
 import 'package:almohandes_estate/screens/whous.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -23,7 +26,11 @@ import 'Unregister_User/unregister.dart';
 import 'get/options_getx_controller.dart';
 
 void main() async{
+ 
   WidgetsFlutterBinding.ensureInitialized();
+   await Firebase.initializeApp();
+await FbNotifications.initNotifications();
+ 
   await SharedPrefController().initPref();
   runApp(const MyApp());
 }
@@ -38,7 +45,8 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
 
   OptionGetxController _optionGetxController = Get.put(OptionGetxController());
-
+@override
+ 
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(

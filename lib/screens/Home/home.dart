@@ -1,3 +1,7 @@
+import 'package:almohandes_estate/controllers/api_helper.dart';
+import 'package:almohandes_estate/controllers/api_settings.dart';
+import 'package:almohandes_estate/firebase/fb_notifications.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -15,6 +19,7 @@ import '../../widgets/homeWidget.dart';
 import '../../widgets/search_form.dart';
 import '../building_details.dart';
 import 'main_screen.dart';
+import 'package:http/http.dart' as http;
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -23,7 +28,7 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home> with FbNotifications, ApiHelper{
   bool isClicked = false;
   String categoryId = "";
   String typeId = "";
@@ -42,6 +47,24 @@ class _HomeState extends State<Home> {
   getData();
     // TODO: implement initState
     super.initState();
+   
+    FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance; 
+   _firebaseMessaging.getToken().then((token){
+      print("token is $token");
+      //send token to api
+       http.post(Uri.parse(ApiSettings.notifications) , headers:headers,
+       body: {
+        'token':token
+       }
+       );
+
+    print('FCM TOKEN IS $token');
+
+  });
+    requestNotificationPermissions();
+
+    
+    initializeForegroundNotificationForAndroid();
   }
   @override
   Widget build(BuildContext context) {
@@ -100,7 +123,7 @@ class _HomeState extends State<Home> {
                             );
                           });
                         },
-                        child: SvgPicture.asset("images/Filter.svg"),
+                        child: SvgPicture.asset("images/Filter.svg", ),
                       ),
                     ),
                   ),
@@ -114,7 +137,7 @@ class _HomeState extends State<Home> {
 
                     Image.asset('images/slider.png'),
                     options!.categories.isNotEmpty?  SizedBox(
-                      height: 40.h,
+                      height: 50.h,
                       child: ListView.builder(
                         shrinkWrap: true,
                         itemCount: options!.categories.length,
@@ -145,7 +168,7 @@ class _HomeState extends State<Home> {
                               setState(() {});
                             },
                             child: Container(
-                              margin: EdgeInsets.symmetric(horizontal: 16.w),
+                              margin: EdgeInsets.symmetric(horizontal: 14.w),
                               width: MediaQuery.of(context).size.width / 4,
                               height: 30.h,
                               decoration: BoxDecoration(
@@ -175,7 +198,7 @@ class _HomeState extends State<Home> {
                       height: 5.h,
                     ),
                     options!.types.isNotEmpty?    SizedBox(
-                      height: 70.h,
+                      height: 60.h,
                       child: ListView.builder(
                         shrinkWrap: true,
                         itemCount: options!.types.length,
@@ -206,9 +229,10 @@ class _HomeState extends State<Home> {
                               setState(() {});
                             },
                             child: Container(
-                              margin: EdgeInsets.symmetric(horizontal: 8.w),
-                              width: MediaQuery.of(context).size.width / 5,
+                              margin: EdgeInsets.symmetric(horizontal: 14.w),
+                              width: MediaQuery.of(context).size.width / 6,
                               height: 60.h,
+                              
                               decoration: BoxDecoration(
                                 color: controller
                                     .options!.types[index].selected
@@ -234,6 +258,7 @@ class _HomeState extends State<Home> {
                                         .types[index].selected
                                         ? Colors.white:Color(0xff797979),
                                   ),
+                                  SizedBox(height: 5.h,),
                                   Center(
                                       child: Text(
                                         controller.  options!.types[index].name,
@@ -287,7 +312,7 @@ class _HomeState extends State<Home> {
                               setState(() {});
                             },
                             child: Container(
-                              margin: EdgeInsets.symmetric(horizontal: 8.w),
+                              margin: EdgeInsets.symmetric(horizontal: 14.w),
                               width: MediaQuery.of(context).size.width / 4,
                               height: 30.h,
                               decoration: BoxDecoration(
@@ -300,8 +325,10 @@ class _HomeState extends State<Home> {
                               ),
                               child: Center(
                                   child: Text(
+                                    
                                     controller.options!.cities[index].name,
-                                    style: TextStyle(fontFamily: 'Tj', fontSize: 14.sp,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(fontFamily: 'Tj',fontSize: 14.sp,
                                         color: controller.options!
                                             .cities[index].selected
                                             ? Colors.white
@@ -348,8 +375,19 @@ class _HomeState extends State<Home> {
                         }
                         else
                         {
-                          return Center(child: Text("لا يوجد نتائج ",
-                          style: TextStyle(fontFamily: 'Tj',fontSize: 14.sp, color: Colors.black ,fontWeight: FontWeight.bold,)));
+                        return  Column(
+            children: [
+              SizedBox(height: 20.h,),
+              Image.asset('images/search.png', width: 120.w,),
+                Center(child: Text(" لا يوجد نتائج ابحث مجددا",
+                              style: TextStyle(fontFamily: 'Tj',fontSize: 16.sp, color: Colors.black ,fontWeight: FontWeight.bold,))),
+
+                              SizedBox(height: 10.h,),
+                               Center(child: Text("للحصول على نتائج أفضل استخدم الفلاتر الموجودة في صفحة البحث ",
+                               textAlign: TextAlign.center,
+                              style: TextStyle(fontFamily: 'Tj',fontSize: 14.sp, color: Color(0xff8A8A8A) ,fontWeight: FontWeight.bold,))),
+            ],
+          );
                         }
                       },),
 
@@ -359,8 +397,18 @@ class _HomeState extends State<Home> {
             ],
           );
         } else {
-          return Center(child: Text("لا يوجد نتائج ",
-                          style: TextStyle(fontFamily: 'Tj',fontSize: 14.sp, color: Colors.black ,fontWeight: FontWeight.bold,)));
+          return Column(
+            children: [
+              SizedBox(height: 40.h,),
+              Image.asset('images/search.png'),
+                Center(child: Text(" لا يوجد نتائج ابحث مجددا",
+                              style: TextStyle(fontFamily: 'Tj',fontSize: 24.sp, color: Colors.black ,fontWeight: FontWeight.bold,))),
+
+                              SizedBox(height: 10.h,),
+                               Center(child: Text("للحصول على نتائج أفضل استخدم الفلاتر الموجودة في صفحة البحث ",
+                              style: TextStyle(fontFamily: 'Tj',fontSize: 14.sp, color: Color(0xff8A8A8A) ,fontWeight: FontWeight.bold,))),
+            ],
+          );
         }
       });
   }

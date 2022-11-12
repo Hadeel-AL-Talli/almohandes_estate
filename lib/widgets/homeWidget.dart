@@ -29,6 +29,7 @@ final  HomeModel homeModel;
       //  Image.network(homeModel.images, fit: BoxFit.fill,),
        Image.network(homeModel.images!=null&&homeModel.images!.isNotEmpty?
        homeModel.images![0].image:"", fit: BoxFit.fill,),
+       
        SizedBox(height: 10.h,),
        Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

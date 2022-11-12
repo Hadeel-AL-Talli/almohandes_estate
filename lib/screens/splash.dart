@@ -1,3 +1,4 @@
+import 'package:almohandes_estate/prefs/shared_prefrences_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -67,7 +68,9 @@ class _SplashState extends State<Splash> {
                    padding: const EdgeInsets.all(15.0),
                    child:CustomButton(
                     onPress: (){
-                    Navigator.pushNamed(context, '/on_boarding');
+                  //  Navigator.pushNamed(context, '/on_boarding');
+                    String route = SharedPrefController().loggedIn ? '/main_screen':'/login';
+                Navigator.pushNamed(context, route);
                    }, text: ' ابدأ الان', color: Color(0xff3D6CF0),))
                  ),
                  

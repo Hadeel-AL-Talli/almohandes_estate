@@ -49,6 +49,7 @@ class AuthApiController with ApiHelper {
     });
     if (response.statusCode == 200) {
       //TODO: SHARED PREFERENCES - SAVE LOGGED IN USER DATA!!
+      print(jsonDecode(response.body)['data']["token"]);
    await   SharedPrefController().save(
           name: jsonDecode(response.body)['data']["name"],
           token: jsonDecode(response.body)['data']["token"] , );
@@ -132,10 +133,10 @@ class AuthApiController with ApiHelper {
       url,
       body: {
         'email':email,
-        'code': code,
+        'token': code,
         
       },
-      headers: {HttpHeaders.acceptHeader: 'application/json'},
+     headers: {HttpHeaders.acceptHeader: 'application/json'},
     );
 
     if (response.statusCode == 200) {
@@ -176,7 +177,7 @@ class AuthApiController with ApiHelper {
       url,
       body: {
         'email':email,
-        'code': code,
+        'token': code,
         'password':password,
         'c_password':c_password
         
@@ -187,7 +188,8 @@ class AuthApiController with ApiHelper {
     if (response.statusCode == 200) {
       showSnackBar(
         context,
-        message: jsonDecode(response.body)['message'],
+        message: 'تم تغيير كلمة السر بنجاح '
+        //message: jsonDecode(response.body)['message'],
       );
       return true;
     } else if (response.statusCode == 400) {

@@ -133,13 +133,13 @@ SizedBox(
            
         Positioned(
             right: 30.w,
-            child: FavoriteButton(
+            child: FavoriteButton(  
             isFavorite: false,
               valueChanged: (_isFavorite){
                  print('Is Favorite : $_isFavorite');
             _isFavorite == false?  
-            FavoriteApiController().addFavorite(context, id: widget.id)
-             : FavoriteApiController().removeFavorite(context, id: widget.id)
+           
+              FavoriteApiController().removeFavorite(context, id: widget.id): FavoriteApiController().addFavorite(context, id: widget.id)
                ;
               
             }, 

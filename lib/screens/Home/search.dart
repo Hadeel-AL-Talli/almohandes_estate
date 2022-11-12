@@ -254,7 +254,7 @@ class _SearchState extends State<Search> {
             controller.options!.types.isNotEmpty ? SizedBox(
               height: 70.h,
               child: ListView.builder(
-                shrinkWrap: true,
+                //shrinkWrap: true,
                 itemCount: controller.options!.types.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
@@ -340,7 +340,7 @@ class _SearchState extends State<Search> {
             controller.options!.cities.isNotEmpty ? SizedBox(
               height: 40.h,
               child: ListView.builder(
-                shrinkWrap: true,
+               // shrinkWrap: true,
                 itemCount: controller.options!.cities.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
@@ -360,6 +360,7 @@ class _SearchState extends State<Search> {
                       setState(() {});
                     },
                     child: Container(
+                      
                       margin: EdgeInsets.symmetric(horizontal: 8.w),
                       width: MediaQuery
                           .of(context)

@@ -60,17 +60,18 @@ class _CallUsState extends State<CallUs> {
                 border: Border.all(color: Colors.grey),
                 borderRadius: BorderRadius.circular(5)
               ),
-              child: Column(
-                children: [
-                  SvgPicture.asset('images/call.svg'),
-                  SizedBox(height: 10.h,),
-                  InkWell(
-                    onTap: (){
-                      launch("tel://+96407832170007");
-                    },
-                    child: Text('الهاتف', style: TextStyle(fontFamily: 'Tj',fontSize: 12.sp ),)),
-
-                ],
+              child: InkWell(
+                onTap: (){
+                   launch("tel://+96407832170007");
+                },
+                child: Column(
+                  children: [
+                    SvgPicture.asset('images/call.svg'),
+                    SizedBox(height: 10.h,),
+                    Text('الهاتف', style: TextStyle(fontFamily: 'Tj',fontSize: 12.sp ),),
+              
+                  ],
+                ),
               ),
             ),
 
@@ -83,27 +84,28 @@ class _CallUsState extends State<CallUs> {
                 border: Border.all(color: Colors.grey),
                 borderRadius: BorderRadius.circular(5)
               ),
-              child: Column(
-                children: [
-                  SvgPicture.asset('images/bareed.svg'),
-                  SizedBox(height: 10.h,),
-                  InkWell(
-                    onTap: ()async{
-                       String email = Uri.encodeComponent("almohandesrealestate1@gmail.com");
-                      String subject = Uri.encodeComponent("");
-                      String body = Uri.encodeComponent("");
-                      print(subject); //output: Hello%20Flutter
-                      Uri mail = Uri.parse("mailto:$email?subject=$subject&body=$body");
-                      if (await launchUrl(mail)) {
-                          //email app opened
-                      }else{
-                          //email app is not opened
-                      }
-                    },
-                    
-                    child: Text('البريد', style: TextStyle(fontFamily: 'Tj',fontSize: 12.sp ),)),
-
-                ],
+              child: InkWell(
+                onTap: ()async{
+ print('email');
+                         String email = Uri.encodeComponent("almohandesrealestate1@gmail.com");
+                        String subject = Uri.encodeComponent("");
+                        String body = Uri.encodeComponent("");
+                        print(subject); //output: Hello%20Flutter
+                        Uri mail = Uri.parse("mailto:$email?subject=$subject&body=$body");
+                        if (await launchUrl(mail)) {
+                            //email app opened
+                        }else{
+                            //email app is not opened
+                        }
+                },
+                child: Column(
+                  children: [
+                    SvgPicture.asset('images/bareed.svg'),
+                    SizedBox(height: 10.h,),
+                    Text('البريد', style: TextStyle(fontFamily: 'Tj',fontSize: 12.sp ),),
+              
+                  ],
+                ),
               ),
             ),
               SizedBox(width: 10.w,),

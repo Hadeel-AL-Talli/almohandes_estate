@@ -145,8 +145,14 @@ class _CodeVerifyState extends State<CodeVerify> with ApiHelper {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
       InkWell(
-        onTap: (){
+        onTap: ()async{
          // Navigator.pushNamed(context, '/login');
+         await AuthApiController().forgetPassword(
+      context,
+      email: widget
+      .email,
+    );
+
         },
         child: Text('  إعادة إرسال' , style: TextStyle(fontFamily: 'Tj',  fontSize: 12.sp, color: Color(0xff3D6CF0)),)),
 
@@ -164,8 +170,10 @@ class _CodeVerifyState extends State<CodeVerify> with ApiHelper {
   }
 Future<void> performResetPassword() async {
     if (checkCode()) {
-    
+     print('code');
       await resetPassword();
+      
+
       
     }
   }
@@ -192,12 +200,16 @@ Future<void> performResetPassword() async {
         _secondCodeTextController.text +
         _thirdCodeTextController.text +
         _fourthCodeTextController.text;
+
+        
         
   }
 
   Future<void> resetPassword() async {
     bool status = await AuthApiController().resetPassword(context,
         email: widget.email, code: code!);
+        print('reset password');
+        print(status);
     if (status) {
       Navigator.pushReplacement(
         context,

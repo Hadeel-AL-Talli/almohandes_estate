@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1052048950734-0q8l0fujss5h34b7ps1mduhqh5jofc0f.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1052048950734-0q8l0fujss5h34b7ps1mduhqh5jofc0f</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>1052048950734-fn8787cumgcqlbl6b12gfi33k3skvo2v.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB_8bIg3KwjozpZcW8cYVhpaEJVzvFlVaY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1052048950734</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.almohandesEstate</string>
+	<key>PROJECT_ID</key>
+	<string>almohandes</string>
+	<key>STORAGE_BUCKET</key>
+	<string>almohandes.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1052048950734:ios:d254649178678f5e90579f</string>
+</dict>
+</plist>

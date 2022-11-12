@@ -30,9 +30,9 @@ class _PasswordChangedState extends State<PasswordChanged> {
           children: [
               Image.asset('images/changepass.png', height: 200.h,),
               SizedBox(height: 60.h,),
-               Text('تم تغيير كلمة السر ', textDirection: TextDirection.rtl,style: TextStyle(fontFamily: 'Tj', fontSize: 24.sp,color: Colors.black, fontWeight: FontWeight.bold),),
+               Center(child: Text('تم تغيير كلمة السر ', textDirection: TextDirection.rtl,style: TextStyle(fontFamily: 'Tj', fontSize: 24.sp,color: Colors.black, fontWeight: FontWeight.bold),)),
                SizedBox(height: 8.h,),
-                Text('تم تغيير كلمة السر الخاصة بك بنجاح', textDirection: TextDirection.rtl,style: TextStyle(fontFamily: 'Tj', fontSize: 14.sp,color: Color(0xff8A8A8A), fontWeight: FontWeight.bold),),
+                Center(child: Text('تم تغيير كلمة السر الخاصة بك بنجاح', textDirection: TextDirection.rtl,style: TextStyle(fontFamily: 'Tj', fontSize: 14.sp,color: Color(0xff8A8A8A), fontWeight: FontWeight.bold),)),
 
           ],
         )

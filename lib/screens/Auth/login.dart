@@ -1,14 +1,22 @@
+import 'dart:convert';
+
+import 'package:almohandes_estate/controllers/api_settings.dart';
+import 'package:almohandes_estate/firebase/fb_notifications.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../controllers/api_helper.dart';
 import '../../controllers/auth_api_controller.dart';
 import '../../widgets/app_text_feild.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/social_button.dart';
+import 'package:http/http.dart'as http;
 
 
 class Login extends StatefulWidget {
@@ -18,19 +26,49 @@ class Login extends StatefulWidget {
   State<Login> createState() => _LoginState();
 }
 
-class _LoginState extends State<Login> with ApiHelper {
+class _LoginState extends State<Login> with ApiHelper , FbNotifications {
    late TextEditingController _emailTextController ;
   late TextEditingController _passwordTextController;
-
-
+  final FacebookLogin _fb = FacebookLogin(); 
+GoogleSignIn _googleSignIn = GoogleSignIn(
+ 
+  // The OAuth client id of your app. This is required.
+ // clientId:'1052048950734-fn8787cumgcqlbl6b12gfi33k3skvo2v.apps.googleusercontent.com',
+  // If you need to authenticate to a backend server, specify its OAuth client. This is optional.
+  serverClientId: '',
+);
+GoogleSignIn _googleSign = GoogleSignIn(
+  scopes: [
+  // 'email',
+    // 'https://www.googleapis.com/auth/contacts.readonly'
+   
+  ],
+);
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _emailTextController = TextEditingController();
     _passwordTextController = TextEditingController();
+    FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance; 
+   _firebaseMessaging.getToken().then((token){
+      print("token is $token");
+      //send token to api
+       http.post(Uri.parse(ApiSettings.notifications) , headers:headers,
+       body: {
+        'token':token
+       }
+       );
+
+    print('FCM TOKEN IS $token');
+
+  });
+    requestNotificationPermissions();
+
+    
     
   }
+  
 
   @override
   void dispose() {
@@ -40,6 +78,45 @@ class _LoginState extends State<Login> with ApiHelper {
     
     _passwordTextController.dispose();
   }
+  void _facebookLogin()async{
+    final result = await _fb.logIn();
+
+    switch(result.status){
+      case FacebookLoginStatus.success :
+      sendToken(result.accessToken!.token);
+      print('TOKEN'+result.accessToken!.token);
+      break;
+
+      case FacebookLoginStatus.cancel: break;
+
+      case FacebookLoginStatus.error:
+       print(result.error);
+      break;
+    }
+  }
+  void sendToken (String facebookToken) async{
+     var url = Uri.parse(ApiSettings.facebooklogin);
+     var response = await http.post(url, body: json.encode({
+      "token":facebookToken
+     }, ), headers: {"Content-Type":"application/json"});
+
+     print(response.body);
+  }
+  Future<void> _handleSignIn() async {
+  try {
+    await _googleSignIn.signIn().then((value) => value!.authentication.then((googleKey) => sendGoogleToken(googleKey.accessToken!))).catchError((err)=>print(err)).catchError((error)=>print(error));
+
+  } catch (error) {
+    print(error);
+  }
+}
+void sendGoogleToken(String googleToken)async{
+  var url = Uri.parse(ApiSettings.googlelogin);
+  var response = await http.post(url, body: json.encode({
+    "token":googleToken
+  }), headers: {"Content-Type":"application/json"});
+  print(response.body);
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,9 +133,20 @@ class _LoginState extends State<Login> with ApiHelper {
          Row(
           mainAxisAlignment: MainAxisAlignment.center,
            children: [
-             SocialButton(imagepath: 'images/google.svg', text: 'باستخدام غوغل ',),
+             InkWell(
+              onTap: ()async{
+                await _handleSignIn();
+                await  Navigator.pushReplacementNamed(context, '/main_screen');
+              },
+              child: SocialButton(imagepath: 'images/google.svg', text: 'باستخدام غوغل ',)),
              SizedBox(width: 10.w,),
-             SocialButton(imagepath: 'images/facebook.svg', text: 'باستخدام فيسبوك ',),
+             InkWell(
+              onTap: ()async{
+                _facebookLogin();
+                await  Navigator.pushReplacementNamed(context, '/main_screen');
+
+              },
+              child: SocialButton(imagepath: 'images/facebook.svg', text: 'باستخدام فيسبوك ',)),
            ],
          ),
          SizedBox(height: 20.h,),

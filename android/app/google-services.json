@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "1052048950734",
+    "project_id": "almohandes",
+    "storage_bucket": "almohandes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1052048950734:android:c7a1d11ffa294c3f90579f",
+        "android_client_info": {
+          "package_name": "com.almohanes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1052048950734-fn8787cumgcqlbl6b12gfi33k3skvo2v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.almohanes",
+            "certificate_hash": "6ab992a60e835505eec5ec17ce461d25aea8b6f3"
+          }
+        },
+        {
+          "client_id": "1052048950734-lmknhj0r1mvj1062vp3kl15hj9m3n6s3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaigX8wEJKW6T725SsiLsLTz8dXNjpKus"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1052048950734-lmknhj0r1mvj1062vp3kl15hj9m3n6s3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1052048950734-0q8l0fujss5h34b7ps1mduhqh5jofc0f.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.almohandesEstate"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

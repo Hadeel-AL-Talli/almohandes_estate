@@ -1,7 +1,7 @@
 class ApiSettings{
-  static const apiUrl = "http://app1.tp-iraq.com/api/";
-  static const register = "http://app1.tp-iraq.com/api/register";
-   static const login = "http://app1.tp-iraq.com/api/login";
+  static const apiUrl = "https://app1.tp-iraq.com/api/";
+  static const register = "https://app1.tp-iraq.com/api/register";
+   static const login = "https://app1.tp-iraq.com/api/login";
    static const option = apiUrl + "options";
    static const home = apiUrl +"properties";
   static const search = apiUrl +"search";
@@ -18,6 +18,9 @@ class ApiSettings{
   static const addtofav = apiUrl + "property/favorite/add";
   static const removefromfav = apiUrl + "/property/favorite/remove";
   static const getfav = apiUrl + "user/favorites/";
+  static const facebooklogin = apiUrl+ "facebooklogin";
+  static const googlelogin = apiUrl+ "googlelogin";
+  static const notifications = apiUrl + "/user/firebasetoken";
   static const logout = apiUrl +"logout";
 
 
