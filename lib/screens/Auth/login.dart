@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:almohandes_estate/controllers/api_settings.dart';
 import 'package:almohandes_estate/firebase/fb_notifications.dart';
+import 'package:almohandes_estate/prefs/shared_prefrences_controller.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -27,6 +28,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> with ApiHelper , FbNotifications {
+    String? _token;
    late TextEditingController _emailTextController ;
   late TextEditingController _passwordTextController;
   final FacebookLogin _fb = FacebookLogin(); 
@@ -52,19 +54,13 @@ GoogleSignIn _googleSign = GoogleSignIn(
     _passwordTextController = TextEditingController();
     FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance; 
    _firebaseMessaging.getToken().then((token){
-      print("token is $token");
-      //send token to api
-       http.post(Uri.parse(ApiSettings.notifications) , headers:headers,
-       body: {
-        'token':token
-       }
-       );
-
-    print('FCM TOKEN IS $token');
+   
+      
 
   });
+    
     requestNotificationPermissions();
-
+   
     
     
   }
@@ -97,7 +93,7 @@ GoogleSignIn _googleSign = GoogleSignIn(
   void sendToken (String facebookToken) async{
      var url = Uri.parse(ApiSettings.facebooklogin);
      var response = await http.post(url, body: json.encode({
-      "token":facebookToken
+      "token":SharedPrefController().token
      }, ), headers: {"Content-Type":"application/json"});
 
      print(response.body);
@@ -113,7 +109,7 @@ GoogleSignIn _googleSign = GoogleSignIn(
 void sendGoogleToken(String googleToken)async{
   var url = Uri.parse(ApiSettings.googlelogin);
   var response = await http.post(url, body: json.encode({
-    "token":googleToken
+    "token":SharedPrefController().token
   }), headers: {"Content-Type":"application/json"});
   print(response.body);
 }
@@ -246,6 +242,7 @@ void sendGoogleToken(String googleToken)async{
       email: _emailTextController.text,
       password: _passwordTextController.text,
     );
+   
     if (status) Navigator.pushReplacementNamed(context, '/main_screen');
   }
 }

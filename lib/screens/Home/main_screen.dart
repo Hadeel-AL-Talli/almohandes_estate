@@ -1,6 +1,8 @@
+import 'package:almohandes_estate/prefs/shared_prefrences_controller.dart';
 import 'package:almohandes_estate/screens/Home/profile.dart';
 import 'package:almohandes_estate/screens/Home/search.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
@@ -33,6 +35,12 @@ class _MainScreenState extends State<MainScreen> {
     // TODO: implement initState
     super.initState();
   }
+  Future<void> _copyToClipboard() async {
+    await Clipboard.setData(ClipboardData(text: SharedPrefController().token));
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      content: Text('Copied to clipboard'),
+    ));
+  }
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -43,8 +51,16 @@ class _MainScreenState extends State<MainScreen> {
         backgroundColor: Colors.white,
        appBar: AppBar(
          leading: 
-            IconButton(onPressed: (){}, icon: Icon(Icons.notifications) , color: Colors.black,),
-        
+            IconButton(onPressed: (){
+              Navigator.pushNamed(context, '/notifications');
+            }, icon: Icon(Icons.notifications) , color: Colors.black,),
+        actions: [
+          // TextButton(onPressed: (){
+          //   _copyToClipboard();
+          // }, child: Container(
+          //   color: Colors.red,
+          //   child: Text(SharedPrefController().token)))
+        ],
           centerTitle: true,
           elevation: 0,
           backgroundColor: Colors.white,

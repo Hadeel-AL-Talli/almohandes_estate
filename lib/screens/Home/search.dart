@@ -155,9 +155,9 @@ class _SearchState extends State<Search> {
               itemBuilder: (context, index) {
                 return InkWell(
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(
-                              builder: (context) => BuildingDetails(id: homeModel[index].id,)));
+                      // Navigator.push(context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => BuildingDetails(id: homeModel[index].id,)));
                     },
                     child: homewidget(
                       homeModel: listSelected![index],
@@ -476,7 +476,18 @@ class _SearchState extends State<Search> {
           ],
         );
       } else {
-        return Text("No Data");
+        return Column(
+            children: [
+              SizedBox(height: 40.h,),
+              Image.asset('images/search.png'),
+                Center(child: Text(" لا يوجد نتائج ابحث مجددا",
+                              style: TextStyle(fontFamily: 'Tj',fontSize: 24.sp, color: Colors.black ,fontWeight: FontWeight.bold,))),
+
+                              SizedBox(height: 10.h,),
+                               Center(child: Text("للحصول على نتائج أفضل استخدم الفلاتر الموجودة في صفحة البحث ",
+                              style: TextStyle(fontFamily: 'Tj',fontSize: 14.sp, color: Color(0xff8A8A8A) ,fontWeight: FontWeight.bold,))),
+            ],
+          );
       }
     });
   }

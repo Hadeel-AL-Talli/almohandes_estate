@@ -4,6 +4,7 @@ import 'package:almohandes_estate/firebase/fb_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,6 +30,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with FbNotifications, ApiHelper{
+  
   bool isClicked = false;
   String categoryId = "";
   String typeId = "";
@@ -49,23 +51,45 @@ class _HomeState extends State<Home> with FbNotifications, ApiHelper{
     super.initState();
    
     FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance; 
+    _firebaseMessaging.subscribeToTopic('all');
    _firebaseMessaging.getToken().then((token){
-      print("token is $token");
-      //send token to api
-       http.post(Uri.parse(ApiSettings.notifications) , headers:headers,
-       body: {
-        'token':token
-       }
-       );
+   
+     print(token);
+     
+      
 
     print('FCM TOKEN IS $token');
+  
 
   });
+ // sendFcmToken(context , token:token);
+  
     requestNotificationPermissions();
 
     
     initializeForegroundNotificationForAndroid();
   }
+   Future<bool> sendFcmToken(BuildContext context,{ required String token})async{
+    var url = Uri.parse(ApiSettings.notifications);
+  var response = await  http.post(url , headers:headers,
+       body: {
+        'token':token
+       }
+     
+       );
+       print(response.statusCode);
+       if(response.statusCode ==200){
+          print('token send to api $token' );
+          return true;
+       }
+
+       return false;
+       
+     
+  }
+
+
+   
   @override
   Widget build(BuildContext context) {
     return

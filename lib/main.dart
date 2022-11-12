@@ -8,6 +8,7 @@ import 'package:almohandes_estate/screens/Home/add_building.dart';
 import 'package:almohandes_estate/screens/Home/edit_profile.dart';
 import 'package:almohandes_estate/screens/Home/main_screen.dart';
 import 'package:almohandes_estate/screens/Home/my_posts.dart';
+import 'package:almohandes_estate/screens/Home/notifications_screen.dart';
 import 'package:almohandes_estate/screens/callus.dart';
 import 'package:almohandes_estate/screens/on_boarding.dart';
 import 'package:almohandes_estate/screens/splash.dart';
@@ -79,7 +80,7 @@ class _MyAppState extends State<MyApp> {
             '/main_screen_un':(context)=> MainScreenUN(),
             '/unregister':(context) => Unregister(),
             '/myPosts':(context) => MyPosts(),
-
+              '/notifications':(context)=> NotificationScreen(),
             '/passwordchanged':((context) => PasswordChanged()),
 
 
