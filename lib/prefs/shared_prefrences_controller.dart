@@ -44,6 +44,12 @@ await _sharedPreferences.setString(PrefKeys.token.toString(), 'Bearer '+ token);
      await _sharedPreferences.setString(PrefKeys.max.toString(), priceMaxMin.max);
 
    }
+   Future<void> updateProfile ({required String name,required String email,required String password, required String phone   }) async {
+    await _sharedPreferences.setString(PrefKeys.name.toString(),name);
+    await _sharedPreferences.setString(PrefKeys.email.toString(),email);
+    await _sharedPreferences.setString(PrefKeys.password.toString(),password);
+    await _sharedPreferences.setString(PrefKeys.phone.toString(), phone);
+  }
    
    String get max =>
        _sharedPreferences.getString(PrefKeys.max.toString()) ?? '';

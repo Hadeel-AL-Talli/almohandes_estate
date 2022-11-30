@@ -68,7 +68,7 @@ class _EditProfileState extends State<EditProfile> with ApiHelper {
              ),
                 Padding(
                   padding: const EdgeInsets.all(15.0),
-                  child: AppTextField(hint: 'فاطمة حسام', controller: _nameTextController, suffix: Padding(
+                  child: AppTextField(hint: '', controller: _nameTextController, suffix: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: SvgPicture.asset('images/user-edit.svg', ),
                   )),
@@ -101,7 +101,7 @@ class _EditProfileState extends State<EditProfile> with ApiHelper {
              ),
                 Padding(
                   padding: const EdgeInsets.all(15.0),
-                  child: AppTextField(hint: '123456456', controller: _phoneTextController, suffix: Padding(
+                  child: AppTextField(hint: '', controller: _phoneTextController, suffix: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: SvgPicture.asset('images/editphone.svg', ),
                   )),
@@ -128,7 +128,8 @@ class _EditProfileState extends State<EditProfile> with ApiHelper {
     bool status = await UpdateProfileController().updateProfile(context, user: user);
    
     if (status) {
-      Navigator.pushReplacementNamed(context, '/main_screen');
+      SharedPrefController().updateProfile(name: _nameTextController.text, email: _emailTextController.text, password: _passwordTextController.text, phone: _phoneTextController.text);
+    //  Navigator.pushReplacementNamed(context, '/main_screen');
     }
   }
 
