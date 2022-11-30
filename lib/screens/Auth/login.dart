@@ -93,7 +93,7 @@ GoogleSignIn _googleSign = GoogleSignIn(
   void sendToken (String facebookToken) async{
      var url = Uri.parse(ApiSettings.facebooklogin);
      var response = await http.post(url, body: json.encode({
-      "token":SharedPrefController().token
+      "token":facebookToken
      }, ), headers: {"Content-Type":"application/json"});
 
      print(response.body);
@@ -109,7 +109,7 @@ GoogleSignIn _googleSign = GoogleSignIn(
 void sendGoogleToken(String googleToken)async{
   var url = Uri.parse(ApiSettings.googlelogin);
   var response = await http.post(url, body: json.encode({
-    "token":SharedPrefController().token
+    "token":googleToken
   }), headers: {"Content-Type":"application/json"});
   print(response.body);
 }
@@ -242,7 +242,7 @@ void sendGoogleToken(String googleToken)async{
       email: _emailTextController.text,
       password: _passwordTextController.text,
     );
-   
+  
     if (status) Navigator.pushReplacementNamed(context, '/main_screen');
   }
 }

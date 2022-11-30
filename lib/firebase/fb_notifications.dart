@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:almohandes_estate/controllers/api_settings.dart';
@@ -75,8 +74,9 @@ mixin FbNotifications {
     if (notificationSettings.authorizationStatus ==
         AuthorizationStatus.authorized) {
           // push notification from api 
- 
-
+         
+final fcmToken = await FirebaseMessaging.instance.getToken();
+//print(" ///////////////////$fcmToken" );
       print('GRANT PERMISSION');
     } else if (notificationSettings.authorizationStatus ==
         AuthorizationStatus.denied) {
@@ -91,6 +91,7 @@ mixin FbNotifications {
   void initializeForegroundNotificationForAndroid() {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       print('Message Received: ${message.messageId}');
+      
       RemoteNotification? notification = message.notification;
       AndroidNotification? androidNotification = notification?.android;
       if (notification != null && androidNotification != null) {

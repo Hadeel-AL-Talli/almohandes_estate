@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:almohandes_estate/controllers/api_helper.dart';
 import 'package:almohandes_estate/controllers/api_settings.dart';
 import 'package:almohandes_estate/firebase/fb_notifications.dart';
@@ -30,7 +32,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with FbNotifications, ApiHelper{
-  
+    
+
+
   bool isClicked = false;
   String categoryId = "";
   String typeId = "";
@@ -52,28 +56,48 @@ class _HomeState extends State<Home> with FbNotifications, ApiHelper{
    
     FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance; 
     _firebaseMessaging.subscribeToTopic('all');
-   _firebaseMessaging.getToken().then((token){
+   _firebaseMessaging.getToken().then((FCMtoken){
    
-     print(token);
      
+     sendFcmToken(token: FCMtoken!);
       
 
-    print('FCM TOKEN IS $token');
+    
   
+ 
 
   });
- // sendFcmToken(context , token:token);
+  FirebaseMessaging.instance.onTokenRefresh
+    .listen((fcmToken) {
+      sendFcmToken(token: fcmToken);
+      // TODO: If necessary send token to application server.
+
+      // Note: This callback is fired at each app startup and whenever a new
+      // token is generated.
+    })
+    .onError((err) {
+      // Error getting token.
+    });
+
+  
   
     requestNotificationPermissions();
 
     
     initializeForegroundNotificationForAndroid();
+    manageNotificationAction();
   }
-   Future<bool> sendFcmToken(BuildContext context,{ required String token})async{
+  
+
+   Future<bool> sendFcmToken({ required String token})async{
+ print('send fcm token');
+ print("/////////////$token");
     var url = Uri.parse(ApiSettings.notifications);
   var response = await  http.post(url , headers:headers,
        body: {
-        'token':token
+        'token':token,
+        
+         
        }
      
        );
@@ -86,10 +110,8 @@ class _HomeState extends State<Home> with FbNotifications, ApiHelper{
        return false;
        
      
-  }
+   }
 
-
-   
   @override
   Widget build(BuildContext context) {
     return

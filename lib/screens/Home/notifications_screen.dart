@@ -12,30 +12,25 @@ class NotificationScreen extends StatefulWidget {
 }
 
 class _NotificationScreenState extends State<NotificationScreen> with FbNotifications {
-   String? _token;
+   //String? _token;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     
-    FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance; 
-   _firebaseMessaging.getToken().then((token){
-    _token = token;
-     print(token);
+  //   FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance; 
+  //  _firebaseMessaging.getToken().then((token){
+  //   _token = token;
+  //    print(token);
      
-      //sendFcmToken(context , token: token!);
+  //     //sendFcmToken(context , token: token!);
 
-    print('FCM TOKEN IS $token');
+  //   print('FCM TOKEN IS $_token');
   
 
-  });
+  // });
   }
-  Future<void> _copyToClipboard() async {
-    await Clipboard.setData(ClipboardData(text: _token));
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      content: Text('Copied to clipboard'),
-    ));
-  }
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,13 +49,7 @@ class _NotificationScreenState extends State<NotificationScreen> with FbNotifica
         body: ListView(
           children: [
  
-            InkWell(
-              onTap: (){
-                _copyToClipboard();
-              },
-              child: Container(
-                color: Colors.red,
-                child: Text(_token??'', style: TextStyle(color: Colors.black),)))
+            
           ],
         ),
     );

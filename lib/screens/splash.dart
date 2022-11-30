@@ -1,4 +1,5 @@
 import 'package:almohandes_estate/prefs/shared_prefrences_controller.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -22,6 +23,8 @@ class _SplashState extends State<Splash> {
     HomeApiController().  getPriceMaxMin();
     // TODO: implement initState
     super.initState();
+     FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance; 
+    _firebaseMessaging.subscribeToTopic('all');
   }
   @override
   Widget build(BuildContext context) {
