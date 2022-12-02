@@ -60,6 +60,7 @@ class _HomeState extends State<Home> with FbNotifications, ApiHelper{
    
      
      sendFcmToken(token: FCMtoken!);
+     print("FCM TOKEN "+FCMtoken);
       
 
     

@@ -18,13 +18,16 @@ class MyPosts extends StatefulWidget {
 class _MyPostsState extends State<MyPosts> {
   late Future<List<MyPostsModel>> _future;
   List<MyPostsModel> _myposts = <MyPostsModel>[];
-
+ String text='حالة العقار';
+ Color color = Colors.white;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _future = MyPostController().getMyPosts();
+   
   }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,6 +79,56 @@ else if(snapshot.hasData && snapshot.data!.isNotEmpty){
              child: CustomButton(onPress: (){
               confirmDelete(_myposts[index].id.toString());
              }, text: 'حذف', color: Colors.white, textcolor: Colors.black,)),
+           ),
+           
+           Positioned(
+            top:20.h,
+            left: 0.w,
+             child: Container(
+              
+             width: 80.w,
+             height: 40.h,
+             
+             child: CustomButton(
+              onPress: (){
+               String statusnum;
+              
+                switch (_myposts[index].status) {
+      case '0':
+        statusnum = 'معلق';
+        setState(() {
+          text = statusnum;
+          color = Colors.blueAccent;
+        });
+         
+       
+        break;
+        case '1':
+statusnum = 'مقبول';
+setState(() {
+  text = statusnum;
+   color = Colors.green;
+});
+
+
+        break;
+
+        case '-1':
+        statusnum = 'مرفوض';
+        setState(() {
+          text = statusnum;
+           color = Colors.red;
+        });
+               
+
+        break;
+      default:
+    }
+              
+             }, text:
+               text
+             
+             , color: color, textcolor: Colors.black,)),
            ),
             ],
           ),

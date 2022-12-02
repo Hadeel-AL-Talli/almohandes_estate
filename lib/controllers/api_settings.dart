@@ -16,11 +16,11 @@ class ApiSettings{
   static const changepass  = apiUrl + "reset/new";
   static const updateProfile = apiUrl + "profile/update";
   static const addtofav = apiUrl + "property/favorite/add";
-  static const removefromfav = apiUrl + "/property/favorite/remove";
+  static const removefromfav = apiUrl + "property/favorite/remove";
   static const getfav = apiUrl + "user/favorites/";
   static const facebooklogin = apiUrl+ "facebooklogin";
   static const googlelogin = apiUrl+ "googlelogin";
-  static const notifications = apiUrl + "/user/firebasetoken";
+  static const notifications = apiUrl + "user/firebasetoken";
   static const logout = apiUrl +"logout";
 
 

@@ -78,6 +78,7 @@ mixin FbNotifications {
 final fcmToken = await FirebaseMessaging.instance.getToken();
 //print(" ///////////////////$fcmToken" );
       print('GRANT PERMISSION');
+      
     } else if (notificationSettings.authorizationStatus ==
         AuthorizationStatus.denied) {
       print('Permission Denied');
@@ -122,15 +123,16 @@ final fcmToken = await FirebaseMessaging.instance.getToken();
 
   void _controlNotificationNavigation(Map<String, dynamic> data) {
     print('Data: $data');
-    if (data['page'] != null) {
-      switch (data['page']) {
-        case 'products':
-          var productId = data['id'];
-          print('Product Id: $productId');
+    if (data['data'] != null) {
+      switch (data['data']) {
+        case 'accepted':
+        print('Navigate to accepted');
+         // var productId = data['id'];
+          //print('Product Id: $productId');
           break;
 
-        case 'settings':
-          print('Navigate to settings');
+        case 'rejected':
+          print('Navigate to rejected');
           break;
 
         case 'profile':

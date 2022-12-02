@@ -26,7 +26,7 @@ class _FavoriteState extends State<Favorite> {
    late Future<List<FavoriteModel>> _future;
 
     List<FavoriteModel> _favourite = <FavoriteModel>[];
-    
+   bool favorite = true;
     @override
   void initState() {
     // TODO: implement initState
@@ -79,9 +79,23 @@ body: FutureBuilder<List<FavoriteModel>>(
                width: 80.w,
                height: 40.h,
                child: FavoriteButton(
-                isFavorite: true,
+               // iconColor: favorite? Colors.red:Colors.grey,
+                isFavorite: favorite,
                 valueChanged: (_isFavorite){
-              _isFavorite == false?    FavoriteApiController().removeFavorite(context, id: _favourite[index].id):FavoriteApiController().addFavorite(context, id: _favourite[index].id) ;
+                  if(_isFavorite == favorite){
+           FavoriteApiController().removeFavorite(context, id: _favourite[index].id);
+           setState(() {
+             favorite = false;
+           });
+                  }else {
+FavoriteApiController().addFavorite(context, id: _favourite[index].id) ;
+setState(() {
+  favorite = true;
+});
+                  }
+              // _isFavorite == favorite?  
+              //   FavoriteApiController().removeFavorite(context, id: _favourite[index].id)
+              //   :FavoriteApiController().addFavorite(context, id: _favourite[index].id) ;
     
                 })
                ),

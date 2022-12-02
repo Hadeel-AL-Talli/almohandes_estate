@@ -53,11 +53,11 @@ GoogleSignIn _googleSign = GoogleSignIn(
     _emailTextController = TextEditingController();
     _passwordTextController = TextEditingController();
     FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance; 
-   _firebaseMessaging.getToken().then((token){
+  //  _firebaseMessaging.getToken().then((token){
    
       
 
-  });
+  // });
     
     requestNotificationPermissions();
    
@@ -94,7 +94,7 @@ GoogleSignIn _googleSign = GoogleSignIn(
      var url = Uri.parse(ApiSettings.facebooklogin);
      var response = await http.post(url, body: json.encode({
       "token":facebookToken
-     }, ), headers: {"Content-Type":"application/json"});
+     }, ), headers:headers);
 
      print(response.body);
   }
