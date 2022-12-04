@@ -912,7 +912,7 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
             apiRespons}) async {
           if (status == "200") {
             showSnackBar(context: context, message: message);
-            Navigator.pop(context);
+            Navigator.pushNamed(context, '/accepet');
           } else {
             showSnackBar(context: context, message: message, error: true);
           }

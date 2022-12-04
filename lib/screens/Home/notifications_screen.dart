@@ -1,4 +1,6 @@
+import 'package:almohandes_estate/controllers/user_notifications_controller.dart';
 import 'package:almohandes_estate/firebase/fb_notifications.dart';
+import 'package:almohandes_estate/models/user_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,22 +15,15 @@ class NotificationScreen extends StatefulWidget {
 
 class _NotificationScreenState extends State<NotificationScreen> with FbNotifications {
    //String? _token;
+    late Future<List<UserNotifications>> _future;
+
+    List<UserNotifications> userNotifications = <UserNotifications>[];
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    
-  //   FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance; 
-  //  _firebaseMessaging.getToken().then((token){
-  //   _token = token;
-  //    print(token);
-     
-  //     //sendFcmToken(context , token: token!);
-
-  //   print('FCM TOKEN IS $_token');
-  
-
-  // });
+    _future = UserNotificationsController().userNotifications();
+   
   }
  
   @override
@@ -46,12 +41,66 @@ class _NotificationScreenState extends State<NotificationScreen> with FbNotifica
 
 
 
-        body: ListView(
-          children: [
- 
+        body: FutureBuilder<List<UserNotifications>>(
+          future: _future,
+          builder: (context, snapshot) {
+           if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+           else if (snapshot.hasData && snapshot.data!.isNotEmpty){
+            userNotifications = snapshot.data ??[];
             
-          ],
+         return ListView.builder(
+          itemCount: userNotifications.length,
+          itemBuilder: ((context, index) {
+           return Container(
+            margin: EdgeInsets.all(15),
+           padding: EdgeInsets.only(top:10, right: 10, bottom: 10,left:  10),
+            decoration: BoxDecoration(
+              border: Border.all(color: Color(0xffCBCFDA))
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+               
+                // Image.asset('images/notifications_no.png', height: 80,width: 80,),
+           
+        Image.asset('images/accepet_notification.png', height: 50,width: 50,),
+           
+      //  Image.asset('images/general_notification.png', height: 80,width: 80,),
+
+                Column(
+                  children: [
+    Center(child: Text(userNotifications[index].created_at , style: TextStyle(fontFamily: 'Tj', fontSize: 14 , color: Color(0xff8A8A8A)),)),
+    SizedBox(height: 5,),
+
+                    Text(userNotifications[index].title , style: TextStyle(fontFamily: 'Tj', fontSize: 18, color: Colors.black),
+                    ),
+                    SizedBox(height: 5,),
+
+                    Text(userNotifications[index].body , style: TextStyle(fontFamily: 'Tj', fontSize: 14 , color: Color(0xff8A8A8A)),)
+                  ],
+                )
+              ],
+            ),
+           );
+         }));
+           }
+          
+           else{
+          return  Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+       Center(child: Text('لا توجد اشعارات ', style: TextStyle(fontFamily: 'Tj', fontSize:24.sp,color: Colors.black ),)),
+
+         Image.asset('images/notifications_no.png'),
+              ],
+            );
+           }
+        },
+  
         ),
+    
     );
   }
 }

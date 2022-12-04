@@ -224,13 +224,13 @@ void sendGoogleToken(String googleToken)async{
   }
 
   bool checkData() {
-    if (_emailTextController.text.isNotEmpty &&
-        _passwordTextController.text.isNotEmpty) {
+    if (_emailTextController.text.isNotEmpty && _emailTextController.text.contains('@') &&
+        _passwordTextController.text.isNotEmpty && _passwordTextController.text.length >=8) {
       return true;
     }
     showSnackBar(
       context,
-      message: 'من فضلك, أدخل البيانات المطلوبة',
+      message: 'من فضلك, أدخل البيانات المطلوبة بشكل صحيح ',
       error: true,
     );
     return false;
