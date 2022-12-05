@@ -14,7 +14,7 @@ class _AccepetBuildingState extends State<AccepetBuilding> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        
+        mainAxisAlignment:MainAxisAlignment.center,
         children: [
           Image.asset('images/accepet.png'),
           SizedBox(height: 5,),
@@ -22,10 +22,12 @@ class _AccepetBuildingState extends State<AccepetBuilding> {
           SizedBox(height: 5,),
           Text('جاري مراجعة منشورك بأقرب وقت \n انتظر موافقة الادمن لاتمام عملية \nالنشر وسيتم اشعارك بذلك ' , style: TextStyle(fontFamily: 'Tj', color: Color(0xff8A8A8A), fontSize: 14),),
           SizedBox(height: 70,),
-          CustomButton(onPress: (){
-            Navigator.pushNamed(context, '/main_screen');
-          }, text: 
-          'العودة للرئيسية ', color: Color(0xff3D6CF0))
+          Center(
+            child: CustomButton(onPress: (){
+              Navigator.pushNamed(context, '/main_screen');
+            }, text: 
+            'العودة للرئيسية ', color: Color(0xff3D6CF0)),
+          )
         ],
       ),
     );
