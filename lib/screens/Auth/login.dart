@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:almohandes_estate/controllers/api_settings.dart';
 import 'package:almohandes_estate/firebase/fb_notifications.dart';
 import 'package:almohandes_estate/prefs/shared_prefrences_controller.dart';
+import 'package:almohandes_estate/screens/Home/model/UserData.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -64,6 +65,17 @@ GoogleSignIn _googleSign = GoogleSignIn(
     
     
   }
+  Future<UserData?> getUserData() async {
+    var url = Uri.parse(ApiSettings.user);
+    var response = await http.get(url, headers: headers);
+
+    if (response.statusCode == 200) {
+      UserData userData=UserData.fromJson(jsonDecode(response.body)['data']);
+      await SharedPrefController().saveUserData(userData: userData);
+      return userData;
+    }
+    return null;
+  }
   
 
   @override
@@ -81,6 +93,7 @@ GoogleSignIn _googleSign = GoogleSignIn(
       case FacebookLoginStatus.success :
       sendToken(result.accessToken!.token);
       print('TOKEN'+result.accessToken!.token);
+      
       break;
 
       case FacebookLoginStatus.cancel: break;
@@ -97,6 +110,20 @@ GoogleSignIn _googleSign = GoogleSignIn(
      }, ), headers:headers);
 
      print(response.body);
+      if (response.statusCode == 200) {
+      //TODO: SHARED PREFERENCES - SAVE LOGGED IN USER DATA!!
+      print(jsonDecode(response.body)['data']["token"]);
+   await   SharedPrefController().save(
+          name: jsonDecode(response.body)['data']["name"],
+          token: jsonDecode(response.body)['data']["token"] , );
+          
+  await getUserData();
+      showSnackBar(
+        context,
+        message: jsonDecode(response.body)['message'],
+      );
+     // return true;
+    }
   }
   Future<void> _handleSignIn() async {
   try {

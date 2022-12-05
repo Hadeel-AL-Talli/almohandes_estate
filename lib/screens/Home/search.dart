@@ -188,6 +188,7 @@ class _SearchState extends State<Search> {
             controller.options!.categories.isNotEmpty ? SizedBox(
               height: 40.h,
               child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: controller.options!.categories.length,
                 scrollDirection: Axis.horizontal,
@@ -254,6 +255,7 @@ class _SearchState extends State<Search> {
             controller.options!.types.isNotEmpty ? SizedBox(
               height: 70.h,
               child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
                 //shrinkWrap: true,
                 itemCount: controller.options!.types.length,
                 scrollDirection: Axis.horizontal,
@@ -340,6 +342,7 @@ class _SearchState extends State<Search> {
             controller.options!.cities.isNotEmpty ? SizedBox(
               height: 40.h,
               child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
                // shrinkWrap: true,
                 itemCount: controller.options!.cities.length,
                 scrollDirection: Axis.horizontal,
