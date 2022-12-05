@@ -60,7 +60,8 @@ class AuthApiController with ApiHelper {
         message: jsonDecode(response.body)['message'],
       );
       return true;
-    } else if (response.statusCode == 400) {
+    }
+    {
       showSnackBar(
         context,
         message: jsonDecode(response.body)['message'],
@@ -68,10 +69,6 @@ class AuthApiController with ApiHelper {
       );
       return false;
     }
-    else{
-      return false;
-    }
-
   }
   Future<UserData?> getUserData() async {
     var url = Uri.parse(ApiSettings.user);
@@ -103,21 +100,14 @@ class AuthApiController with ApiHelper {
         error: false,
       );
       return true;
-    } else if (response.statusCode == 400) {
+    } else {
       showSnackBar(
-
         context,
         message: jsonDecode(response.body)['message'],
         error: true,
       );
-    } else {
-      showSnackBar(
-        context,
-        message: 'Something went wrong, please try again!',
-        error: true,
-      );
+      return false;
     }
-    return false;
   }
 
 // password reset check token 

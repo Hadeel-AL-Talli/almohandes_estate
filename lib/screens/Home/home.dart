@@ -1,14 +1,9 @@
-import 'dart:convert';
 
 import 'package:almohandes_estate/controllers/api_helper.dart';
 import 'package:almohandes_estate/controllers/api_settings.dart';
 import 'package:almohandes_estate/firebase/fb_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -118,7 +113,7 @@ class _HomeState extends State<Home> with FbNotifications, ApiHelper{
     return
       GetBuilder<OptionGetxController>(builder: (controller) {
         if (controller.loading) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         } else if (controller.options != null) {
@@ -132,7 +127,7 @@ class _HomeState extends State<Home> with FbNotifications, ApiHelper{
                       listen: false).sherch(text: value);
                 },
                 decoration: InputDecoration(
-                  hintStyle: TextStyle(fontFamily: 'Tj'),
+                  hintStyle: const TextStyle(fontFamily: 'Tj'),
                   filled: true,
                   fillColor: Colors.white,
                   hintText: "ابحث الان عن عقارك ",
@@ -145,14 +140,14 @@ class _HomeState extends State<Home> with FbNotifications, ApiHelper{
                     child: SvgPicture.asset("images/Search1.svg"),
                   ),
                   suffixIcon: Padding(
-                    padding:  EdgeInsets.symmetric(
+                    padding:  const EdgeInsets.symmetric(
                         horizontal: 16, vertical: 8),
                     child: SizedBox(
                       width: 48,
                       height: 48,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary:Color(0xff3D6CF0),
+                          primary:const Color(0xff3D6CF0),
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(12)),
                           ),
@@ -163,7 +158,7 @@ class _HomeState extends State<Home> with FbNotifications, ApiHelper{
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => MainScreen(
+                                builder: (context) => const MainScreen(
                                   currentIndex: 1,
                                 ),
                               ),
@@ -178,7 +173,7 @@ class _HomeState extends State<Home> with FbNotifications, ApiHelper{
               ),
               Expanded(
                 child: ListView(
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
                   children: [
 
@@ -221,7 +216,7 @@ class _HomeState extends State<Home> with FbNotifications, ApiHelper{
                               decoration: BoxDecoration(
                                 color: controller
                                     .options!.categories[index].selected
-                                    ? Color(0xff3D6CF0)
+                                    ? const Color(0xff3D6CF0)
                                     : Colors.white,
                                 border: Border.all(color: Colors.grey),
                                 borderRadius: BorderRadius.circular(5),
@@ -240,7 +235,7 @@ class _HomeState extends State<Home> with FbNotifications, ApiHelper{
                           );
                         },
                       ),
-                    ):SizedBox(),
+                    ):const SizedBox(),
                     SizedBox(
                       height: 5.h,
                     ),
@@ -279,11 +274,11 @@ class _HomeState extends State<Home> with FbNotifications, ApiHelper{
                               margin: EdgeInsets.symmetric(horizontal: 14.w),
                               width: MediaQuery.of(context).size.width / 6,
                               height: 60.h,
-                              
+
                               decoration: BoxDecoration(
                                 color: controller
                                     .options!.types[index].selected
-                                    ? Color(0xff3D6CF0)
+                                    ? const Color(0xff3D6CF0)
                                     : Colors.white,
                                 border: Border.all(color: Colors.grey),
                                 borderRadius: BorderRadius.circular(5),
@@ -303,7 +298,7 @@ class _HomeState extends State<Home> with FbNotifications, ApiHelper{
                                         : 'images/building-4.svg',
                                     color: controller.options!
                                         .types[index].selected
-                                        ? Colors.white:Color(0xff797979),
+                                        ? Colors.white:const Color(0xff797979),
                                   ),
                                   SizedBox(height: 5.h,),
                                   Center(
@@ -323,7 +318,7 @@ class _HomeState extends State<Home> with FbNotifications, ApiHelper{
                           );
                         },
                       ),
-                    ):SizedBox(),
+                    ):const SizedBox(),
                     SizedBox(
                       height: 5.h,
                     ),
@@ -331,6 +326,7 @@ class _HomeState extends State<Home> with FbNotifications, ApiHelper{
                       height: 40.h,
                       child: ListView.builder(
                         shrinkWrap: true,
+                        physics: const BouncingScrollPhysics(),
                         itemCount: options!.cities.length,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
@@ -361,18 +357,18 @@ class _HomeState extends State<Home> with FbNotifications, ApiHelper{
                             child: Container(
                               margin: EdgeInsets.symmetric(horizontal: 14.w),
                               width: MediaQuery.of(context).size.width / 4,
+                              // padding: EdgeInsets.symmetric(horizontal: 4.w),
                               height: 30.h,
                               decoration: BoxDecoration(
                                 color: controller
                                     .options!.cities[index].selected
-                                    ? Color(0xff3D6CF0)
+                                    ? const Color(0xff3D6CF0)
                                     : Colors.white,
                                 border: Border.all(color: Colors.grey),
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               child: Center(
                                   child: Text(
-                                    
                                     controller.options!.cities[index].name,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(fontFamily: 'Tj',fontSize: 14.sp,
@@ -386,7 +382,7 @@ class _HomeState extends State<Home> with FbNotifications, ApiHelper{
                           );
                         },
                       ),
-                    ):SizedBox(),
+                    ):const SizedBox(),
                     SizedBox(
                       height: 10.h,
                     ),
