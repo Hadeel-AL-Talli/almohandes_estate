@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1052048950734-buug9ht81us2bdd8211pn0ql1shp2dd0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.almohanes",
+            "certificate_hash": "304bf1da2ca3b2d13a34e51ed496eb3e868582b2"
+          }
+        },
+        {
           "client_id": "1052048950734-fn8787cumgcqlbl6b12gfi33k3skvo2v.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
