@@ -3,6 +3,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:share_plus/share_plus.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
@@ -147,7 +148,7 @@ class _ProfileState extends State<Profile> {
             //  SizedBox(width: 20.w,),
    InkWell(
     onTap: (){
-      //lauch url 
+      Share.share('حمل تطبيق عقارات المهندس على الرابط التالي:\n https://onelink.to/bfa6w7 ', subject: 'عقارات المندس');
     },
     child: Text('شارك التطبيق  ',style: TextStyle(fontFamily: 'Tj',fontSize: 12.sp ,fontWeight: FontWeight.bold),)),
 
