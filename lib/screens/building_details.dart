@@ -143,7 +143,9 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                               context,
                                               id: widget.id.toString());
                                     },
-                                  )),
+                                  )
+                                  
+                                  ),
                               Positioned(
                                   left: 30.w,
                                   child: IconButton(

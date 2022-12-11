@@ -148,7 +148,7 @@ class _ProfileState extends State<Profile> {
             //  SizedBox(width: 20.w,),
    InkWell(
     onTap: (){
-      Share.share('حمل تطبيق عقارات المهندس على الرابط التالي:\n https://onelink.to/bfa6w7 ', subject: 'عقارات المندس');
+      Share.share('حمل تطبيق عقارات المهندس على الرابط التالي:\n https://onelink.to/bfa6w7 ', subject: 'عقارات المهندس');
     },
     child: Text('شارك التطبيق  ',style: TextStyle(fontFamily: 'Tj',fontSize: 12.sp ,fontWeight: FontWeight.bold),)),
 
