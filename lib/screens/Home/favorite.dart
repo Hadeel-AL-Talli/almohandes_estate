@@ -33,6 +33,19 @@ class _FavoriteState extends State<Favorite> {
     getData();
   }
 
+  void unFav(String id) async{
+    var fav = FavoriteApiController()
+        .unFavourite(context,
+        id: id);
+        // showSnackBar(
+        //   context,
+        //   message: jsonDecode(response.body)['message'].toString(),
+        // );
+    setState(() {
+      favorite = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,12 +89,7 @@ class _FavoriteState extends State<Favorite> {
                                         isFavorite: favorite,
                                         valueChanged: (_isFavorite) {
                                           if (!_isFavorite) {
-                                            FavoriteApiController()
-                                                .unFavourite(context,
-                                                    id: _favourite[index].id.toString());
-                                            setState(() {
-                                              favorite = false;
-                                            });
+                                            unFav(_favourite[index].id.toString());
                                           } else {
                                             FavoriteApiController().addToFavourite(
                                                 context,
