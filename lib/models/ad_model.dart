@@ -4,12 +4,12 @@ AdModel({
     required this.image,
     
   });
-  late final String id;
+  late final int id;
   late final String image;
   
   
   AdModel.fromJson(Map<String, dynamic> json){
-    id = json['id'];
+    id = json['id'] ;
     image = json['image'];
    
   }
