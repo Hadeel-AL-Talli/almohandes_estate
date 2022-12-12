@@ -122,7 +122,7 @@ final fcmToken = await FirebaseMessaging.instance.getToken();
   }
 
   void _controlNotificationNavigation(Map<String, dynamic> data) {
-    print('Data: $data');
+    //print('Data: $data');
     if (data['data'] != null) {
       switch (data['data']) {
         case 'accepted':

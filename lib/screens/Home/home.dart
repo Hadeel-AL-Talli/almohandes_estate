@@ -97,6 +97,7 @@ class _HomeState extends State<Home> with FbNotifications, ApiHelper{
        }
      
        );
+       print('response ');
        print(response.statusCode);
        if(response.statusCode ==200){
           print('token send to api $token' );
@@ -177,7 +178,7 @@ class _HomeState extends State<Home> with FbNotifications, ApiHelper{
                   shrinkWrap: true,
                   children: [
 
-                    Image.asset('images/slider.png'),
+                  //  Image.asset('images/slider.png'),
                     options!.categories.isNotEmpty?  SizedBox(
                       height: 50.h,
                       child: ListView.builder(
