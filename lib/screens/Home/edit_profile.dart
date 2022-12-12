@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../controllers/api_helper.dart';
+import '../../controllers/auth_api_controller.dart';
 import '../../controllers/update_profile_controller.dart';
 import '../../models/register_user.dart';
 import '../../prefs/shared_prefrences_controller.dart';
@@ -25,6 +26,7 @@ class _EditProfileState extends State<EditProfile> with ApiHelper {
   late TextEditingController _nameTextController;
    late TextEditingController _phoneTextController;
    late TextEditingController _emailTextController;
+   bool _loading = true;
    @override
   void initState() {
     // TODO: implement initState
@@ -34,6 +36,24 @@ class _EditProfileState extends State<EditProfile> with ApiHelper {
    _phoneTextController=TextEditingController()..text=SharedPrefController().phone!="null"?SharedPrefController().phone:"";
 
     _emailTextController = TextEditingController()..text=SharedPrefController().email;
+
+    getUserData();
+  }
+
+  void getUserData() async{
+     var user = await AuthApiController().getUserData();
+     if(user != null)
+       {
+         setState(() {
+           _nameTextController.text = user.name;
+           _phoneTextController.text = user.phone;
+           _emailTextController.text = user.email;
+         });
+       }
+     setState(() {
+       _loading = false;
+     });
+
   }
   @override
   void dispose() {
@@ -59,7 +79,7 @@ class _EditProfileState extends State<EditProfile> with ApiHelper {
           backgroundColor: Colors.white,
           title: Text('تعديل الحساب', style: TextStyle(fontFamily: 'Tj',fontSize: 24.sp, color: Colors.black )),
         ),
-        body: ListView(
+        body: _loading?Center(child: CircularProgressIndicator(),):ListView(
           children: [
             SizedBox(height: 30.h,),
               Padding(
