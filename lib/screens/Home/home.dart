@@ -263,7 +263,7 @@ late Future<AdModel?> _imageFuture;
                       height: 5.h,
                     ),
                     options!.types.isNotEmpty?    SizedBox(
-                      height: 60.h,
+                      height: 70.h,
                       child: ListView.builder(
                         shrinkWrap: true,
                         itemCount: options!.types.length,
