@@ -99,6 +99,7 @@ late Future<AdModel?> _imageFuture;
        }
      
        );
+       print('response ');
        print(response.statusCode);
        if(response.statusCode ==200){
           print('token send to api $token' );
@@ -179,6 +180,7 @@ late Future<AdModel?> _imageFuture;
                   shrinkWrap: true,
                   children: [
 
+
                     FutureBuilder<AdModel?>(
                       future: _imageFuture,
                       builder: (context, snapshot) {
@@ -198,6 +200,7 @@ late Future<AdModel?> _imageFuture;
              }
                       }
                     ),
+
                     options!.categories.isNotEmpty?  SizedBox(
                       height: 50.h,
                       child: ListView.builder(

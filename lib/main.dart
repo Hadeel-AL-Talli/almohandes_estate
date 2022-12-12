@@ -14,6 +14,8 @@ import 'package:almohandes_estate/screens/callus.dart';
 import 'package:almohandes_estate/screens/on_boarding.dart';
 import 'package:almohandes_estate/screens/splash.dart';
 import 'package:almohandes_estate/screens/whous.dart';
+import 'package:almohandes_estate/widgets/accepeted.dart';
+import 'package:almohandes_estate/widgets/reject.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -83,7 +85,11 @@ class _MyAppState extends State<MyApp> {
             '/myPosts':(context) => MyPosts(),
               '/notifications':(context)=> NotificationScreen(),
             '/passwordchanged':((context) => PasswordChanged()),
-            '/accepet':(context)=> AccepetBuilding()
+            '/accepet':(context)=> AccepetBuilding(),
+            '/accepeted':((context) => Accepeted()),
+
+            '/reject':((context) => Reject())
+
 
 
 

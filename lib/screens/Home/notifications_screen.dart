@@ -53,36 +53,58 @@ class _NotificationScreenState extends State<NotificationScreen> with FbNotifica
          return ListView.builder(
           itemCount: userNotifications.length,
           itemBuilder: ((context, index) {
-           return Container(
-            margin: EdgeInsets.all(15),
-           padding: EdgeInsets.only(top:10, right: 10, bottom: 10,left:  10),
-            decoration: BoxDecoration(
-              border: Border.all(color: Color(0xffCBCFDA))
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-               
-                // Image.asset('images/notifications_no.png', height: 80,width: 80,),
+           return InkWell(
+            onTap: (){
+              String route ;
+              switch(userNotifications[index].type){
+                case '0': route = '/general';
+               // Navigator.pushNamed(context, route);
+                break;
+
+                case '1': route = '/accepeted';
+                 Navigator.pushNamed(context, route);
+                print(route);
+                break;
+
+                case '2': route = '/reject';
+                 Navigator.pushNamed(context, route);
+                print(route);
+                break;
+              }
+            },
+             child: Container(
+              margin: EdgeInsets.all(15),
+             padding: EdgeInsets.only(top:10, right: 10, bottom: 10,left:  10),
+              decoration: BoxDecoration(
+                border: Border.all(color: Color(0xffCBCFDA))
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+              
+                  // Image.asset('images/notifications_no.png', height: 80,width: 80,),
+             
+                userNotifications[index].type==0 ?   Image.asset('images/accepet_notification.png', height: 50,width: 50,): 
+                userNotifications[index].type ==1 ?
+             
+                   Image.asset('images/general_notification.png', height: 80,width: 80,): userNotifications[index].type ==2 ? Image.asset('images/notifications_no.png', height: 80,width: 80,):  Image.asset('images/accepet_notification.png', height: 50,width: 50,),
+                   
            
-        Image.asset('images/accepet_notification.png', height: 50,width: 50,),
+                  Column(
+                    children: [
+               Center(child: Text(userNotifications[index].created_at , style: TextStyle(fontFamily: 'Tj', fontSize: 14 , color: Color(0xff8A8A8A)),)),
+               SizedBox(height: 5,),
            
-      //  Image.asset('images/general_notification.png', height: 80,width: 80,),
-
-                Column(
-                  children: [
-    Center(child: Text(userNotifications[index].created_at , style: TextStyle(fontFamily: 'Tj', fontSize: 14 , color: Color(0xff8A8A8A)),)),
-    SizedBox(height: 5,),
-
-                    Text(userNotifications[index].title , style: TextStyle(fontFamily: 'Tj', fontSize: 18, color: Colors.black),
-                    ),
-                    SizedBox(height: 5,),
-
-                    Text(userNotifications[index].body , style: TextStyle(fontFamily: 'Tj', fontSize: 14 , color: Color(0xff8A8A8A)),)
-                  ],
-                )
-              ],
-            ),
+                      Text(userNotifications[index].title , style: TextStyle(fontFamily: 'Tj', fontSize: 18, color: Colors.black),
+                      ),
+                      SizedBox(height: 5,),
+           
+                      Text(userNotifications[index].body , style: TextStyle(fontFamily: 'Tj', fontSize: 14 , color: Color(0xff8A8A8A)),)
+                    ],
+                  )
+                ],
+              ),
+             ),
            );
          }));
            }
