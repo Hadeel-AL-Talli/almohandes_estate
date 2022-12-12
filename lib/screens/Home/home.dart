@@ -1,7 +1,9 @@
 
+import 'package:almohandes_estate/controllers/ad_api_controller.dart';
 import 'package:almohandes_estate/controllers/api_helper.dart';
 import 'package:almohandes_estate/controllers/api_settings.dart';
 import 'package:almohandes_estate/firebase/fb_notifications.dart';
+import 'package:almohandes_estate/models/ad_model.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,7 +31,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with FbNotifications, ApiHelper{
     
 
-
+late Future<AdModel?> _imageFuture; 
   bool isClicked = false;
   String categoryId = "";
   String typeId = "";
@@ -48,7 +50,7 @@ class _HomeState extends State<Home> with FbNotifications, ApiHelper{
   getData();
     // TODO: implement initState
     super.initState();
-   
+   _imageFuture = ADController().getadUrl();
     FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance; 
     _firebaseMessaging.subscribeToTopic('all');
    _firebaseMessaging.getToken().then((FCMtoken){
@@ -178,7 +180,27 @@ class _HomeState extends State<Home> with FbNotifications, ApiHelper{
                   shrinkWrap: true,
                   children: [
 
-                  //  Image.asset('images/slider.png'),
+
+                    FutureBuilder<AdModel?>(
+                      future: _imageFuture,
+                      builder: (context, snapshot) {
+                         if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+             }
+             else if (snapshot.hasData ){
+                        return Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Container(
+                           
+                            child: Image.network(snapshot.data!.image , fit: BoxFit.cover,)),
+                        );
+             }
+             else {
+              return Image.asset('images/slider.png');
+             }
+                      }
+                    ),
+
                     options!.categories.isNotEmpty?  SizedBox(
                       height: 50.h,
                       child: ListView.builder(
