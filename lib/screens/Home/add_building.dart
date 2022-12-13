@@ -57,7 +57,8 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
   ImagePicker _imagePicker = ImagePicker();
   List<XFile?> listImage = [];
   bool loding = false;
-
+  int? selectedtype ;
+  int? selectedcate;
   // Future<void> _pickImage() async {
   //   XFile? imageFile = await _imagePicker.pickImage(
   //       source: ImageSource.camera, imageQuality: 50);
@@ -203,6 +204,9 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
                             setState(() {});
                             //change color
                             print('index $index');
+                            selectedcate = index;
+                            
+                            
                           },
                           child: Container(
                               margin: EdgeInsets.only(left: 10, right: 20),
@@ -266,6 +270,7 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
                                 controller.options!.types[index].id.toString();
                             setState(() {});
                             print('index $index');
+                            selectedtype = index;
                           },
                           child: Container(
                               margin: EdgeInsets.only(left: 10, right: 20),
@@ -584,81 +589,108 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
               SizedBox(
                 height: 10,
               ),
-              Padding(
-                padding: const EdgeInsets.only(right: 15.0, bottom: 10),
-                child: Text(
-                  'السعر',
-                  textDirection: TextDirection.rtl,
-                  style: TextStyle(
-                      fontFamily: 'Tj',
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.bold),
+              Visibility(
+                 visible: selectedcate!=0,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 15.0, bottom: 10),
+                  child: Text(
+                    'السعر',
+                    textDirection: TextDirection.rtl,
+                    style: TextStyle(
+                        fontFamily: 'Tj',
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    width: 150.w,
-                    child: AppTextField(
-                        hint: 'السعر للمتر', controller: meter_price),
-                  ),
-                  Container(
+              Visibility(
+                visible: selectedcate!=0,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
                       width: 150.w,
                       child: AppTextField(
-                          hint: 'السعر الكلي ', controller: total_price)),
-                ],
+                        //controller.options!.categories.first.name =="بيع"? 
+                          hint:selectedcate ==1?'السعر للمتر':'السعر الشهري', controller: meter_price),
+                    ),
+                    Container(
+                        width: 150.w,
+                        child: AppTextField(
+                            hint: selectedcate==1?'السعر الاجمالي ':'السعر السنوي', controller: total_price)),
+                  ],
+                ),
               ),
               SizedBox(
                 height: 10.h,
               ),
-              Padding(
-                padding: const EdgeInsets.only(right: 15.0, bottom: 10),
-                child: Text(
-                  'عدد الطوابق ',
-                  textDirection: TextDirection.rtl,
-                  style: TextStyle(
-                      fontFamily: 'Tj',
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.bold),
+              Visibility(
+              
+                visible: selectedtype ==1 ,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 15.0, bottom: 10),
+                  child: Text(
+                    'عدد الطوابق ',
+                    textDirection: TextDirection.rtl,
+                    style: TextStyle(
+                        fontFamily: 'Tj',
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.only(left: 20.0, right: 15, bottom: 10),
-                child: AppTextField(hint: '5', controller: floornum),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 15.0, bottom: 10),
-                child: Text(
-                  'موقع الشقة في العمارة',
-                  textDirection: TextDirection.rtl,
-                  style: TextStyle(
-                      fontFamily: 'Tj',
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.bold),
+              Visibility(
+                visible: selectedtype ==1,
+                // visible: controller.options!.categories.first.name =="عمارة"||controller.options!.categories.first.id ==3,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.only(left: 20.0, right: 15, bottom: 10),
+                  child: AppTextField(hint: '5', controller: floornum),
                 ),
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.only(left: 20.0, right: 15, bottom: 10),
-                child: AppTextField(hint: '5', controller: location),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 15.0, bottom: 10),
-                child: Text(
-                  'عدد الغرف ',
-                  textDirection: TextDirection.rtl,
-                  style: TextStyle(
-                      fontFamily: 'Tj',
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.bold),
+              Visibility(
+                visible: selectedtype==2,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 15.0, bottom: 10),
+                  child: Text(
+                    'موقع الشقة في العمارة',
+                    textDirection: TextDirection.rtl,
+                    style: TextStyle(
+                        fontFamily: 'Tj',
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.only(left: 20.0, right: 15, bottom: 10),
-                child: AppTextField(hint: '5', controller: rooms),
+              Visibility(
+                visible:   selectedtype==2, 
+                child: Padding(
+                  padding:
+                      const EdgeInsets.only(left: 20.0, right: 15, bottom: 10),
+                  child: AppTextField(hint: '5', controller: location),
+                ),
+              ),
+              Visibility(
+                visible: selectedtype==2 || selectedtype ==3,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 15.0, bottom: 10),
+                  child: Text(
+                    'عدد الغرف ',
+                    textDirection: TextDirection.rtl,
+                    style: TextStyle(
+                        fontFamily: 'Tj',
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+              Visibility(
+                 visible: selectedtype==2 || selectedtype ==3,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.only(left: 20.0, right: 15, bottom: 10),
+                  child: AppTextField(hint: '5', controller: rooms),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 15.0, bottom: 10),
