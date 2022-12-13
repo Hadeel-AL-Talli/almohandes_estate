@@ -295,7 +295,13 @@ Row(
           ),
           onPressed: () async{
 await MyPostController().deletePost(context, id:Id);
-Navigator.push(context, MaterialPageRoute(builder: ((context) =>MyPosts())));
+
+Navigator.of(context).pop();
+setState(() {
+   _future = MyPostController().getMyPosts();
+});
+
+//Navigator.push(context, MaterialPageRoute(builder: ((context) =>MyPosts())));
         }, child: Text('حذف',style: TextStyle(fontFamily: 'Tj', fontSize: 14.sp, fontWeight: FontWeight.w500),)
         ),
 
