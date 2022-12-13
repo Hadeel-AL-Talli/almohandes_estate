@@ -379,7 +379,7 @@ late Future<AdModel?> _imageFuture;
                             },
                             child: Container(
                               margin: EdgeInsets.symmetric(horizontal: 14.w),
-                              width: MediaQuery.of(context).size.width / 4,
+                              width: MediaQuery.of(context).size.width / 5,
                               // padding: EdgeInsets.symmetric(horizontal: 4.w),
                               height: 30.h,
                               decoration: BoxDecoration(

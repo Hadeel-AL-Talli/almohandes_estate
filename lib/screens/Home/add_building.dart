@@ -274,7 +274,7 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
                           },
                           child: Container(
                               margin: EdgeInsets.only(left: 10, right: 20),
-                              width: MediaQuery.of(context).size.width / 4,
+                              width: MediaQuery.of(context).size.width / 5,
                               height: 40.h,
                               decoration: BoxDecoration(
                                 color: controller.options!.types[index].selected
@@ -399,7 +399,7 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
                           },
                           child: Container(
                               margin: EdgeInsets.only(left: 10, right: 20),
-                              width: MediaQuery.of(context).size.width / 4,
+                              width: MediaQuery.of(context).size.width / 5,
                               height: 40.h,
                               decoration: BoxDecoration(
                                 color:
@@ -461,10 +461,11 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
                             setState(() {});
                             //change color
                             print('index $index');
+                            print(featuresIdList);
                           },
                           child: Container(
                               margin: EdgeInsets.only(left: 10, right: 20),
-                              width: MediaQuery.of(context).size.width / 4,
+                              width: MediaQuery.of(context).size.width / 5,
                               height: 40.h,
                               decoration: BoxDecoration(
                                 color:
@@ -569,7 +570,7 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
               Padding(
                 padding:
                     const EdgeInsets.only(left: 20.0, right: 15, bottom: 10),
-                child: AppTextField(hint: '800 متر ', controller: street),
+                child: AppTextField(hint: '20 متر ', controller: street),
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 15.0, bottom: 10),
@@ -653,7 +654,7 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
                 child: Padding(
                   padding: const EdgeInsets.only(right: 15.0, bottom: 10),
                   child: Text(
-                    'موقع الشقة في العمارة',
+                    'رقم الطابق',
                     textDirection: TextDirection.rtl,
                     style: TextStyle(
                         fontFamily: 'Tj',
@@ -667,7 +668,7 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
                 child: Padding(
                   padding:
                       const EdgeInsets.only(left: 20.0, right: 15, bottom: 10),
-                  child: AppTextField(hint: '5', controller: location),
+                  child: AppTextField(hint: '3', controller: location),
                 ),
               ),
               Visibility(
@@ -689,7 +690,7 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
                 child: Padding(
                   padding:
                       const EdgeInsets.only(left: 20.0, right: 15, bottom: 10),
-                  child: AppTextField(hint: '5', controller: rooms),
+                  child: AppTextField(hint: '2', controller: rooms),
                 ),
               ),
               Padding(
