@@ -59,6 +59,8 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
   bool loding = false;
   int? selectedtype ;
   int? selectedcate;
+  bool isChecked = false;
+
   // Future<void> _pickImage() async {
   //   XFile? imageFile = await _imagePicker.pickImage(
   //       source: ImageSource.camera, imageQuality: 50);
@@ -586,6 +588,23 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
               Padding(
                 padding: const EdgeInsets.only(left: 20.0, right: 15),
                 child: AppTextField(hint: '78555', controller: number),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text('بدون رقم', style: TextStyle(
+                      fontFamily: 'Tj',
+                      fontSize: 12.sp,
+                      color: Color(0xff3D6CF0),),),
+                  Checkbox(
+                  value: isChecked,
+                  onChanged: (value) {
+                    setState(() {
+                      isChecked = value!;
+                    });
+                  },
+            ),
+                ],
               ),
               SizedBox(
                 height: 10,

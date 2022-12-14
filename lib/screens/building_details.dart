@@ -1,3 +1,4 @@
+import 'package:almohandes_estate/widgets/GalleryWidget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:full_screen_image_null_safe/full_screen_image_null_safe.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../controllers/favorite_api_controller.dart';
@@ -71,7 +73,7 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                           _current = index;
                                         });
                                       },
-                                      height: 300.h,
+                                      height: 200.h,
                                       autoPlay: true,
                                       // viewportFraction: 0.8,
                                       enlargeCenterPage: true,
@@ -87,16 +89,29 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                   itemCount: _images.length,
                                   itemBuilder: (BuildContext context,
                                           int itemIndex, int pageViewIndex) =>
-                                      Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      image: DecorationImage(
-                                          image: NetworkImage(_details[index]
-                                              .images[itemIndex]
-                                              .image),
-                                          fit: BoxFit.cover),
-                                    ),
-                                  ),
+                                      FullScreenWidget(
+                                       
+                                          backgroundColor: Colors.white,
+                                        child: Center(
+                                          child: ClipRRect(
+                                            
+                                                          borderRadius: BorderRadius.circular(16),
+                                          
+                                            child: Container(
+                                                                 decoration: BoxDecoration(
+                                                                                
+                                            borderRadius: BorderRadius.circular(20),
+                                            image: DecorationImage(
+                                              
+                                                image: NetworkImage(_details[index]
+                                                    .images[itemIndex]
+                                                    .image),
+                                                fit: BoxFit.fitWidth,),
+                                                                              ),
+                                                                            ),
+                                          ),
+                                        ),
+                                      ),
                                 ),
                               ),
 
@@ -211,12 +226,14 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                             ),
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
+                          
                               Column(
+                               
                                 children: [
                                   Text(
-                                    'السعر للمتر',
+                                    'السعرالشهري/ للمتر',
                                     textDirection: TextDirection.rtl,
                                     style: TextStyle(
                                       fontFamily: 'Tj',
@@ -225,7 +242,7 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                     ),
                                   ),
                                   Text(
-                                    _details[index].meterPrice,
+                                    _details[index].meterPrice ??'' ,
                                     textDirection: TextDirection.rtl,
                                     style: TextStyle(
                                       fontFamily: 'Tj',
@@ -235,7 +252,9 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                   )
                                 ],
                               ),
+                                 SizedBox(width: 10,),
                               SvgPicture.asset('images/dollar.svg'),
+                                 SizedBox(width: 20,),
                               Row(
                                 children: [
                                   Column(
@@ -260,7 +279,9 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                       )
                                     ],
                                   ),
-                                  SvgPicture.asset('images/dollar.svg')
+                                     SizedBox(width: 10,),
+                                  SvgPicture.asset('images/dollar.svg'),
+                                     SizedBox(width: 20,),
                                 ],
                               )
                             ],
@@ -277,113 +298,112 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'عدد الغرف ' + _details[index].rooms,
-                                  style: TextStyle(
-                                    fontFamily: 'Tj',
-                                    fontSize: 12.sp,
-                                    color: Colors.black,
-                                  ),
+                          Wrap(
+                             runSpacing: 5.0,
+            spacing: 5.0,
+                            children: [
+                              Text(
+                                'عدد الغرف ' + _details[index].rooms,
+                                style: TextStyle(
+                                  fontFamily: 'Tj',
+                                  fontSize: 12.sp,
+                                  color: Colors.black,
                                 ),
+                              ),
+                              
 
-                                SvgPicture.asset(
-                                  'images/house.svg',
-                                  height: 18.h,
-                                  width: 18.w,
-                                  color: Color(0xff797979),
+                              SvgPicture.asset(
+                                'images/house.svg',
+                                height: 18.h,
+                                width: 18.w,
+                                color: Color(0xff797979),
+                              ),
+
+                              // SizedBox(
+
+                              //   width: 5.w,
+
+                              // ),
+
+                              Text(
+                                'رقم العقار ' + _details[index].number ??
+                                    'الرقم لا يوجد ',
+                                style: TextStyle(
+                                  fontFamily: 'Tj',
+                                  fontSize: 12.sp,
+                                  color: Colors.black,
                                 ),
+                              ),
 
-                                // SizedBox(
+                              // SizedBox(
 
-                                //   width: 5.w,
+                              //   width: 5.w,
 
-                                // ),
+                              // ),
 
-                                Text(
-                                  'رقم العقار ' + _details[index].number ??
-                                      'الرقم لا يوجد ',
-                                  style: TextStyle(
-                                    fontFamily: 'Tj',
-                                    fontSize: 12.sp,
-                                    color: Colors.black,
-                                  ),
+                              SvgPicture.asset(
+                                'images/num.svg',
+                                height: 18.h,
+                                width: 18.w,
+                                color: Color(0xff797979),
+                              ),
+
+                              // SizedBox(
+
+                              //   width: 5.w,
+
+                              // ),
+
+                              Text(
+                                _details[index].tabooName,
+                                style: TextStyle(
+                                  fontFamily: 'Tj',
+                                  fontSize: 12.sp,
+                                  color: Colors.black,
                                 ),
+                              ),
 
-                                // SizedBox(
+                              // SizedBox(
 
-                                //   width: 5.w,
+                              //   width: 5.w,
 
-                                // ),
+                              // ),
 
-                                SvgPicture.asset(
-                                  'images/num.svg',
-                                  height: 18.h,
-                                  width: 18.w,
-                                  color: Color(0xff797979),
+                              SvgPicture.asset(
+                                'images/cat.svg',
+                                height: 18.h,
+                                width: 18.w,
+                                color: Color(0xff797979),
+                              ),
+
+                              // SizedBox(
+
+                              //   width: 5.w,
+
+                              // ),
+
+                              Text(
+                                'طابق عدد ' + _details[index].floors ,
+                                style: TextStyle(
+                                  fontFamily: 'Tj',
+                                  fontSize: 12.sp,
+                                  color: Colors.black,
                                 ),
+                              ),
 
-                                // SizedBox(
+                              // SizedBox(
 
-                                //   width: 5.w,
+                              //   width: 5.w,
 
-                                // ),
+                              // ),
 
-                                Text(
-                                  _details[index].tabooName,
-                                  style: TextStyle(
-                                    fontFamily: 'Tj',
-                                    fontSize: 12.sp,
-                                    color: Colors.black,
-                                  ),
-                                ),
-
-                                // SizedBox(
-
-                                //   width: 5.w,
-
-                                // ),
-
-                                SvgPicture.asset(
-                                  'images/cat.svg',
-                                  height: 18.h,
-                                  width: 18.w,
-                                  color: Color(0xff797979),
-                                ),
-
-                                // SizedBox(
-
-                                //   width: 5.w,
-
-                                // ),
-
-                                Text(
-                                  'طابق عدد ' + _details[index].floors,
-                                  style: TextStyle(
-                                    fontFamily: 'Tj',
-                                    fontSize: 12.sp,
-                                    color: Colors.black,
-                                  ),
-                                ),
-
-                                // SizedBox(
-
-                                //   width: 5.w,
-
-                                // ),
-
-                                SvgPicture.asset(
-                                  'images/buliding.svg',
-                                  height: 18.h,
-                                  width: 18.w,
-                                  color: Color(0xff797979),
-                                ),
-                              ],
-                            ),
+                              SvgPicture.asset(
+                                'images/buliding.svg',
+                                height: 18.h,
+                                width: 18.w,
+                                color: Color(0xff797979),
+                              ),
+                            ],
                           ),
 
                           Padding(
@@ -415,6 +435,7 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                             child: Text(
                               'وصف العقار ',
                               textDirection: TextDirection.rtl,
+                              textAlign: TextAlign.right,
                               style: TextStyle(
                                   fontFamily: 'Tj',
                                   fontSize: 18.sp,
@@ -424,10 +445,11 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(
-                                left: 20, top: 10, right: 40),
+                                left: 220, top: 10, bottom: 20),
                             child: Text(
                               _details[index].description,
                               textDirection: TextDirection.rtl,
+                              textAlign: TextAlign.right,
                               style: TextStyle(
                                 fontFamily: 'Tj',
                                 fontSize: 14.sp,

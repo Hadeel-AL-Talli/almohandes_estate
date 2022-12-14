@@ -19,6 +19,7 @@ class _MyPostsState extends State<MyPosts> {
   late Future<List<MyPostsModel>> _future;
   List<MyPostsModel> _myposts = <MyPostsModel>[];
  String text='حالة العقار';
+
  Color color = Colors.white;
   @override
   void initState() {
@@ -53,6 +54,7 @@ class _MyPostsState extends State<MyPosts> {
 else if(snapshot.hasData && snapshot.data!.isNotEmpty){
   _myposts = snapshot.data ??[];
   return ListView.builder(
+    physics: BouncingScrollPhysics(),
     itemCount: _myposts.length,
     itemBuilder: ((context, index) {
     return Container(
@@ -85,50 +87,57 @@ else if(snapshot.hasData && snapshot.data!.isNotEmpty){
             top:20.h,
             left: 0.w,
              child: Container(
-              
-             width: 80.w,
-             height: 40.h,
-             
-             child: CustomButton(
-              onPress: (){
-               String statusnum;
-              
-                switch (_myposts[index].status) {
-      case '0':
-        statusnum = 'معلق';
-        setState(() {
-          text = statusnum;
-          color = Colors.blueAccent;
-        });
-         
-       
-        break;
-        case '1':
-statusnum = 'مقبول';
-setState(() {
-  text = statusnum;
-   color = Colors.green;
-});
-
-
-        break;
-
-        case '-1':
-        statusnum = 'مرفوض';
-        setState(() {
-          text = statusnum;
-           color = Colors.red;
-        });
+             padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color:_myposts[index].status =='0'? Colors.blueAccent:_myposts[index].status =='1'?Colors.green:Colors.red,
+                border: Border.all(color: Colors.white),
+                borderRadius: BorderRadius.circular(10)
+              ),
+            
+            child: Text(_myposts[index].status =='0'? 'معلق':_myposts[index].status =='1'?'مقبول':'مرفوض', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w900,
+                fontFamily: 'Tj', fontSize: 16), ),
+            //  child: CustomButton(
+            //   onPress: (){
+            //    String statusnum;
                
-
-        break;
-      default:
-    }
-              
-             }, text:
-               text
+            //     switch (_myposts[index].status) {
+            //      case '0':
+            //        statusnum = 'معلق';
+            //        setState(() {
+            //          text = statusnum;
+            //          color = Colors.blueAccent;
+            //        });
+                    
+                  
+            //        break;
+            //        case '1':
+            //  statusnum = 'مقبول';
+            //  setState(() {
+            //  text = statusnum;
+            //   color = Colors.green;
+            //  });
              
-             , color: color, textcolor: Colors.black,)),
+             
+            //        break;
+             
+            //        case '-1':
+            //        statusnum = 'مرفوض';
+            //        setState(() {
+            //          text = statusnum;
+            //           color = Colors.red;
+            //        });
+               
+             
+            //        break;
+            //      default:
+            //    }
+              
+          //    }, text:
+          //      text
+             
+          //    , color: color, textcolor: Colors.black,
+          //  //  )
+             ),
            ),
             ],
           ),

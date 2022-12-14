@@ -97,6 +97,7 @@ class _MainScreenState extends State<MainScreen> {
           iconSize: 16,
           items: [
           BottomNavigationBarItem(
+            
               backgroundColor: Colors.blueAccent,
               icon: SvgPicture.asset('images/homeuns.svg',),
               activeIcon:SvgPicture.asset('images/homeuns.svg',color: Color(0xff3D6CF0),),
@@ -109,6 +110,7 @@ class _MainScreenState extends State<MainScreen> {
               label: 'بحث',
             ),
               BottomNavigationBarItem(
+
               backgroundColor: Colors.blueAccent,
               icon: SvgPicture.asset('images/heart.svg',),
               activeIcon:SvgPicture.asset('images/heart.svg',color: Color(0xff3D6CF0),),

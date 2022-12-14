@@ -23,6 +23,7 @@ class ApiSettings{
   static const notifications = apiUrl + "user/firebasetoken";
   static const userNotifications = apiUrl +"user/notifications";
   static const ad = apiUrl + "ad";
+  static const contactus = apiUrl + "contactinfo";
   static const logout = apiUrl +"logout";
 
 

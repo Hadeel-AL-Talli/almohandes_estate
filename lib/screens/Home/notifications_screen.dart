@@ -98,7 +98,9 @@ class _NotificationScreenState extends State<NotificationScreen> with FbNotifica
                       Text(userNotifications[index].title , style: TextStyle(fontFamily: 'Tj', fontSize: 18, color: Colors.black),
                       ),
                       SizedBox(height: 5,),
-           
+                       Text(userNotifications[index].reject_reason??'' , style: TextStyle(fontFamily: 'Tj', fontSize: 18, color: Colors.black),
+                      ),
+            SizedBox(height: 5,),
                       Text(userNotifications[index].body , style: TextStyle(fontFamily: 'Tj', fontSize: 14 , color: Color(0xff8A8A8A)),)
                     ],
                   )

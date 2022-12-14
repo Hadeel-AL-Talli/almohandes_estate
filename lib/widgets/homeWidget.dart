@@ -51,14 +51,15 @@ final  HomeModel homeModel;
  Row(
        // mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-         SizedBox(width: 5.w,),
+         SizedBox(width: 10.w,),
           SvgPicture.asset('images/max.svg', color:Color(0xff797979),),
-          SizedBox(width: 5.w,),
+          SizedBox(width: 10.w,),
           Text(homeModel.size, style: TextStyle(fontFamily: 'Tj', fontSize: 14.sp, color: Colors.black,),),
+          SizedBox(width: 5.w,),
            SvgPicture.asset('images/cat.svg', color:Color(0xff797979) ,),
-         SizedBox(width: 5.w,),
+         SizedBox(width: 10.w,),
           Text(homeModel.tabooName, style: TextStyle(fontFamily: 'Tj', fontSize: 14.sp, color: Colors.black,),),
-        SizedBox(width: 5.w,),
+        SizedBox(width: 10.w,),
            SvgPicture.asset('images/house.svg', color:Color(0xff797979) ,),
           SizedBox(width: 5.w,),
           Text(homeModel.rooms, style: TextStyle(fontFamily: 'Tj', fontSize: 14.sp, color: Colors.black,),)

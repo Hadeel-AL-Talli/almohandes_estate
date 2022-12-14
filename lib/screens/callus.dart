@@ -14,9 +14,10 @@ class CallUs extends StatefulWidget {
 }
 
 class _CallUsState extends State<CallUs> {
+  
   launchWhatsApp() async {
   final link = WhatsAppUnilink(
-    phoneNumber: '',
+    phoneNumber: '07832170007',
     text: "",
   );
   await launch('$link');
@@ -137,7 +138,7 @@ class _CallUsState extends State<CallUs> {
                       String facebook = "https://www.facebook.com/watch/?extid=NS-UNK-UNK-UNK-IOS_GK0T-GK1C-GK2T&v=506399970669186";
                       canLaunchUrlString(facebook).then((canLaunch) {
               if(canLaunch){
-                launchUrlString(facebook);
+                launchUrlString(facebook,mode: LaunchMode.externalApplication );
               }
               else{
                 print('error');
