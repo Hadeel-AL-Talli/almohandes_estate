@@ -187,7 +187,7 @@ void sendGoogleToken(String googleToken)async{
                 ),
 
                 Padding(
-                  padding: const EdgeInsets.only(top:20.0, right: 20, left: 20, bottom: 10),
+                  padding: const EdgeInsets.only(top:10.0, right: 20, left: 20, bottom: 10),
                   child: CustomButton(onPress: () async{
 await performRegister();
                   }, text: 'انشاء حساب', color: Color(0xff3D6CF0)),
@@ -202,7 +202,7 @@ await performRegister();
         },
         child: Text('تسجيل الدخول', style: TextStyle(fontFamily: 'Tj',  fontSize: 12.sp, color: Color(0xff3D6CF0)),)),
 
-         Text('هل لديك حساب بالفعل؟ ', style: TextStyle(fontFamily: 'Tj',  fontSize: 12.sp, color: Color(0xff797979)),),
+         Text(' هل لديك حساب بالفعل؟ ', style: TextStyle(fontFamily: 'Tj',  fontSize: 12.sp, color: Color(0xff797979)),),
 
 
                   ],

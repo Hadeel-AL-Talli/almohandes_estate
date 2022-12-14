@@ -287,7 +287,7 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                             ],
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 25, left: 220),
+                            padding: const EdgeInsets.only(top: 25, left: 220,bottom: 10),
                             child: Text(
                               'تفاصيل العقار ',
                               textDirection: TextDirection.rtl,
@@ -445,7 +445,7 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(
-                                left: 220, top: 10, bottom: 20),
+                                 top: 10, bottom: 20),
                             child: Text(
                               _details[index].description,
                               textDirection: TextDirection.rtl,
@@ -466,7 +466,7 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                     borderRadius: BorderRadius.circular(15)),
                               ),
                               onPressed: () {
-                                launch("tel://+96407832170007");
+                                launch("tel://+9647800012163");
                               },
                               icon: Icon(Icons.call),
                               label: Text(

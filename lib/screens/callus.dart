@@ -17,7 +17,7 @@ class _CallUsState extends State<CallUs> {
   
   launchWhatsApp() async {
   final link = WhatsAppUnilink(
-    phoneNumber: '07832170007',
+    phoneNumber: '9647800133334',
     text: "",
   );
   await launch('$link');
@@ -63,7 +63,7 @@ class _CallUsState extends State<CallUs> {
               ),
               child: InkWell(
                 onTap: (){
-                   launch("tel://+96407832170007");
+                   launch("tel://+9647800012163");
                 },
                 child: Column(
                   children: [

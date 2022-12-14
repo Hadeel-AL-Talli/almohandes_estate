@@ -46,14 +46,14 @@ class _SplashState extends State<Splash> {
                 
                top: 500.h,
                  child: Padding(
-                   padding: const EdgeInsets.all(15.0),
+                   padding: const EdgeInsets.all(25.0),
                    child: Text('احصل الان',style: TextStyle(fontSize: 20, fontFamily: 'Tj', color: Colors.white, fontWeight: FontWeight.bold),),
                  )),
                   Positioned(
                 
                top: 530.h,
                  child: Padding(
-                   padding: const EdgeInsets.all(15.0),
+                   padding: const EdgeInsets.all(25.0),
                    child: Text(' على منزل أحلامك ',style: TextStyle(fontSize: 20, fontFamily: 'Tj', color: Colors.white, fontWeight: FontWeight.bold),),
                  )),
         
@@ -61,18 +61,18 @@ class _SplashState extends State<Splash> {
                 
                top: 560.h,
                  child: Padding(
-                   padding: const EdgeInsets.all(15.0),
+                   padding: const EdgeInsets.all(25.0),
                    child: Text(' مع تطبيق عقارات المهندس ',style: TextStyle(fontSize: 20, fontFamily: 'Tj', color: Colors.white, fontWeight: FontWeight.bold),),
                  )),
                Positioned(
-               top: 590.h,
+               top: 620.h,
                right: 30.w,
                  child: Padding(
                    padding: const EdgeInsets.all(15.0),
                    child:CustomButton(
                     onPress: (){
                   //  Navigator.pushNamed(context, '/on_boarding');
-                    String route = SharedPrefController().loggedIn ? '/main_screen':'/login';
+                    String route = SharedPrefController().loggedIn ? '/main_screen':'/on_boarding';
                 Navigator.pushNamed(context, route);
                    }, text: ' ابدأ الان', color: Color(0xff3D6CF0),))
                  ),

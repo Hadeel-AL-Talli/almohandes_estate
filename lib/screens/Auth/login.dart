@@ -307,7 +307,7 @@ class _LoginState extends State<Login> with ApiHelper, FbNotifications {
                     Navigator.pushNamed(context, '/register');
                   },
                   child: Text(
-                    ' إنشاءحساب',
+                    ' إنشاء حساب',
                     style: TextStyle(
                         fontFamily: 'Tj',
                         fontSize: 12.sp,

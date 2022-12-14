@@ -53,7 +53,7 @@ class _MainScreenState extends State<MainScreen> {
          leading: 
             IconButton(onPressed: (){
               Navigator.pushNamed(context, '/notifications');
-            }, icon: Icon(Icons.notifications) , color: Colors.black,),
+            }, icon: Image.asset('images/notification.png'), color: Colors.black,),
         actions: [
           // TextButton(onPressed: (){
           //   _copyToClipboard();

@@ -87,7 +87,7 @@ class _OnBoardingContentState extends State<OnBoardingContent> {
               }, text: 'إنشاء حساب ', color: Color(0xff3D6CF0)),
                                   SizedBox(height: 20.h,),
               CustomButton(onPress: (){
-                String route =  '/main_screen';
+                String route =  '/login';
                 Navigator.pushNamed(context, route);
               }, text: ' تسجيل دخول ', color:Colors.white, textcolor: Colors.black,)
             ],
