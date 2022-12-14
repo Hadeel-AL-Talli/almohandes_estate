@@ -42,7 +42,7 @@ class _FavoriteState extends State<Favorite> {
         //   message: jsonDecode(response.body)['message'].toString(),
         // );
     setState(() {
-      favorite = false;
+      favorite = favorite;
     });
   }
 
