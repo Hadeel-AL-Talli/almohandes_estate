@@ -40,29 +40,29 @@ class _SplashState extends State<Splash> {
                Positioned.fill(child: Image.asset('images/splash.png', fit: BoxFit.fill,)),
              Positioned(
               top: 90.h,
-              right: 20.w,
+              left: 20.w,
               child: SvgPicture.asset('images/logo.svg')),
                Positioned(
                 
                top: 500.h,
                  child: Padding(
                    padding: const EdgeInsets.all(25.0),
-                   child: Text('احصل الان',style: TextStyle(fontSize: 20, fontFamily: 'Tj', color: Colors.white, fontWeight: FontWeight.bold),),
+                   child: Text('احصل الان على عقارك',style: TextStyle(fontSize: 20.sp, fontFamily: 'Tj', color: Colors.white, fontWeight: FontWeight.bold),),
                  )),
-                  Positioned(
+              //     Positioned(
                 
-               top: 530.h,
-                 child: Padding(
-                   padding: const EdgeInsets.all(25.0),
-                   child: Text(' على منزل أحلامك ',style: TextStyle(fontSize: 20, fontFamily: 'Tj', color: Colors.white, fontWeight: FontWeight.bold),),
-                 )),
+              //  top: 530.h,
+              //    child: Padding(
+              //      padding: const EdgeInsets.all(25.0),
+              //      child: Text(' على عقارك ',style: TextStyle(fontSize: 20, fontFamily: 'Tj', color: Colors.white, fontWeight: FontWeight.bold),),
+              //    )),
         
                  Positioned(
                 
-               top: 560.h,
+               top: 540.h,
                  child: Padding(
-                   padding: const EdgeInsets.all(25.0),
-                   child: Text(' مع تطبيق عقارات المهندس ',style: TextStyle(fontSize: 20, fontFamily: 'Tj', color: Colors.white, fontWeight: FontWeight.bold),),
+                   padding: const EdgeInsets.only(top:25.0, right: 25),
+                   child: Text(' مع تطبيق عقارات المهندس ',style: TextStyle(fontSize: 20.sp, fontFamily: 'Tj', color: Colors.white, fontWeight: FontWeight.bold),),
                  )),
                Positioned(
                top: 620.h,

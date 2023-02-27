@@ -20,6 +20,7 @@ class ForgetPassword extends StatefulWidget {
 
 class _ForgetPasswordState extends State<ForgetPassword> with ApiHelper {
   late TextEditingController _email;
+   bool loding = false;
   @override
   void initState() {
     // TODO: implement initState
@@ -59,10 +60,16 @@ class _ForgetPasswordState extends State<ForgetPassword> with ApiHelper {
                   )),
                 ),
 
-                 Padding(
+                loding? Center(child: CircularProgressIndicator()):    Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: CustomButton(onPress: ()async{
+                    setState(() {
+                        loding=true;
+                      });
                     await performForgetPassword();
+                    setState(() {
+                        loding=false;
+                      });
                   }, text: 'إرسال  ', color: Color(0xff3D6CF0)),
                 ),
         ],
@@ -82,7 +89,7 @@ class _ForgetPasswordState extends State<ForgetPassword> with ApiHelper {
     }
     showSnackBar(
       context,
-      message: 'Enter required data!',
+      message: 'الرجاء ادخال البريد الالكتروني',
       error: true,
     );
     return false;

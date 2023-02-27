@@ -155,9 +155,9 @@ class _SearchState extends State<Search> {
               itemBuilder: (context, index) {
                 return InkWell(
                     onTap: () {
-                      // Navigator.push(context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => BuildingDetails(id: homeModel[index].id,)));
+                      Navigator.push(context,
+                          MaterialPageRoute(
+                              builder: (context) => BuildingDetails(id: listSelected![index].id,)));
                     },
                     child: homewidget(
                       homeModel: listSelected![index],
@@ -253,7 +253,8 @@ class _SearchState extends State<Search> {
               ),
             ),
             controller.options!.types.isNotEmpty ? SizedBox(
-              height: 70.h,
+              height: 40.h,
+            
               child: ListView.builder(
                   physics: const BouncingScrollPhysics(),
                 //shrinkWrap: true,
@@ -280,8 +281,8 @@ class _SearchState extends State<Search> {
                       width: MediaQuery
                           .of(context)
                           .size
-                          .width / 5,
-                      height: 60.h,
+                          .width / 4,
+                      height: 40.h,
                       decoration: BoxDecoration(
                         color: controller
                             .options!.types[index].selected
@@ -295,18 +296,19 @@ class _SearchState extends State<Search> {
                           SizedBox(
                             height: 10.h,
                           ),
-                          SvgPicture.asset(
-                            index == 3
-                                ? 'images/hous.svg'
-                                : index == 2
-                                ? 'images/buildings.svg'
-                                : index == 1
-                                ? 'images/buildings-2.svg'
-                                : 'images/building-4.svg',
-                            color: controller.options!
-                                .types[index].selected
-                                ? Colors.white : Color(0xff797979),
-                          ),
+                          // SvgPicture.asset(
+                          //   index == 3
+                          //       ? 'images/hous.svg'
+                          //       : index == 2
+                          //       ? 'images/buildings.svg'
+                          //       : index == 1
+                          //       ? 'images/buildings-2.svg'
+                          //       : 'images/building-4.svg',
+                          //   color: controller.options!
+                          //       .types[index].selected
+                          //       ? Colors.white : Color(0xff797979),
+                          // ),
+                        //  SizedBox(height: 3.h,),
                           Center(
                               child: Text(
                                 controller.options!.types[index].name,
@@ -326,7 +328,7 @@ class _SearchState extends State<Search> {
               ),
             ) : SizedBox(),
             SizedBox(
-              height: 10.h,
+              height: 20.h,
             ),
             Padding(
               padding: const EdgeInsets.only(right: 10.0, bottom: 10),
@@ -340,12 +342,12 @@ class _SearchState extends State<Search> {
               ),
             ),
             controller.options!.cities.isNotEmpty ? SizedBox(
-              height: 40.h,
+              height: 100.h,
               child: ListView.builder(
                   physics: const BouncingScrollPhysics(),
                // shrinkWrap: true,
                 itemCount: controller.options!.cities.length,
-                scrollDirection: Axis.horizontal,
+                scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
@@ -363,13 +365,13 @@ class _SearchState extends State<Search> {
                       setState(() {});
                     },
                     child: Container(
-                      
-                      margin: EdgeInsets.symmetric(horizontal: 8.w),
+
+                      margin: EdgeInsets.symmetric(vertical: 5.w, horizontal: 15),
                       width: MediaQuery
                           .of(context)
                           .size
                           .width / 4,
-                      height: 30.h,
+                      height: 40.h,
                       decoration: BoxDecoration(
                         color: controller
                             .options!.cities[index].selected
@@ -396,35 +398,35 @@ class _SearchState extends State<Search> {
             SizedBox(
               height: 10.h,
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 10.0, bottom: 10),
-              child: Text(
-                'السعر',
-                textDirection: TextDirection.rtl,
-                style: TextStyle(
-                    fontFamily: 'Tj',
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-            RangeSlider(
-              values: _currentRangeValues,
-              min: double.parse(SharedPrefController().min.toString()),
-              max: double.parse(SharedPrefController().max.toString()),
-              // min: 1000,
-              // max: 10000000,
-              divisions: 10,
-              labels: RangeLabels(
-                _currentRangeValues.start.round().toString(),
-                _currentRangeValues.end.round().toString(),
-              ),
-              onChanged: (RangeValues values) {
-                setState(() {
-                  _currentRangeValues = values;
-                });
-                print( _currentRangeValues.start.round().toString(),);
-              },
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.only(right: 10.0, bottom: 10),
+            //   child: Text(
+            //     'السعر',
+            //     textDirection: TextDirection.rtl,
+            //     style: TextStyle(
+            //         fontFamily: 'Tj',
+            //         fontSize: 18.sp,
+            //         fontWeight: FontWeight.bold),
+            //   ),
+            // ),
+            // RangeSlider(
+            //   values: _currentRangeValues,
+            //   min: double.parse(SharedPrefController().min.toString()),
+            //   max: double.parse(SharedPrefController().max.toString()),
+            //   // min: 1000,
+            //   // max: 10000000,
+            //   divisions: 10,
+            //   labels: RangeLabels(
+            //     _currentRangeValues.start.round().toString(),
+            //     _currentRangeValues.end.round().toString(),
+            //   ),
+            //   onChanged: (RangeValues values) {
+            //     setState(() {
+            //       _currentRangeValues = values;
+            //     });
+            //     print( _currentRangeValues.start.round().toString(),);
+            //   },
+            // ),
             SizedBox(
               height: 20.h,
             ),

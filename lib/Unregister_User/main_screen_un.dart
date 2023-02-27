@@ -34,8 +34,11 @@ class _MainScreenUNState extends State<MainScreenUN> {
       child: Scaffold(
         backgroundColor: Colors.white,
        appBar: AppBar(
-         leading: 
-            IconButton(onPressed: (){}, icon: Icon(Icons.notifications) , color: Colors.black,),
+        
+           leading: 
+            IconButton(onPressed: (){
+            //  Navigator.pushNamed(context, '/notifications');
+            }, icon: Image.asset('images/notification.png'), color: Colors.black,),
        
           centerTitle: true,
           elevation: 0,

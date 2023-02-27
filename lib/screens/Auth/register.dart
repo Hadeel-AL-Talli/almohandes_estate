@@ -31,6 +31,7 @@ class _RegisterState extends State<Register>with ApiHelper{
   late TextEditingController _nameTextController ;
    late TextEditingController _passwordConTextController;
    final FacebookLogin _fb = FacebookLogin(); 
+   bool loding = false;
 GoogleSignIn _googleSignIn = GoogleSignIn(
  
   // The OAuth client id of your app. This is required.
@@ -186,10 +187,16 @@ void sendGoogleToken(String googleToken)async{
                   )),
                 ),
 
-                Padding(
+               loding? Center(child: CircularProgressIndicator()):  Padding(
                   padding: const EdgeInsets.only(top:10.0, right: 20, left: 20, bottom: 10),
                   child: CustomButton(onPress: () async{
+                     setState(() {
+                        loding=true;
+                      });
 await performRegister();
+setState(() {
+                        loding=false;
+                      });
                   }, text: 'انشاء حساب', color: Color(0xff3D6CF0)),
                 ),
 

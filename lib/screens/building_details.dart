@@ -7,6 +7,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:full_screen_image_null_safe/full_screen_image_null_safe.dart';
+import 'package:scroll_indicator/scroll_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../controllers/favorite_api_controller.dart';
@@ -29,15 +30,21 @@ class _BuildingDetailsState extends State<BuildingDetails> {
   List<Details> _details = <Details>[];
   List<Images> _images = <Images>[];
   final CarouselController _controller = CarouselController();
-
+  ScrollController scrollController = ScrollController();
   @override
   void initState() {
     // TODO: implement initState
+    scrollController = ScrollController();
     super.initState();
     print('load data');
     _future = HomeApiController().getDetails(widget.id.toString());
   }
-
+ @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    scrollController.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,6 +58,7 @@ class _BuildingDetailsState extends State<BuildingDetails> {
               } else if (snapShot.hasData && snapShot.data!.isNotEmpty) {
                 _details = snapShot.data ?? [];
                 return ListView.builder(
+                  
                     itemCount: _details.length,
                     itemBuilder: (context, index) {
                       return Column(
@@ -73,7 +81,7 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                           _current = index;
                                         });
                                       },
-                                      height: 200.h,
+                                      height: 280.h,
                                       autoPlay: true,
                                       // viewportFraction: 0.8,
                                       enlargeCenterPage: true,
@@ -114,7 +122,20 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                       ),
                                 ),
                               ),
-
+          // ScrollIndicator(
+          //              alignment: Alignment.center,
+          // scrollController: scrollController,
+          // width: 30,
+          // height: 5,
+          // indicatorWidth: 15,
+          // decoration: BoxDecoration(
+          // borderRadius: BorderRadius.circular(10),
+          // color: Colors.grey[300]),
+          // indicatorDecoration: BoxDecoration(
+          // color: Colors.blueAccent,
+          // borderRadius: BorderRadius.circular(10)),
+          // ),
+            
                               //     Row(
                               //   mainAxisAlignment: MainAxisAlignment.center,
                               //   children: imgList.asMap().entries.map((entry) {
@@ -173,20 +194,46 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                       ))),
                             ],
                           ),
-
-                          Padding(
-                            padding: const EdgeInsets.only(top: 40, left: 220),
-                            child: Text(
-                              _details[index].title,
-                              // textAlign: TextAlign.right,
-                              textDirection: TextDirection.rtl,
-                              style: TextStyle(
+ Padding(
+   padding: const EdgeInsets.only(top: 40,left: 200),
+   child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text(_details[index].typeName  , style: TextStyle(
                                   fontFamily: 'Tj',
                                   color: Colors.black,
                                   fontSize: 18.sp,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
+                                  fontWeight: FontWeight.bold),),
+                      Text(' | ', style: TextStyle(
+                                  fontFamily: 'Tj',
+                                  color: Colors.black,
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.bold),),
+
+            Text(_details[index].tabooName  , style: TextStyle(
+                                  fontFamily: 'Tj',
+                                  color: Colors.black,
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.bold),),
+            SizedBox(width: 40.w,),
+           // Text('${homeModel.totalPrice}''د.ع', style: TextStyle(fontFamily: 'Tj', fontSize: 16.sp, color: Color(0xff3D6CF0), fontWeight: FontWeight.bold),)
+          ],
+         ),
+ ),
+                          // Padding(
+                          //   padding: const EdgeInsets.only(top: 40, left: 260),
+                          //   child: Text(
+                          //     _details[index].typeName,
+                          //     // textAlign: TextAlign.right,
+                          //     textDirection: TextDirection.rtl,
+                          //     style: TextStyle(
+                          //         fontFamily: 'Tj',
+                          //         color: Colors.black,
+                          //         fontSize: 18.sp,
+                          //         fontWeight: FontWeight.bold),
+                          //   ),
+                          // ),
+                          
                           Padding(
                             padding: const EdgeInsets.only(top: 5, right: 20),
                             child: Directionality(

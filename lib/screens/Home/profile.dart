@@ -36,16 +36,18 @@ class _ProfileState extends State<Profile> {
               },
               child: Container(
                padding: EdgeInsets.all(15),
-               width: 100.w,
+               width: 110.w,
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
+                  border: Border.all(color: Colors.grey.shade300),
                   borderRadius: BorderRadius.circular(5)
                 ),
-                child: Wrap(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                //  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SvgPicture.asset('images/edit.svg'),
-                    SizedBox(height: 10.h,),
-                    Text('تعديل الحساب', style: TextStyle(fontFamily: 'Tj',fontSize: 12.sp ),),
+                    Center(child: SvgPicture.asset('images/edit.svg')),
+                    SizedBox(height: 15.h,),
+                    Text('تعديل الحساب', textAlign: TextAlign.center, style: TextStyle(fontFamily: 'Tj',fontSize: 12.sp ),),
             
                   ],
                 ),
@@ -59,13 +61,13 @@ class _ProfileState extends State<Profile> {
                padding: EdgeInsets.all(15),
                width: 100.w,
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
+                  border: Border.all(color: Colors.grey.shade300),
                   borderRadius: BorderRadius.circular(5)
                 ),
                 child: Column(
                   children: [
                     SvgPicture.asset('images/posts.svg'),
-                    SizedBox(height: 10.h,),
+                    SizedBox(height: 15.h,),
                     Text('منشوراتي',style: TextStyle(fontFamily: 'Tj',fontSize: 12.sp ),),
              
                   ],
@@ -81,13 +83,13 @@ class _ProfileState extends State<Profile> {
                padding: EdgeInsets.all(15),
                width: 100.w,
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
+                  border: Border.all(color: Colors.grey.shade300),
                   borderRadius: BorderRadius.circular(5)
                 ),
                 child: Column(
                   children: [
                     SvgPicture.asset('images/call.svg'),
-                    SizedBox(height: 10.h,),
+                    SizedBox(height: 15.h,),
                     Text('تواصل معنا',style: TextStyle(fontFamily: 'Tj',fontSize: 12.sp ),),
              
                   ],
@@ -103,49 +105,59 @@ class _ProfileState extends State<Profile> {
         SizedBox(height: 20.h,),
 
         Container(
+          height: 240.h,
           margin: EdgeInsets.all(20),
            decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
+                border: Border.all(color: Colors.grey.shade300),
                 borderRadius: BorderRadius.circular(5)
               ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: 10.h,),
           Row(
-           mainAxisAlignment: MainAxisAlignment.spaceAround,
+         //  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              SizedBox(width: 30.w,),
               SvgPicture.asset('images/location.svg'),
+              SizedBox(width: 20.w,),
             //  SizedBox(width: 20.w,),
    Text('موقعنا ',style: TextStyle(fontFamily: 'Tj',fontSize: 12.sp ,fontWeight: FontWeight.bold),),
+
+   SizedBox(width: 150.w),
    IconButton(onPressed: (){
     const url = 'https://maps.app.goo.gl/wQrcuLtxifH8ddrp6?g_st=it';
     _launchURL(url);
-   }, icon: Icon(Icons.arrow_forward_ios, size: 14,))
+   }, icon: Icon(Icons.arrow_forward_ios, size: 16,))
 
 
             ],
           ),
            Row(
-           mainAxisAlignment: MainAxisAlignment.spaceAround,
+         //  mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
+              SizedBox(width: 30.w,),
               SvgPicture.asset('images/message.svg'),
-            //  SizedBox(width: 20.w,),
+              SizedBox(width: 20.w,),
    Text('من نحن ',style: TextStyle(fontFamily: 'Tj',fontSize: 12.sp ,fontWeight: FontWeight.bold),),
+   SizedBox(width: 150.w,),
    IconButton(onPressed: (){
     Navigator.pushNamed(context, '/whous');
-   }, icon: Icon(Icons.arrow_forward_ios, size: 14,))
+   }, icon: Icon(Icons.arrow_forward_ios, size: 16,))
 
 
             ],
           ),
+          SizedBox(height: 15,),
            Row(
           
 
             children: [
               SizedBox(width: 30.w,),
               SvgPicture.asset('images/share.svg'),
-              SizedBox(width: 70.w,),
-            //  SizedBox(width: 20.w,),
+             
+              SizedBox(width: 20.w,),
    InkWell(
     onTap: (){
       Share.share('حمل تطبيق عقارات المهندس على الرابط التالي:\n https://onelink.to/bfa6w7 ', subject: 'عقارات المهندس');
@@ -162,7 +174,7 @@ class _ProfileState extends State<Profile> {
             children: [
               SizedBox(width: 30.w,),
               SvgPicture.asset('images/logout.svg'),
-              SizedBox(width: 70.w,),
+              SizedBox(width: 20.w,),
             //  SizedBox(width: 20.w,),
    InkWell(
     onTap: () async{
@@ -173,6 +185,8 @@ await logout(context);
 
             ],
           ),
+
+          SizedBox(height: 10,),
             ],
           ),
         )

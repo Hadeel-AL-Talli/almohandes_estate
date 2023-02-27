@@ -21,7 +21,7 @@ final  HomeModel homeModel;
       padding: EdgeInsets.all(10),
       margin: EdgeInsets.all(20),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey),
+        border: Border.all(color: Colors.grey.shade200),
         borderRadius: BorderRadius.circular(10)
       ),
       child: Column(
@@ -32,9 +32,14 @@ final  HomeModel homeModel;
        
        SizedBox(height: 10.h,),
        Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+       // mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Text(homeModel.title, style: TextStyle(fontFamily: 'Tj', color: Colors.black,fontSize: 14.sp),),
+                    Text(homeModel.tabooName  , style: TextStyle(fontFamily: 'Tj', color: Colors.black,fontSize: 14.sp),),
+                    Text(' | ', style: TextStyle(fontFamily: 'Tj', color: Colors.black,fontSize: 14.sp),),
+
+          Text(homeModel.typeName  , style: TextStyle(fontFamily: 'Tj', color: Colors.black,fontSize: 14.sp),),
+
+          SizedBox(width: 40.w,),
           Text('${homeModel.totalPrice}''د.ع', style: TextStyle(fontFamily: 'Tj', fontSize: 16.sp, color: Color(0xff3D6CF0), fontWeight: FontWeight.bold),)
         ],
        ),

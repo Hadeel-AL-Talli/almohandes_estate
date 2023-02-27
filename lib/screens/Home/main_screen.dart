@@ -85,7 +85,7 @@ class _MainScreenState extends State<MainScreen> {
     
            selectedItemColor: Colors.blueAccent,
           selectedIconTheme: IconThemeData(color: Colors.blueAccent),
-          selectedFontSize: 18,
+          selectedFontSize: 14,
           selectedLabelStyle:
              TextStyle(fontFamily: 'Tj'),
     
@@ -94,7 +94,7 @@ class _MainScreenState extends State<MainScreen> {
           unselectedFontSize: 12,
           unselectedLabelStyle:
               TextStyle(fontFamily: 'Tj', color: Color(0xff848484)),
-          iconSize: 16,
+          iconSize: 14,
           items: [
           BottomNavigationBarItem(
             

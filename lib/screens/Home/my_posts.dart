@@ -143,26 +143,35 @@ else if(snapshot.hasData && snapshot.data!.isNotEmpty){
           ),
 SizedBox(height: 10.h,),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //  mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-                Text(
-    _myposts[index].totalPrice+'د.ع',
-    textDirection: TextDirection.rtl,
-    style: TextStyle(
-        fontFamily: 'Tj',
-        fontSize: 18.sp,
-        color: Color(0xff3D6CF0),
-        fontWeight: FontWeight.bold),
-  ),
-              Text(
-    _myposts[index].title,
-    textDirection: TextDirection.rtl,
-    style: TextStyle(
-        fontFamily: 'Tj',
-        fontSize: 18.sp,
-        color: Colors.black,
-        fontWeight: FontWeight.bold),
-  ),
+                        Text('${_myposts[index].totalPrice}''د.ع', style: TextStyle(fontFamily: 'Tj', fontSize: 16.sp, color: Color(0xff3D6CF0), fontWeight: FontWeight.bold),),
+                        SizedBox(width: 40.w,),
+
+                 Text(_myposts[index].tabooName  , style: TextStyle(fontFamily: 'Tj', color: Colors.black,fontSize: 14.sp),),
+                    Text(' | ', style: TextStyle(fontFamily: 'Tj', color: Colors.black,fontSize: 14.sp),),
+
+          Text(_myposts[index].typeName  , style: TextStyle(fontFamily: 'Tj', color: Colors.black,fontSize: 14.sp),),
+
+         // SizedBox(width: 40.w,),
+  //               Text(
+  //   _myposts[index].totalPrice+'د.ع',
+  //   textDirection: TextDirection.rtl,
+  //   style: TextStyle(
+  //       fontFamily: 'Tj',
+  //       fontSize: 18.sp,
+  //       color: Color(0xff3D6CF0),
+  //       fontWeight: FontWeight.bold),
+  // ),
+  //             Text(
+  //   _myposts[index].tabooName,
+  //   textDirection: TextDirection.rtl,
+  //   style: TextStyle(
+  //       fontFamily: 'Tj',
+  //       fontSize: 18.sp,
+  //       color: Colors.black,
+  //       fontWeight: FontWeight.bold),
+  // ),
             ],
           ),
 Padding(

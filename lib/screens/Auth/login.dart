@@ -32,6 +32,7 @@ class _LoginState extends State<Login> with ApiHelper, FbNotifications {
   late TextEditingController _emailTextController;
   late TextEditingController _passwordTextController;
   final FacebookLogin _fb = FacebookLogin();
+  bool loding = false;
 // GoogleSignIn _googleSignIn = GoogleSignIn(
 //
 //   // The OAuth client id of your app. This is required.
@@ -290,11 +291,17 @@ class _LoginState extends State<Login> with ApiHelper, FbNotifications {
                       fontWeight: FontWeight.bold),
                 )),
           ),
-          Padding(
+         loding? Center(child: CircularProgressIndicator()):  Padding(
             padding: const EdgeInsets.all(20.0),
             child: CustomButton(
                 onPress: () async {
+                  setState(() {
+                        loding=true;
+                      });
                   await performLogin();
+                   setState(() {
+                        loding=false;
+                      });
                 },
                 text: 'تسجيل دخول ',
                 color: Color(0xff3D6CF0)),

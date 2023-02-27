@@ -7,16 +7,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 class ADController with ApiHelper{
-   Future<AdModel?> getadUrl() async {
+   Future<List<AdModel>> getadUrl() async {
     var url = Uri.parse(ApiSettings.ad);
     print(url);
     var response = await http.get(url, headers: headers);
     print(response.statusCode);
     print(response.body);
     if (response.statusCode == 200) {
-      var productsJsonObject = jsonDecode(response.body)['data'];
-      return AdModel.fromJson(productsJsonObject);
+      var productsJsonObject = jsonDecode(response.body)['data'] as List ;
+      return productsJsonObject.map((e) => AdModel.fromJson(e)).toList();
     }
+   return [];
     
   }
 }

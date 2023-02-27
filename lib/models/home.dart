@@ -57,7 +57,7 @@ late  List<Features> features;
 
   HomeModel.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? 0;
-    title = json['title'] ?? '';
+    title = json['title']??'' ;
     location = json['location']?? '';
     totalPrice = json['total_price']?? '';
     meterPrice = json['meter_price']?? '';

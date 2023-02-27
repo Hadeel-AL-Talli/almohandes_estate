@@ -37,7 +37,8 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
   String tabooId = "";
   String cityId = "";
   String featuresId = "";
-  List<String> featuresIdList=[];
+  List<String> featuresIdList=[]; 
+  late TextEditingController title;
   late TextEditingController point;
   late TextEditingController interface;
   late TextEditingController totalSpase;
@@ -102,7 +103,7 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
     // TODO: implement initState
     super.initState();
     OptionGetxController.to.getOptions();
-
+  title = TextEditingController();
     point = TextEditingController();
     interface = TextEditingController();
     nzal = TextEditingController();
@@ -140,6 +141,7 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
     name.dispose();
     phone.dispose();
     totalSpase.dispose();
+    title.dispose();
   }
 
   @override
@@ -494,8 +496,10 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
                   itemCount: controller.options!.features.length,
                 ),
               ),
+              
+               
               Padding(
-                padding: const EdgeInsets.only(right: 10.0, bottom: 10),
+                padding: const EdgeInsets.only(right: 10.0, bottom: 10, top: 10),
                 child: Text(
                   'أقرب نقطة دالة',
                   textDirection: TextDirection.rtl,
