@@ -7,6 +7,7 @@ import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../controllers/api_helper.dart';
 import '../../controllers/api_settings.dart';
@@ -26,6 +27,7 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register>with ApiHelper{
+   bool isChecked1 = false;
   late TextEditingController _emailTextController ;
   late TextEditingController _passwordTextController;
   late TextEditingController _nameTextController ;
@@ -102,6 +104,14 @@ void sendGoogleToken(String googleToken)async{
     "token":googleToken
   }), headers: {"Content-Type":"application/json"});
 }
+//  _launchURL(String url) async {
+//     if (await canLaunch(url)) {
+//       await launch(url);
+//     } else {
+//       throw 'Could not launch $url';
+//     }
+//   }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -186,7 +196,69 @@ void sendGoogleToken(String googleToken)async{
                     child: SvgPicture.asset('images/eye.svg', ),
                   )),
                 ),
-
+             Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                        Text(
+                        'أوافق على سياسة الخصوصية والاستخدام ',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontSize: 15,
+                            fontFamily: 'Tj'),
+                      ),
+                      Checkbox(
+                        value: isChecked1,
+                        onChanged: (value) {
+                          setState(() {
+                            isChecked1 = value!;
+                          });
+                        },
+                      ),
+                    
+                    ],
+                  ),
+                   Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                     children: [
+                      
+                       InkWell(
+                        onTap: ()async{
+                      //   const url = 'https://sites.google.com/view/almohands-iq/';
+                         const url = 'https://sites.google.com/view/almohands-iq/';
+      if(await canLaunch(url)){
+        await launch(url);
+      }else {
+        throw 'Could not launch $url';
+      }
+    
+                        },
+                         child: Text(
+                          'اضغط هنا',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                              color: Colors.red,
+                              fontSize: 15,
+                              fontFamily: 'Tj'),
+                                             ),
+                       ),
+                      SizedBox(width: 10.w,),
+                       Padding(
+                         padding: const EdgeInsets.only(right:8.0),
+                         child: Text(
+                              'للاطلاع على سياسة الخصوصية والاستخدام',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  fontSize: 12,
+                                  fontFamily: 'Tj'),
+                            ),
+                       ),
+                     ],
+                   ),
                loding? Center(child: CircularProgressIndicator()):  Padding(
                   padding: const EdgeInsets.only(top:10.0, right: 20, left: 20, bottom: 10),
                   child: CustomButton(onPress: () async{
@@ -219,7 +291,14 @@ setState(() {
       ),
     );
   }
-
+// _launchURLBrowser() async {
+//   var url = Uri.parse("https://sites.google.com/view/almohands-iq/");
+//   if (await canLaunchUrl(url)) {
+//     await launchUrl(url);
+//   } else {
+//     throw 'Could not launch $url';
+//   }
+// }
 Future<void> performRegister() async{
     if(checkData()){
       await register();
@@ -227,7 +306,7 @@ Future<void> performRegister() async{
   } 
      bool checkData(){
       if(_nameTextController.text.isNotEmpty && _emailTextController.text.isNotEmpty
-       && _passwordConTextController.text.isNotEmpty &&_passwordConTextController.text.isNotEmpty){
+       && _passwordConTextController.text.isNotEmpty &&_passwordConTextController.text.isNotEmpty &&isChecked1==true){
         return true;
        }
        showSnackBar(
