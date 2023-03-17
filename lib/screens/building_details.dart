@@ -1,3 +1,5 @@
+import 'package:almohandes_estate/get/options_getx_controller.dart';
+import 'package:almohandes_estate/models/option.dart';
 import 'package:almohandes_estate/widgets/GalleryWidget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:favorite_button/favorite_button.dart';
@@ -7,6 +9,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:full_screen_image_null_safe/full_screen_image_null_safe.dart';
+import 'package:get/get.dart';
 import 'package:scroll_indicator/scroll_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -25,6 +28,7 @@ class BuildingDetails extends StatefulWidget {
 }
 
 class _BuildingDetailsState extends State<BuildingDetails> {
+  List<Categories> categories = <Categories>[];
   int _current = 0;
   late Future<List<Details>> _future;
   List<Details> _details = <Details>[];
@@ -39,12 +43,14 @@ class _BuildingDetailsState extends State<BuildingDetails> {
     print('load data');
     _future = HomeApiController().getDetails(widget.id.toString());
   }
- @override
+
+  @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
     scrollController.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +64,6 @@ class _BuildingDetailsState extends State<BuildingDetails> {
               } else if (snapShot.hasData && snapShot.data!.isNotEmpty) {
                 _details = snapShot.data ?? [];
                 return ListView.builder(
-                  
                     itemCount: _details.length,
                     itemBuilder: (context, index) {
                       return Column(
@@ -98,44 +103,42 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                   itemBuilder: (BuildContext context,
                                           int itemIndex, int pageViewIndex) =>
                                       FullScreenWidget(
-                                       
-                                          backgroundColor: Colors.white,
-                                        child: Center(
-                                          child: ClipRRect(
-                                            
-                                                          borderRadius: BorderRadius.circular(16),
-                                          
-                                            child: Container(
-                                                                 decoration: BoxDecoration(
-                                                                                
-                                            borderRadius: BorderRadius.circular(20),
+                                    backgroundColor: Colors.white,
+                                    child: Center(
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(16),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
                                             image: DecorationImage(
-                                              
-                                                image: NetworkImage(_details[index]
-                                                    .images[itemIndex]
-                                                    .image),
-                                                fit: BoxFit.fitWidth,),
-                                                                              ),
-                                                                            ),
+                                              image: NetworkImage(
+                                                  _details[index]
+                                                      .images[itemIndex]
+                                                      .image),
+                                              fit: BoxFit.fitWidth,
+                                            ),
                                           ),
                                         ),
                                       ),
+                                    ),
+                                  ),
                                 ),
                               ),
-          // ScrollIndicator(
-          //              alignment: Alignment.center,
-          // scrollController: scrollController,
-          // width: 30,
-          // height: 5,
-          // indicatorWidth: 15,
-          // decoration: BoxDecoration(
-          // borderRadius: BorderRadius.circular(10),
-          // color: Colors.grey[300]),
-          // indicatorDecoration: BoxDecoration(
-          // color: Colors.blueAccent,
-          // borderRadius: BorderRadius.circular(10)),
-          // ),
-            
+                              // ScrollIndicator(
+                              //              alignment: Alignment.center,
+                              // scrollController: scrollController,
+                              // width: 30,
+                              // height: 5,
+                              // indicatorWidth: 15,
+                              // decoration: BoxDecoration(
+                              // borderRadius: BorderRadius.circular(10),
+                              // color: Colors.grey[300]),
+                              // indicatorDecoration: BoxDecoration(
+                              // color: Colors.blueAccent,
+                              // borderRadius: BorderRadius.circular(10)),
+                              // ),
+
                               //     Row(
                               //   mainAxisAlignment: MainAxisAlignment.center,
                               //   children: imgList.asMap().entries.map((entry) {
@@ -175,13 +178,11 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                           ? FavoriteApiController().unFavourite(
                                               context,
                                               id: widget.id.toString())
-                                          : FavoriteApiController().addToFavourite(
-                                              context,
-                                              id: widget.id.toString());
+                                          : FavoriteApiController()
+                                              .addToFavourite(context,
+                                                  id: widget.id.toString());
                                     },
-                                  )
-                                  
-                                  ),
+                                  )),
                               Positioned(
                                   left: 30.w,
                                   child: IconButton(
@@ -194,32 +195,43 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                       ))),
                             ],
                           ),
- Padding(
-   padding: const EdgeInsets.only(top: 40,left: 200),
-   child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text(_details[index].typeName  , style: TextStyle(
-                                  fontFamily: 'Tj',
-                                  color: Colors.black,
-                                  fontSize: 18.sp,
-                                  fontWeight: FontWeight.bold),),
-                      Text(' | ', style: TextStyle(
-                                  fontFamily: 'Tj',
-                                  color: Colors.black,
-                                  fontSize: 18.sp,
-                                  fontWeight: FontWeight.bold),),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 40, left: 200),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  _details[index].typeName,
+                                  style: TextStyle(
+                                      fontFamily: 'Tj',
+                                      color: Colors.black,
+                                      fontSize: 18.sp,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  ' | ',
+                                  style: TextStyle(
+                                      fontFamily: 'Tj',
+                                      color: Colors.black,
+                                      fontSize: 18.sp,
+                                      fontWeight: FontWeight.bold),
+                                ),
 
-            Text(_details[index].tabooName  , style: TextStyle(
-                                  fontFamily: 'Tj',
-                                  color: Colors.black,
-                                  fontSize: 18.sp,
-                                  fontWeight: FontWeight.bold),),
-            SizedBox(width: 40.w,),
-           // Text('${homeModel.totalPrice}''د.ع', style: TextStyle(fontFamily: 'Tj', fontSize: 16.sp, color: Color(0xff3D6CF0), fontWeight: FontWeight.bold),)
-          ],
-         ),
- ),
+                                Text(
+                                  _details[index].tabooName,
+                                  style: TextStyle(
+                                      fontFamily: 'Tj',
+                                      color: Colors.black,
+                                      fontSize: 18.sp,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  width: 40.w,
+                                ),
+                                // Text('${homeModel.totalPrice}''د.ع', style: TextStyle(fontFamily: 'Tj', fontSize: 16.sp, color: Color(0xff3D6CF0), fontWeight: FontWeight.bold),)
+                              ],
+                            ),
+                          ),
                           // Padding(
                           //   padding: const EdgeInsets.only(top: 40, left: 260),
                           //   child: Text(
@@ -233,7 +245,7 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                           //         fontWeight: FontWeight.bold),
                           //   ),
                           // ),
-                          
+
                           Padding(
                             padding: const EdgeInsets.only(top: 5, right: 20),
                             child: Directionality(
@@ -272,42 +284,25 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                          
-                              Column(
-                               
-                                children: [
-                                  Text(
-                                    'السعرالشهري/ للمتر',
-                                    textDirection: TextDirection.rtl,
-                                    style: TextStyle(
-                                      fontFamily: 'Tj',
-                                      fontSize: 14.sp,
-                                      color: Color(0xff797979),
-                                    ),
-                                  ),
-                                  Text(
-                                    _details[index].meterPrice ??'' ,
-                                    textDirection: TextDirection.rtl,
-                                    style: TextStyle(
-                                      fontFamily: 'Tj',
-                                      fontSize: 14.sp,
-                                      color: Color(0xff797979),
-                                    ),
-                                  )
-                                ],
-                              ),
-                                 SizedBox(width: 10,),
-                              SvgPicture.asset('images/dollar.svg'),
-                                 SizedBox(width: 20,),
-                              Row(
+                          GetBuilder<OptionGetxController>(
+                            init: OptionGetxController(),
+                            initState: (_) {},
+                            builder: (controller) {
+                              return Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Column(
                                     children: [
-                                      Text(
-                                        'السعر الكلي',
+                          _details[index].categoryId =="2"?           Text(
+                                        'السعر للمتر ',
+                                        textDirection: TextDirection.rtl,
+                                        style: TextStyle(
+                                          fontFamily: 'Tj',
+                                          fontSize: 14.sp,
+                                          color: Color(0xff797979),
+                                        ),
+                                      ):   Text(
+                                        'السعر الشهري',
                                         textDirection: TextDirection.rtl,
                                         style: TextStyle(
                                           fontFamily: 'Tj',
@@ -316,7 +311,7 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                         ),
                                       ),
                                       Text(
-                                        _details[index].totalPrice,
+                                        _details[index].meterPrice ?? '',
                                         textDirection: TextDirection.rtl,
                                         style: TextStyle(
                                           fontFamily: 'Tj',
@@ -326,15 +321,61 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                       )
                                     ],
                                   ),
-                                     SizedBox(width: 10,),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
                                   SvgPicture.asset('images/dollar.svg'),
-                                     SizedBox(width: 20,),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Column(
+                                        children: [
+                                     _details[index].categoryId =="2"?        Text(
+                                            'السعر الكلي',
+                                            textDirection: TextDirection.rtl,
+                                            style: TextStyle(
+                                              fontFamily: 'Tj',
+                                              fontSize: 14.sp,
+                                              color: Color(0xff797979),
+                                            ),
+                                          ) :  Text(
+                                            'السعر السنوي ',
+                                            textDirection: TextDirection.rtl,
+                                            style: TextStyle(
+                                              fontFamily: 'Tj',
+                                              fontSize: 14.sp,
+                                              color: Color(0xff797979),
+                                            ),
+                                          ),
+                                          Text(
+                                            _details[index].totalPrice,
+                                            textDirection: TextDirection.rtl,
+                                            style: TextStyle(
+                                              fontFamily: 'Tj',
+                                              fontSize: 14.sp,
+                                              color: Color(0xff797979),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      SvgPicture.asset('images/dollar.svg'),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                    ],
+                                  )
                                 ],
-                              )
-                            ],
+                              );
+                            },
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 25, left: 220,bottom: 10),
+                            padding: const EdgeInsets.only(
+                                top: 25, left: 220, bottom: 10),
                             child: Text(
                               'تفاصيل العقار ',
                               textDirection: TextDirection.rtl,
@@ -346,8 +387,8 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                             ),
                           ),
                           Wrap(
-                             runSpacing: 5.0,
-            spacing: 5.0,
+                            runSpacing: 5.0,
+                            spacing: 5.0,
                             children: [
                               Text(
                                 'عدد الغرف ' + _details[index].rooms,
@@ -357,7 +398,6 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                   color: Colors.black,
                                 ),
                               ),
-                              
 
                               SvgPicture.asset(
                                 'images/house.svg',
@@ -430,7 +470,7 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                               // ),
 
                               Text(
-                                'طابق عدد ' + _details[index].floors ,
+                                'طابق عدد ' + _details[index].floors,
                                 style: TextStyle(
                                   fontFamily: 'Tj',
                                   fontSize: 12.sp,
@@ -491,8 +531,7 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(
-                                 top: 10, bottom: 20),
+                            padding: const EdgeInsets.only(top: 10, bottom: 20),
                             child: Text(
                               _details[index].description,
                               textDirection: TextDirection.rtl,
