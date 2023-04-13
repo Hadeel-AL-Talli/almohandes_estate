@@ -116,7 +116,7 @@ class Images {
   Images({required this.image});
 
   Images.fromJson(Map<String, dynamic> json) {
-    image = json['image'];
+    image = json['image'] ;
   }
 
 }

@@ -23,7 +23,7 @@
  late String leaseType;
  late String rejectReason;
  late String tabooName;
- late String images;
+  String? images;
  late String typeName;
  late String categoryName;
  late String cityName;
@@ -65,7 +65,7 @@ late  List<Features> features;
     floors = json['floors']?? '';
     propertyFloor = json['property_floor']??'';
     size = json['size']??'';
-    images = json['images']??'';
+    images = json['images']??'https://app1.tp-iraq.com/property_images/default.png';
     number = json['number'] ?? '';
     rooms = json['rooms']??'';
     nzal = json['nzal']??'';

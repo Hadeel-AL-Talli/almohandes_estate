@@ -746,6 +746,7 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
                       fontWeight: FontWeight.bold),
                 ),
               ),
+             
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: DottedBorder(
@@ -775,6 +776,13 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
                   ),
                 ),
               ),
+               Directionality(
+                textDirection: TextDirection.rtl,
+                 child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Text('*اذا كنت لا تملك صورة للعقار ارفق اي صورة افتراضية', style: TextStyle(fontFamily: 'Tj', color: Colors.red),),
+                             ),
+               ),
               SizedBox(
                 height: 16.h,
               ),
@@ -933,16 +941,16 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
         tabooId.isNotEmpty &&
         typeId.isNotEmpty &&
         featuresIdList.isNotEmpty&&point.text.isNotEmpty) {
-      if (listImage.isNotEmpty) {
-        return true;
-      } else {
-        showSnackBar(
-          context: context,
-          message: 'يجب اضافة صورة واحدة على الاقل ',
-          error: true,
-        );
-      }
-      return false;
+      // if (listImage.isNotEmpty) {
+      //   return true;
+      // } else {
+      //   showSnackBar(
+      //     context: context,
+      //     message: 'يجب اضافة صورة واحدة على الاقل ',
+      //     error: true,
+      //   );
+      // }
+      return true;
     }
     showSnackBar(
       context: context,
