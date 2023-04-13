@@ -50,7 +50,7 @@ class AddBuildingController  with ApiHelper{
          required String name,
          required String phone,
          required List<XFile?> images,
-         required UploadImageCallback uploadImageCallback
+          UploadImageCallback?  uploadImageCallback
        }) async {
      var request = http.MultipartRequest("POST", Uri.parse(ApiSettings.propertyAdd));
      request.fields['title'] = title;
@@ -91,7 +91,7 @@ class AddBuildingController  with ApiHelper{
        if (response.statusCode == 200) {
          var jsonResponse = jsonDecode(value);
 
-         uploadImageCallback(
+         uploadImageCallback!(
              status: "200",
              message: jsonResponse['message'],
           );
@@ -99,7 +99,7 @@ class AddBuildingController  with ApiHelper{
          // showSnackBar(context: context, message: jsonResponse['message']);
 
        } else if (response.statusCode == 400) {
-         uploadImageCallback(
+         uploadImageCallback!(
            status: "400",
            message: jsonDecode(value)['message'],
          );
@@ -107,7 +107,7 @@ class AddBuildingController  with ApiHelper{
          // showSnackBar(context: context, message: jsonDecode(value)['message'],error: true);
 
        } else if (response.statusCode == 500) {
-         uploadImageCallback(
+         uploadImageCallback!(
            status: "500",
            message: 'Something went wrong, try again!',
          );
@@ -115,7 +115,7 @@ class AddBuildingController  with ApiHelper{
          // showSnackBar(context: context, message: 'Something went wrong, try again!',error: true);
        }
        else{
-         uploadImageCallback(
+         uploadImageCallback!(
            status: "400",
            message: 'Something went wrong, try again!',
          );
