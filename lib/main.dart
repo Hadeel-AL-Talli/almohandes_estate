@@ -28,12 +28,16 @@ import 'package:provider/provider.dart';
 import 'Provider/building_provider_vandor.dart';
 import 'Unregister_User/main_screen_un.dart';
 import 'Unregister_User/unregister.dart';
+import 'firebase_options.dart';
 import 'get/options_getx_controller.dart';
 
 void main() async{
  
   WidgetsFlutterBinding.ensureInitialized();
-   await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+
+  );
 await FbNotifications.initNotifications();
  
   await SharedPrefController().initPref();

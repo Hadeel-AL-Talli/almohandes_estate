@@ -22,11 +22,27 @@
           }
         },
         {
+          "client_id": "1052048950734-etnnhe9012pjk192v8fv0ks8gi721lhq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.almohanes",
+            "certificate_hash": "5064e43157649005f16b514d3b68dae57af58a78"
+          }
+        },
+        {
           "client_id": "1052048950734-fn8787cumgcqlbl6b12gfi33k3skvo2v.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.almohanes",
             "certificate_hash": "6ab992a60e835505eec5ec17ce461d25aea8b6f3"
+          }
+        },
+        {
+          "client_id": "1052048950734-jcsndntp86fflm5venipoqpqsj1vrmsl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.almohanes",
+            "certificate_hash": "a9dea9049f5ecaedf3005aad4177b62da71c9787"
           }
         },
         {
