@@ -153,11 +153,13 @@ class _LoginState extends State<Login> with ApiHelper, FbNotifications {
   void sendAppleToken(String appleToken) async {
     print('token apple : $appleToken') ;
     var url = Uri.parse(ApiSettings.applelogin);
+
     var response = await http.post(url,
         body: json.encode({"token": appleToken}),
         headers: {"Content-Type": "application/json"});
+    print(response.body) ;
     var body = json.decode(response.body);
-    if(response.statusCode == 200 && body["success"] == true){
+    if(response.statusCode == 200 && body["success"] == true) {
       await SharedPrefController().save(
         name: jsonDecode(response.body)['data']["name"],
         token: jsonDecode(response.body)['data']["token"],
@@ -224,27 +226,28 @@ class _LoginState extends State<Login> with ApiHelper, FbNotifications {
                   redirectUri:
                         // For web your redirect URI needs to be the host of the "current page",
                         // while for Android you will be using the API server that redirects back into your app via a deep link
-                      
+                        //https://app1.tp-iraq.com/api/applelogin
                             Uri.parse(
-                                'https://example.com/callbacks/sign_in_with_apple',
+                              ApiSettings.applelogin,
                               ),
                      ),
                  
                   );
 
                   // ignore: avoid_print
-                  //print(credential);
+                  print(credential);
                   sendAppleToken(credential.identityToken!);
 
                   // This is the endpoint that will convert an authorization code obtained
                   // via Sign in with Apple into a session in your system
-                /*
+                  /*
                   final signInWithAppleEndpoint = Uri(
                     scheme: 'https',
-                    host: 'flutter-sign-in-with-apple-example.glitch.me',
-                    path: '/sign_in_with_apple',
+                    host: 'app1.tp-iraq.com',
+                    path: '/api/applelogin',
                     queryParameters: <String, String>{
-                      'code': credential.authorizationCode,
+                       'token' : credential.identityToken! ,
+                       'code': credential.authorizationCode,
                       if (credential.givenName != null)
                         'firstName': credential.givenName!,
                       if (credential.familyName != null)
@@ -257,16 +260,29 @@ class _LoginState extends State<Login> with ApiHelper, FbNotifications {
                     },
                   );
 
-                  final session = await http.Client().post(
+                  final response = await http.Client().post(
                     signInWithAppleEndpoint,
                   );
 
                   // If we got this far, a session based on the Apple ID credential has been created in your system,
                   // and you can now set this as the app's session
                   // ignore: avoid_print
-                  print(session);
+                  print(response.body);
+               //var body = json.decode(response.body);
 
-                 */
+                if(response.statusCode == 200 ) {
+                  await SharedPrefController().save(
+                    name: jsonDecode(response.body)['data']["name"],
+                    token: jsonDecode(response.body)['data']["token"],
+                  );
+                  await Navigator.pushReplacementNamed(
+                      context, '/main_screen');
+                }
+
+                   */
+
+
+
                 },
               ),
           ),
