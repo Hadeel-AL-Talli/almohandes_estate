@@ -11,9 +11,13 @@ import flutter_local_notifications
 import path_provider_foundation
 import share_plus
 <<<<<<< HEAD
+<<<<<<< HEAD
 import shared_preferences_foundation
 =======
 import shared_preferences_macos
+=======
+import shared_preferences_foundation
+>>>>>>> 49539a1... applelogin
 import sign_in_with_apple
 >>>>>>> 4011b0f... appleloginIssue
 import sqflite
