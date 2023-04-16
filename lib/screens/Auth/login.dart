@@ -50,12 +50,10 @@ class _LoginState extends State<Login> with ApiHelper, FbNotifications {
       // 'https://www.googleapis.com/auth/contacts.readonly'
     ],
   );
-  var appleSignIn=SignInWithApple.getAppleIDCredential(
-                    scopes: [
-                      AppleIDAuthorizationScopes.email,
-                     // AppleIDAuthorizationScopes.fullName,
-                    ],
- );
+
+
+
+
   @override
   void initState() {
     // TODO: implement initState
@@ -153,6 +151,7 @@ class _LoginState extends State<Login> with ApiHelper, FbNotifications {
   }
   //apple login api
   void sendAppleToken(String appleToken) async {
+    print('token apple : $appleToken') ;
     var url = Uri.parse(ApiSettings.applelogin);
     var response = await http.post(url,
         body: json.encode({"token": appleToken}),
@@ -168,31 +167,6 @@ class _LoginState extends State<Login> with ApiHelper, FbNotifications {
     }
 
   }
-  void _handleAppleLogin() async{
-    try{
-//       var y;
-//  y= await appleSignIn.whenComplete(() => sendAppleToken(y.identityToken));
- final AuthorizationCredentialAppleID result = await SignInWithApple.getAppleIDCredential(
-      // Set empty options for Android
-      webAuthenticationOptions:  WebAuthenticationOptions(
-        clientId: 'almohandes.com',
-       redirectUri:Uri.parse('almohandes.com') ,
-      ), scopes: [
-        AppleIDAuthorizationScopes.email,
-       
-      ],
-      // Your scope options for Apple Sign-In
-    );
-    //  send token to API
-//if (Platform.isAndroid || Platform.isIOS){
-   sendAppleToken(result.identityToken!);
-//}
-    }
-    catch (error) {
-    // Handle sign-in failure
-    print('Apple Sign-In Error: $error');
-  }
-}
 
 
   @override
@@ -235,34 +209,36 @@ class _LoginState extends State<Login> with ApiHelper, FbNotifications {
             
               style: SignInWithAppleButtonStyle.whiteOutlined,
                 onPressed: () async {
+                print('call ____') ;
               
                   final credential = await SignInWithApple.getAppleIDCredential(
                     scopes: [
-                      AppleIDAuthorizationScopes.email,
-                     // AppleIDAuthorizationScopes.fullName,
+                      //AppleIDAuthorizationScopes.email,
+                      AppleIDAuthorizationScopes.fullName,
                     ],
                      webAuthenticationOptions: WebAuthenticationOptions(
                     //   // TODO: Set the `clientId` and `redirectUri` arguments to the values you entered in the Apple Developer portal during the setup
                        clientId:
-                           'almohandes.com',
+                           'almohandesEstate.com.example',
 
                   redirectUri:
                         // For web your redirect URI needs to be the host of the "current page",
                         // while for Android you will be using the API server that redirects back into your app via a deep link
                       
                             Uri.parse(
-                                'https://flutter-sign-in-with-apple-example.glitch.me/callbacks/sign_in_with_apple',
+                                'https://example.com/callbacks/sign_in_with_apple',
                               ),
                      ),
                  
                   );
 
                   // ignore: avoid_print
-                  print(credential);
+                  //print(credential);
                   sendAppleToken(credential.identityToken!);
 
                   // This is the endpoint that will convert an authorization code obtained
                   // via Sign in with Apple into a session in your system
+                /*
                   final signInWithAppleEndpoint = Uri(
                     scheme: 'https',
                     host: 'flutter-sign-in-with-apple-example.glitch.me',
@@ -289,6 +265,8 @@ class _LoginState extends State<Login> with ApiHelper, FbNotifications {
                   // and you can now set this as the app's session
                   // ignore: avoid_print
                   print(session);
+
+                 */
                 },
               ),
           ),
