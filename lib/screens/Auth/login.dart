@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 
 import 'package:almohandes_estate/controllers/api_settings.dart';
@@ -174,8 +175,8 @@ class _LoginState extends State<Login> with ApiHelper, FbNotifications {
  final AuthorizationCredentialAppleID result = await SignInWithApple.getAppleIDCredential(
       // Set empty options for Android
       webAuthenticationOptions:  WebAuthenticationOptions(
-        clientId: 'com.almohanes',
-       redirectUri:Uri.parse('com.almohanes') ,
+        clientId: 'almohandes.com',
+       redirectUri:Uri.parse('almohandes.com') ,
       ), scopes: [
         AppleIDAuthorizationScopes.email,
        
@@ -248,9 +249,8 @@ class _LoginState extends State<Login> with ApiHelper, FbNotifications {
                   redirectUri:
                         // For web your redirect URI needs to be the host of the "current page",
                         // while for Android you will be using the API server that redirects back into your app via a deep link
-                        kIsWeb
-                            ? Uri.parse('https://')
-                            : Uri.parse(
+                      
+                            Uri.parse(
                                 'https://flutter-sign-in-with-apple-example.glitch.me/callbacks/sign_in_with_apple',
                               ),
                      ),
@@ -273,10 +273,10 @@ class _LoginState extends State<Login> with ApiHelper, FbNotifications {
                         'firstName': credential.givenName!,
                       if (credential.familyName != null)
                         'lastName': credential.familyName!,
-                      // 'useBundleId':
-                      //     !kIsWeb && (Platform.isIOS || Platform.isMacOS)
-                      //         ? 'true'
-                      //         : 'false',
+                       'useBundleId':
+                           !kIsWeb && (Platform.isIOS || Platform.isMacOS)
+                               ? 'true'
+                               : 'false',
                       if (credential.state != null) 'state': credential.state!,
                     },
                   );
