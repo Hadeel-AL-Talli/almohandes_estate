@@ -1,10 +1,12 @@
 import 'dart:convert';
 
+
 import 'package:almohandes_estate/controllers/api_settings.dart';
 import 'package:almohandes_estate/firebase/fb_notifications.dart';
 import 'package:almohandes_estate/prefs/shared_prefrences_controller.dart';
 import 'package:almohandes_estate/screens/Home/model/UserData.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -12,6 +14,7 @@ import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import '../../controllers/api_helper.dart';
 import '../../controllers/auth_api_controller.dart';
@@ -46,6 +49,12 @@ class _LoginState extends State<Login> with ApiHelper, FbNotifications {
       // 'https://www.googleapis.com/auth/contacts.readonly'
     ],
   );
+  var appleSignIn=SignInWithApple.getAppleIDCredential(
+                    scopes: [
+                      AppleIDAuthorizationScopes.email,
+                     // AppleIDAuthorizationScopes.fullName,
+                    ],
+ );
   @override
   void initState() {
     // TODO: implement initState
@@ -141,6 +150,49 @@ class _LoginState extends State<Login> with ApiHelper, FbNotifications {
     }
 
   }
+  //apple login api
+  void sendAppleToken(String appleToken) async {
+    var url = Uri.parse(ApiSettings.applelogin);
+    var response = await http.post(url,
+        body: json.encode({"token": appleToken}),
+        headers: {"Content-Type": "application/json"});
+    var body = json.decode(response.body);
+    if(response.statusCode == 200 && body["success"] == true){
+      await SharedPrefController().save(
+        name: jsonDecode(response.body)['data']["name"],
+        token: jsonDecode(response.body)['data']["token"],
+      );
+      await Navigator.pushReplacementNamed(
+          context, '/main_screen');
+    }
+
+  }
+  void _handleAppleLogin() async{
+    try{
+//       var y;
+//  y= await appleSignIn.whenComplete(() => sendAppleToken(y.identityToken));
+ final AuthorizationCredentialAppleID result = await SignInWithApple.getAppleIDCredential(
+      // Set empty options for Android
+      webAuthenticationOptions:  WebAuthenticationOptions(
+        clientId: 'com.almohanes',
+       redirectUri:Uri.parse('com.almohanes') ,
+      ), scopes: [
+        AppleIDAuthorizationScopes.email,
+       
+      ],
+      // Your scope options for Apple Sign-In
+    );
+    //  send token to API
+//if (Platform.isAndroid || Platform.isIOS){
+   sendAppleToken(result.identityToken!);
+//}
+    }
+    catch (error) {
+    // Handle sign-in failure
+    print('Apple Sign-In Error: $error');
+  }
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -167,12 +219,78 @@ class _LoginState extends State<Login> with ApiHelper, FbNotifications {
           ),
           Center(
               child: Text(
-            'سجل دخول على التطبيق باستخدام فيسبوك او غوغل   ',
+            ' سجل دخول على التطبيق باستخدام فيسبوك أو غوغل أو أبل ',
             style: TextStyle(
                 fontFamily: 'Tj', fontSize: 12.sp, color: Color(0xff797979)),
           )),
           SizedBox(
             height: 25.h,
+          ),
+           
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: SignInWithAppleButton(
+              borderRadius:   const BorderRadius.all(Radius.circular(8.0)),
+            
+              style: SignInWithAppleButtonStyle.whiteOutlined,
+                onPressed: () async {
+              
+                  final credential = await SignInWithApple.getAppleIDCredential(
+                    scopes: [
+                      AppleIDAuthorizationScopes.email,
+                     // AppleIDAuthorizationScopes.fullName,
+                    ],
+                     webAuthenticationOptions: WebAuthenticationOptions(
+                    //   // TODO: Set the `clientId` and `redirectUri` arguments to the values you entered in the Apple Developer portal during the setup
+                       clientId:
+                           'almohandes.com',
+
+                  redirectUri:
+                        // For web your redirect URI needs to be the host of the "current page",
+                        // while for Android you will be using the API server that redirects back into your app via a deep link
+                        kIsWeb
+                            ? Uri.parse('https://')
+                            : Uri.parse(
+                                'https://flutter-sign-in-with-apple-example.glitch.me/callbacks/sign_in_with_apple',
+                              ),
+                     ),
+                 
+                  );
+
+                  // ignore: avoid_print
+                  print(credential);
+                  sendAppleToken(credential.identityToken!);
+
+                  // This is the endpoint that will convert an authorization code obtained
+                  // via Sign in with Apple into a session in your system
+                  final signInWithAppleEndpoint = Uri(
+                    scheme: 'https',
+                    host: 'flutter-sign-in-with-apple-example.glitch.me',
+                    path: '/sign_in_with_apple',
+                    queryParameters: <String, String>{
+                      'code': credential.authorizationCode,
+                      if (credential.givenName != null)
+                        'firstName': credential.givenName!,
+                      if (credential.familyName != null)
+                        'lastName': credential.familyName!,
+                      // 'useBundleId':
+                      //     !kIsWeb && (Platform.isIOS || Platform.isMacOS)
+                      //         ? 'true'
+                      //         : 'false',
+                      if (credential.state != null) 'state': credential.state!,
+                    },
+                  );
+
+                  final session = await http.Client().post(
+                    signInWithAppleEndpoint,
+                  );
+
+                  // If we got this far, a session based on the Apple ID credential has been created in your system,
+                  // and you can now set this as the app's session
+                  // ignore: avoid_print
+                  print(session);
+                },
+              ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -196,11 +314,13 @@ class _LoginState extends State<Login> with ApiHelper, FbNotifications {
                     imagepath: 'images/facebook.svg',
                     text: 'باستخدام فيسبوك ',
                   )),
+                   
             ],
           ),
           SizedBox(
             height: 20.h,
           ),
+          
           Row(
             children: [
               Expanded(

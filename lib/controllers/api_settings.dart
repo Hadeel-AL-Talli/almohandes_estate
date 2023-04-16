@@ -25,6 +25,7 @@ class ApiSettings{
   static const ad = apiUrl + "special";
   static const contactus = apiUrl + "contactinfo";
   static const logout = apiUrl +"logout";
+  static const applelogin = apiUrl+ "applelogin";
 
 
 
