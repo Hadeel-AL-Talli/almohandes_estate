@@ -150,18 +150,19 @@ class _LoginState extends State<Login> with ApiHelper, FbNotifications {
 
   }
   //apple login api
-  void sendAppleToken(String appleToken) async {
-    print('token apple : $appleToken') ;
+  void sendAppleToken(String appleToken , String name ) async {
+    print('token apple : $appleToken  ') ;
+    print('name : $name  ') ;
     var url = Uri.parse(ApiSettings.applelogin);
 
     var response = await http.post(url,
-        body: json.encode({"token": appleToken}),
+        body: json.encode({"token": appleToken , 'name' : name }),
         headers: {"Content-Type": "application/json"});
     print(response.body) ;
     var body = json.decode(response.body);
     if(response.statusCode == 200 && body["success"] == true) {
       await SharedPrefController().save(
-        name: jsonDecode(response.body)['data']["name"],
+        name: jsonDecode(response.body)['data']["name"]??'',
         token: jsonDecode(response.body)['data']["token"],
       );
       await Navigator.pushReplacementNamed(
@@ -219,7 +220,6 @@ class _LoginState extends State<Login> with ApiHelper, FbNotifications {
                       AppleIDAuthorizationScopes.fullName,
                     ],
                      webAuthenticationOptions: WebAuthenticationOptions(
-                    //   // TODO: Set the `clientId` and `redirectUri` arguments to the values you entered in the Apple Developer portal during the setup
                        clientId:
                            'almohandesEstate.com.example',
 
@@ -231,12 +231,16 @@ class _LoginState extends State<Login> with ApiHelper, FbNotifications {
                               ApiSettings.applelogin,
                               ),
                      ),
-                 
+
                   );
+                  //benameurhemidi10@gmail.com
 
                   // ignore: avoid_print
-                  print(credential);
-                  sendAppleToken(credential.identityToken!);
+                  print('token : ${credential.identityToken!}');
+                  print('authorizationCode : ${credential.authorizationCode}');
+                  print('givenName : ${credential.givenName??''}');
+                  print('familyName : ${credential.familyName?? ''}');
+                  sendAppleToken(credential.identityToken! , '${credential.familyName} ${credential.givenName}');
 
                   // This is the endpoint that will convert an authorization code obtained
                   // via Sign in with Apple into a session in your system
