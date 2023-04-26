@@ -174,7 +174,7 @@ List<AdModel> _myAd = <AdModel>[];
                         onPressed: () {
                           print("aaaa");
                           setState(() {
-                            Navigator.pushReplacement(
+                            Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => const MainScreen(

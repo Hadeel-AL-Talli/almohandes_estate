@@ -22,9 +22,9 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  RangeValues _currentRangeValues = RangeValues(
-      double.parse(SharedPrefController().min.toString()),
-      double.parse(SharedPrefController().max.toString()));
+  // RangeValues _currentRangeValues = RangeValues(
+  //     double.parse(SharedPrefController().min.toString()),
+  //     double.parse(SharedPrefController().max.toString()));
   String categoryId = "";
   String typeId = "";
   String tabooId = "";
@@ -446,8 +446,8 @@ class _SearchState extends State<Search> {
 
                       });
                       await getData(
-                        priceMin:_currentRangeValues.start.round().toString(),
-                        priceMax: _currentRangeValues.end.round().toString()
+                        priceMin:0.toString(),
+                        priceMax: 0.toString()
                       );
                       setState(() {
                         loding=false;
