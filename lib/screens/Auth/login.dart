@@ -49,12 +49,19 @@ class _LoginState extends State<Login> with ApiHelper, FbNotifications {
       // 'https://www.googleapis.com/auth/contacts.readonly'
     ],
   );
+<<<<<<< HEAD
 //   var appleSignIn=SignInWithApple.getAppleIDCredential(
 //                     scopes: [
 //                       AppleIDAuthorizationScopes.email,
 //                      // AppleIDAuthorizationScopes.fullName,
 //                     ],
 //  );
+=======
+
+
+
+
+>>>>>>> b63a5d662bf356ade919e7b209316fca594e65a2
   @override
   void initState() {
     // TODO: implement initState
@@ -151,6 +158,7 @@ class _LoginState extends State<Login> with ApiHelper, FbNotifications {
 
   }
   //apple login api
+<<<<<<< HEAD
   // void sendAppleToken(String appleToken) async {
   //   var url = Uri.parse(ApiSettings.applelogin);
   //   var response = await http.post(url,
@@ -192,6 +200,28 @@ class _LoginState extends State<Login> with ApiHelper, FbNotifications {
 //     print('Apple Sign-In Error: $error');
 //   }
 // }
+=======
+  void sendAppleToken(String appleToken , String name ) async {
+    print('token apple : $appleToken  ') ;
+    print('name : $name  ') ;
+    var url = Uri.parse(ApiSettings.applelogin);
+
+    var response = await http.post(url,
+        body: json.encode({"token": appleToken , 'name' : name }),
+        headers: {"Content-Type": "application/json"});
+    print(response.body) ;
+    var body = json.decode(response.body);
+    if(response.statusCode == 200 && body["success"] == true) {
+      await SharedPrefController().save(
+        name: jsonDecode(response.body)['data']["name"]??'',
+        token: jsonDecode(response.body)['data']["token"],
+      );
+      await Navigator.pushReplacementNamed(
+          context, '/main_screen');
+    }
+
+  }
+>>>>>>> b63a5d662bf356ade919e7b209316fca594e65a2
 
 
   @override
@@ -232,6 +262,7 @@ class _LoginState extends State<Login> with ApiHelper, FbNotifications {
           //   child: SignInWithAppleButton(
           //     borderRadius:   const BorderRadius.all(Radius.circular(8.0)),
             
+<<<<<<< HEAD
           //     style: SignInWithAppleButtonStyle.whiteOutlined,
           //       onPressed: () async {
               
@@ -291,6 +322,88 @@ class _LoginState extends State<Login> with ApiHelper, FbNotifications {
           //       },
           //     ),
           // ),
+=======
+              style: SignInWithAppleButtonStyle.whiteOutlined,
+                onPressed: () async {
+                print('call ____') ;
+              
+                  final credential = await SignInWithApple.getAppleIDCredential(
+                    scopes: [
+                      //AppleIDAuthorizationScopes.email,
+                      AppleIDAuthorizationScopes.fullName,
+                    ],
+                     webAuthenticationOptions: WebAuthenticationOptions(
+                       clientId:
+                           'almohandesEstate.com.example',
+
+                  redirectUri:
+                        // For web your redirect URI needs to be the host of the "current page",
+                        // while for Android you will be using the API server that redirects back into your app via a deep link
+                        //https://app1.tp-iraq.com/api/applelogin
+                            Uri.parse(
+                              ApiSettings.applelogin,
+                              ),
+                     ),
+
+                  );
+                  //benameurhemidi10@gmail.com
+
+                  // ignore: avoid_print
+                  print('token : ${credential.identityToken!}');
+                  print('authorizationCode : ${credential.authorizationCode}');
+                  print('givenName : ${credential.givenName??''}');
+                  print('familyName : ${credential.familyName?? ''}');
+                  sendAppleToken(credential.identityToken! , '${credential.familyName} ${credential.givenName}');
+
+                  // This is the endpoint that will convert an authorization code obtained
+                  // via Sign in with Apple into a session in your system
+                  /*
+                  final signInWithAppleEndpoint = Uri(
+                    scheme: 'https',
+                    host: 'app1.tp-iraq.com',
+                    path: '/api/applelogin',
+                    queryParameters: <String, String>{
+                       'token' : credential.identityToken! ,
+                       'code': credential.authorizationCode,
+                      if (credential.givenName != null)
+                        'firstName': credential.givenName!,
+                      if (credential.familyName != null)
+                        'lastName': credential.familyName!,
+                       'useBundleId':
+                           !kIsWeb && (Platform.isIOS || Platform.isMacOS)
+                               ? 'true'
+                               : 'false',
+                      if (credential.state != null) 'state': credential.state!,
+                    },
+                  );
+
+                  final response = await http.Client().post(
+                    signInWithAppleEndpoint,
+                  );
+
+                  // If we got this far, a session based on the Apple ID credential has been created in your system,
+                  // and you can now set this as the app's session
+                  // ignore: avoid_print
+                  print(response.body);
+               //var body = json.decode(response.body);
+
+                if(response.statusCode == 200 ) {
+                  await SharedPrefController().save(
+                    name: jsonDecode(response.body)['data']["name"],
+                    token: jsonDecode(response.body)['data']["token"],
+                  );
+                  await Navigator.pushReplacementNamed(
+                      context, '/main_screen');
+                }
+
+                   */
+
+
+
+                },
+              ),
+          ),
+>>>>>>> b63a5d662bf356ade919e7b209316fca594e65a2
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

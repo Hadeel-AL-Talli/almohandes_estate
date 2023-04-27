@@ -7,12 +7,14 @@ import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../controllers/api_helper.dart';
 import '../../controllers/api_settings.dart';
 import '../../controllers/auth_api_controller.dart';
 import '../../models/register_user.dart';
+import '../../prefs/shared_prefrences_controller.dart';
 import '../../widgets/app_text_feild.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/social_button.dart';
@@ -111,7 +113,30 @@ void sendGoogleToken(String googleToken)async{
 //       throw 'Could not launch $url';
 //     }
 //   }
-  
+
+
+  //apple login api
+  void sendAppleToken(String appleToken , String name ) async {
+    print('token apple : $appleToken  ') ;
+    print('name : $name  ') ;
+    var url = Uri.parse(ApiSettings.applelogin);
+
+    var response = await http.post(url,
+        body: json.encode({"token": appleToken , 'name' : name }),
+        headers: {"Content-Type": "application/json"});
+    print(response.body) ;
+    var body = json.decode(response.body);
+    if(response.statusCode == 200 && body["success"] == true) {
+      await SharedPrefController().save(
+        name: jsonDecode(response.body)['data']["name"]??'',
+        token: jsonDecode(response.body)['data']["token"],
+      );
+      await Navigator.pushReplacementNamed(
+          context, '/main_screen');
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -125,7 +150,93 @@ void sendGoogleToken(String googleToken)async{
          Center(child: Text('انشئ حسابك على التطبيق باستخدام فيسبوك او غوغل   ', style: TextStyle(fontFamily: 'Tj',  fontSize: 12.sp, color: Color(0xff797979)),)),
 
         SizedBox(height: 25.h,),
-         Row(
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: SignInWithAppleButton(
+              borderRadius:   const BorderRadius.all(Radius.circular(8.0)),
+
+              style: SignInWithAppleButtonStyle.whiteOutlined,
+              onPressed: () async {
+                print('call ____') ;
+
+                final credential = await SignInWithApple.getAppleIDCredential(
+                  scopes: [
+                    //AppleIDAuthorizationScopes.email,
+                    AppleIDAuthorizationScopes.fullName,
+                  ],
+                  webAuthenticationOptions: WebAuthenticationOptions(
+                    clientId:
+                    'almohandesEstate.com.example',
+
+                    redirectUri:
+                    // For web your redirect URI needs to be the host of the "current page",
+                    // while for Android you will be using the API server that redirects back into your app via a deep link
+                    //https://app1.tp-iraq.com/api/applelogin
+                    Uri.parse(
+                      ApiSettings.applelogin,
+                    ),
+                  ),
+
+                );
+                //benameurhemidi10@gmail.com
+
+                // ignore: avoid_print
+                print('token : ${credential.identityToken!}');
+                print('authorizationCode : ${credential.authorizationCode}');
+                print('givenName : ${credential.givenName??''}');
+                print('familyName : ${credential.familyName?? ''}');
+                sendAppleToken(credential.identityToken! , '${credential.familyName} ${credential.givenName}');
+
+                // This is the endpoint that will convert an authorization code obtained
+                // via Sign in with Apple into a session in your system
+                /*
+                  final signInWithAppleEndpoint = Uri(
+                    scheme: 'https',
+                    host: 'app1.tp-iraq.com',
+                    path: '/api/applelogin',
+                    queryParameters: <String, String>{
+                       'token' : credential.identityToken! ,
+                       'code': credential.authorizationCode,
+                      if (credential.givenName != null)
+                        'firstName': credential.givenName!,
+                      if (credential.familyName != null)
+                        'lastName': credential.familyName!,
+                       'useBundleId':
+                           !kIsWeb && (Platform.isIOS || Platform.isMacOS)
+                               ? 'true'
+                               : 'false',
+                      if (credential.state != null) 'state': credential.state!,
+                    },
+                  );
+
+                  final response = await http.Client().post(
+                    signInWithAppleEndpoint,
+                  );
+
+                  // If we got this far, a session based on the Apple ID credential has been created in your system,
+                  // and you can now set this as the app's session
+                  // ignore: avoid_print
+                  print(response.body);
+               //var body = json.decode(response.body);
+
+                if(response.statusCode == 200 ) {
+                  await SharedPrefController().save(
+                    name: jsonDecode(response.body)['data']["name"],
+                    token: jsonDecode(response.body)['data']["token"],
+                  );
+                  await Navigator.pushReplacementNamed(
+                      context, '/main_screen');
+                }
+
+                   */
+
+
+
+              },
+            ),
+          ),
+
+          Row(
           mainAxisAlignment: MainAxisAlignment.center,
            children: [
              InkWell(
