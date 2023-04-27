@@ -67,7 +67,7 @@ dependencies:
   drop_shadow:
   scroll_indicator: ^0.0.3
   cached_network_image:
-  sign_in_with_apple: ^4.3.0
+  # sign_in_with_apple: ^4.3.0
  
 dev_dependencies:
   flutter_test:
