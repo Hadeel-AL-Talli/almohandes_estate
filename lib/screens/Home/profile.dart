@@ -203,16 +203,19 @@ await logout(context);
     child: Row(
       children: [
         
-           SizedBox(width: 30.w,),
-            Image.asset('images/user.png', height: 20.h, width: 20.w),
+           SizedBox(width: 35.w,),
+            SvgPicture.asset('images/del.svg', width: 20.w,height: 20.h,color: Colors.black,),
              
-              SizedBox(width: 20.w,),
+              SizedBox(width: 15.w,),
         Text('حذف حسابي ',style: TextStyle(fontFamily: 'Tj',fontSize: 14.sp ,fontWeight: FontWeight.bold, color: Colors.red),),
+
+        
       ],
     )),
+     SizedBox(height: 20.h,),
             ],
           ),
-        )
+        ),
        ],
     );
 
