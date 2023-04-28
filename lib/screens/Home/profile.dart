@@ -204,7 +204,7 @@ await logout(context);
       children: [
         
            SizedBox(width: 30.w,),
-              Icon(Icons.delete_forever_outlined),
+            Image.asset('images/user.png', height: 20.h, width: 20.w),
              
               SizedBox(width: 20.w,),
         Text('حذف حسابي ',style: TextStyle(fontFamily: 'Tj',fontSize: 14.sp ,fontWeight: FontWeight.bold, color: Colors.red),),
