@@ -192,7 +192,7 @@ await logout(context);
           ),
 
 
-          SizedBox(height: 20,),
+          SizedBox(height: 10,),
 
           
           InkWell(
@@ -203,7 +203,10 @@ await logout(context);
     child: Row(
       children: [
         
-          SizedBox(width: 60.w,),
+           SizedBox(width: 30.w,),
+              Icon(Icons.delete_forever_outlined),
+             
+              SizedBox(width: 20.w,),
         Text('حذف حسابي ',style: TextStyle(fontFamily: 'Tj',fontSize: 14.sp ,fontWeight: FontWeight.bold, color: Colors.red),),
       ],
     )),
