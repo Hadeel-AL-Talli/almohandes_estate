@@ -1,3 +1,4 @@
+import 'package:almohandes_estate/controllers/api_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -9,14 +10,14 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../controllers/auth_api_controller.dart';
 
-class Profile extends StatefulWidget {
+class Profile extends StatefulWidget  {
   const Profile({Key? key}) : super(key: key);
 
   @override
   State<Profile> createState() => _ProfileState();
 }
 
-class _ProfileState extends State<Profile> {
+class _ProfileState extends State<Profile> with ApiHelper {
   //final Uri _url = Uri.parse('https://maps.app.goo.gl/wQrcuLtxifH8ddrp6?g_st=it');
 
   @override
@@ -176,6 +177,10 @@ class _ProfileState extends State<Profile> {
               SvgPicture.asset('images/logout.svg'),
               SizedBox(width: 20.w,),
             //  SizedBox(width: 20.w,),
+
+
+
+  
    InkWell(
     onTap: () async{
 await logout(context);
@@ -186,7 +191,22 @@ await logout(context);
             ],
           ),
 
-          SizedBox(height: 10,),
+
+          SizedBox(height: 20,),
+
+          
+          InkWell(
+    onTap: () async{
+  await confirmDelete();
+  
+    },
+    child: Row(
+      children: [
+        
+          SizedBox(width: 60.w,),
+        Text('حذف حسابي ',style: TextStyle(fontFamily: 'Tj',fontSize: 14.sp ,fontWeight: FontWeight.bold, color: Colors.red),),
+      ],
+    )),
             ],
           ),
         )
@@ -209,5 +229,60 @@ await logout(context);
   Future<void> logout(BuildContext context) async {
     bool loggedOut = await AuthApiController().logout();
     if (loggedOut) Navigator.pushReplacementNamed(context, '/login');
+  }
+
+
+
+  confirmDelete(){
+    showDialog(context: context, builder: (BuildContext context)=>AlertDialog(
+     // content:Text( 'هل ترغب حقاً أن تحذف المنشور', style: TextStyle(fontFamily: 'Tj', fontSize: 20.sp, fontWeight: FontWeight.w500),),
+    title: Text( 'هل أنت متأكد؟ سيتم حذف حسابك خلال أيام ', style: TextStyle(fontFamily: 'Tj', fontSize: 20.sp, fontWeight: FontWeight.w500),),
+      actions: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                
+                minimumSize: Size(120,50),
+                primary: Colors.white,
+                shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+              ),
+              onPressed: (){
+                Navigator.pop(context);
+              }, child: Text('إلغاء', style: TextStyle(fontFamily: 'Tj', color: Colors.black,fontSize: 14.sp),)),
+            ElevatedButton(
+          style: ElevatedButton.styleFrom(
+             minimumSize: Size(120,50),
+         shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          ),
+          onPressed: () async{
+         
+
+Navigator.of(context).pop();
+showSnackBar(
+      context,
+      message: 'سيتم حذف حسابك خلال أيام ',
+      error: true,
+    );
+
+
+
+
+//Navigator.push(context, MaterialPageRoute(builder: ((context) =>MyPosts())));
+        }, child: Text('حذف',style: TextStyle(fontFamily: 'Tj', fontSize: 14.sp, fontWeight: FontWeight.w500),)
+        ),
+
+        
+          ],
+        )
+        
+
+       
+        
+      ],
+    ));
   }
 }
