@@ -528,7 +528,7 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
               Padding(
                 padding:
                     const EdgeInsets.only(left: 20.0, right: 15, bottom: 10),
-                child: AppTextField(hint: '200 متر ', controller: interface),
+                child: AppTextField(hint: '15 متر ', controller: interface),
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 15.0, bottom: 10),
@@ -544,7 +544,7 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
               Padding(
                 padding:
                     const EdgeInsets.only(left: 20.0, right: 15, bottom: 10),
-                child: AppTextField(hint: '200 متر ', controller: nzal),
+                child: AppTextField(hint: '10 متر ', controller: nzal),
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 15.0, bottom: 10),
