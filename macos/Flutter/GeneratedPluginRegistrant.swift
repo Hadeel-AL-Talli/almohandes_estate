@@ -9,7 +9,7 @@ import firebase_core
 import firebase_messaging
 import flutter_local_notifications
 import path_provider_foundation
-import share_plus
+import share_plus_macos
 import shared_preferences_foundation
 import sign_in_with_apple
 import sqflite
