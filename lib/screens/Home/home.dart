@@ -140,10 +140,13 @@ List<AdModel> _myAd = <AdModel>[];
           return Column(
             children: [
               TextFormField(
-                onSaved: (value) {},
-                onChanged: (value) {
+                onSaved: (value) {
                   Provider.of<BuildingProvider>(context,
-                      listen: false).sherch(text: value);
+                      listen: false).sherch(text: value!);
+                },
+                onChanged: (value) {
+                  // Provider.of<BuildingProvider>(context,
+                  //     listen: false).sherch(text: value);
                 },
                 decoration: InputDecoration(
                   hintStyle: const TextStyle(fontFamily: 'Tj'),

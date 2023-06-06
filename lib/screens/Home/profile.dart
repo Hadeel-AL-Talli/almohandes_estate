@@ -195,18 +195,18 @@ await logout(context);
           SizedBox(height: 20,),
 
           
-          InkWell(
-    onTap: () async{
-  await confirmDelete();
+  //         InkWell(
+  //   onTap: () async{
+  // await confirmDelete();
   
-    },
-    child: Row(
-      children: [
+  //   },
+  //   child: Row(
+  //     children: [
         
-          SizedBox(width: 60.w,),
-        Text('حذف حسابي ',style: TextStyle(fontFamily: 'Tj',fontSize: 14.sp ,fontWeight: FontWeight.bold, color: Colors.red),),
-      ],
-    )),
+  //         SizedBox(width: 60.w,),
+  //       Text('حذف حسابي ',style: TextStyle(fontFamily: 'Tj',fontSize: 14.sp ,fontWeight: FontWeight.bold, color: Colors.red),),
+  //     ],
+  //   )),
             ],
           ),
         )

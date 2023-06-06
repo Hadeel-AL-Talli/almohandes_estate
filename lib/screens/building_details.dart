@@ -1,4 +1,5 @@
 import 'package:almohandes_estate/get/options_getx_controller.dart';
+import 'package:almohandes_estate/models/IsFav.dart';
 import 'package:almohandes_estate/models/option.dart';
 import 'package:almohandes_estate/widgets/GalleryWidget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -18,6 +19,7 @@ import '../controllers/home_api_controller.dart';
 
 import '../controllers/home_api_controller.dart';
 import '../models/details.dart';
+import '../models/favorite.dart';
 
 class BuildingDetails extends StatefulWidget {
   const BuildingDetails({Key? key, required this.id}) : super(key: key);
@@ -31,10 +33,26 @@ class _BuildingDetailsState extends State<BuildingDetails> {
   List<Categories> categories = <Categories>[];
   int _current = 0;
   late Future<List<Details>> _future;
+   
   List<Details> _details = <Details>[];
+ 
   List<Images> _images = <Images>[];
+
+  
   final CarouselController _controller = CarouselController();
   ScrollController scrollController = ScrollController();
+  
+   _viewFav() {
+    bool? isFav;
+    FavoriteApiController().isFav(context, widget.id.toString()).then((value){
+
+     isFav = value;
+   
+
+   } );
+   
+   }
+  
   @override
   void initState() {
     // TODO: implement initState
@@ -42,7 +60,11 @@ class _BuildingDetailsState extends State<BuildingDetails> {
     super.initState();
     print('load data');
     _future = HomeApiController().getDetails(widget.id.toString());
+  
+    
+
   }
+ 
 
   @override
   void dispose() {
@@ -168,21 +190,43 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                               //           color: Colors.white,
                               //         ))),
 
-                              Positioned(
-                                  right: 30.w,
-                                  child: FavoriteButton(
-                                    isFavorite: false,
-                                    valueChanged: (_isFavorite) {
-                                      print('Is Favorite : $_isFavorite');
-                                      _isFavorite == false
-                                          ? FavoriteApiController().unFavourite(
-                                              context,
-                                              id: widget.id.toString())
-                                          : FavoriteApiController()
-                                              .addToFavourite(context,
-                                                  id: widget.id.toString());
-                                    },
-                                  )),
+                          
+                                 
+               
+            
+                  
+                                   Positioned(
+                                      right: 30.w,
+                                      child: FavoriteButton(
+                                       isFavorite:  _viewFav() ,
+                                        valueChanged: (_isFavorite) {
+                                         
+                                            
+                                          
+                                         
+                                          print('Is Favorite : $_isFavorite');
+                                          _isFavorite == false
+                                              ? FavoriteApiController().unFavourite(
+                                                  context,
+                                                  id: widget.id.toString())
+                                              : FavoriteApiController()
+                                                  .addToFavourite(context,
+                                                      id: widget.id.toString());
+                              
+                                                    
+                                        },
+                                        
+                                        
+                                      )
+                                      ),
+
+
+                                      
+                               
+                               
+
+                                
+                              
                               Positioned(
                                   left: 30.w,
                                   child: IconButton(

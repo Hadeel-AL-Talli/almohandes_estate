@@ -45,8 +45,7 @@ class _SearchState extends State<Search> {
     listSelected = await HomeApiController().search(
       category: categoryId,
       city: cityId,
-      priceMax: priceMax,
-      priceMin: priceMin,
+      
       type: tabooId,
     );
     return listSelected;

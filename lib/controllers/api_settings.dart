@@ -27,6 +27,8 @@ class ApiSettings{
   static const logout = apiUrl +"logout";
   static const applelogin = apiUrl+ "applelogin";
 
+  static const isFav = apiUrl+ "property/is_favorite";
+
 
 
 

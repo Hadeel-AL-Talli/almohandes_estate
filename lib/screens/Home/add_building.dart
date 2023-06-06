@@ -940,7 +940,7 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
     if (categoryId.isNotEmpty &&
         tabooId.isNotEmpty &&
         typeId.isNotEmpty &&
-        featuresIdList.isNotEmpty&&point.text.isNotEmpty) {
+        featuresIdList.isNotEmpty&&point.text.isNotEmpty && phone.text.isNotEmpty) {
       // if (listImage.isNotEmpty) {
       //   return true;
       // } else {
