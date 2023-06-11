@@ -304,7 +304,7 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                     width: 5.w,
                                   ),
                                   Text(
-                                    _details[index].location,
+                                    _details[index].cityName,
                                     textDirection: TextDirection.rtl,
                                     style: TextStyle(
                                       fontFamily: 'Tj',

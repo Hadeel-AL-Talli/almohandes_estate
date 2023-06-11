@@ -49,7 +49,7 @@ final  HomeModel homeModel;
         children: [
           SvgPicture.asset('images/location.svg', color:Color(0xff797979) ,),
           SizedBox(width: 5.w,),
-          Text(homeModel.location, style: TextStyle(fontFamily: 'Tj', fontSize: 14.sp, color: Color(0xff797979),),)
+          Text(homeModel.cityName, style: TextStyle(fontFamily: 'Tj', fontSize: 14.sp, color: Color(0xff797979),),)
         ],
        ),
        SizedBox(height: 10.h,),
