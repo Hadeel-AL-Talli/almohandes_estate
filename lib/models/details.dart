@@ -94,7 +94,9 @@ late  String status;
     if (json['features'] != null) {
       features = <Features>[];
       json['features'].forEach((v) {
-        features!.add(new Features.fromJson(v));
+        print('v ====$v}') ;
+        // todo this is work fine
+        features.add( Features.fromJson(v));
       });
     }
     if (json['images'] != null) {
@@ -138,7 +140,7 @@ late  String status;
     data['category_name'] = this.categoryName;
     data['city_name'] = this.cityName;
     if (this.features != null) {
-      data['features'] = this.features!.map((v) => v.toJson()).toList();
+      data['features'] =  features.map((v) => v.toJson()).toList();
     }
     if (this.images != null) {
       data['images'] = this.images!.map((v) => v.toJson()).toList();

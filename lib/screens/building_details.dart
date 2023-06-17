@@ -576,18 +576,50 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                             ),
                           ),
                           /**  todo this error  */
-                          Padding(
-                            padding: const EdgeInsets.only(left: 260, top: 10),
-                            child: Text(
-                              _details[index].features[index].featureName,
-                              textDirection: TextDirection.rtl,
-                              style: TextStyle(
-                                fontFamily: 'Tj',
-                                fontSize: 14.sp,
-                                color: Color(0xff797979),
-                              ),
-                            ),
+                          /*
+                          Builder(
+                            builder: (context) {
+                              print('index = $index') ;
+                              return Padding(
+                                padding: const EdgeInsets.only(left: 260, top: 10),
+                                child: Text(
+                                  _details[index].features[index].featureName,
+                                  textDirection: TextDirection.rtl,
+                                  style: TextStyle(
+                                    fontFamily: 'Tj',
+                                    fontSize: 14.sp,
+                                    color: const Color(0xff797979),
+                                  ),
+                                ),
+                              );
+                            }
                           ),
+
+                           */
+                          Wrap(
+                            direction: Axis.horizontal,
+                            children: _details[index].features
+                                .map((item) => InkWell(
+
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.blue.withOpacity(.5),
+                                    border: Border.all(
+                                        color: Colors.blue),
+                                    borderRadius: BorderRadius.circular(10)),
+                                margin: const EdgeInsets.symmetric(
+                                    horizontal: 5, vertical: 5),
+                                padding: EdgeInsets.all(8),
+                                child: Text(
+                                  item.featureName,
+                                  style:
+                                  Theme.of(context).textTheme.titleSmall,
+                                ),
+                              ),
+                            ))
+                                .toList(),
+                          ),
+
                            
                           Padding(
                             padding: const EdgeInsets.only(top: 25, left: 220),
