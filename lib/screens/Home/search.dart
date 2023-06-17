@@ -468,7 +468,7 @@ class _SearchState extends State<Search> {
                     ),
                     onPressed: () {
                       
-                    },
+                  },
                     child: Text('إعادة تعيين',
                         style: TextStyle(
                             color: Colors.black,

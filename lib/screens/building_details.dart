@@ -1,5 +1,6 @@
 import 'package:almohandes_estate/get/options_getx_controller.dart';
 import 'package:almohandes_estate/models/IsFav.dart';
+import 'package:almohandes_estate/models/my_post.dart';
 import 'package:almohandes_estate/models/option.dart';
 import 'package:almohandes_estate/widgets/GalleryWidget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -37,10 +38,11 @@ class _BuildingDetailsState extends State<BuildingDetails> {
   List<Details> _details = <Details>[];
  
   List<Images> _images = <Images>[];
-
-  
+ 
+   
   final CarouselController _controller = CarouselController();
   ScrollController scrollController = ScrollController();
+   
   
    _viewFav() {
     bool? isFav;
@@ -85,9 +87,13 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                 );
               } else if (snapShot.hasData && snapShot.data!.isNotEmpty) {
                 _details = snapShot.data ?? [];
+                          
+
                 return ListView.builder(
                     itemCount: _details.length,
                     itemBuilder: (context, index) {
+                              
+
                       return Column(
                         children: [
                           SizedBox(
@@ -239,11 +245,29 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                       ))),
                             ],
                           ),
+                          
                           Padding(
-                            padding: const EdgeInsets.only(top: 40, left: 200),
+                            padding: const EdgeInsets.only(top: 40, left: 120),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
+                                
+                                 Text(
+                                  _details[index].categoryName,
+                                  style: TextStyle(
+                                      fontFamily: 'Tj',
+                                      color: Colors.black,
+                                      fontSize: 18.sp,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  ' | ',
+                                  style: TextStyle(
+                                      fontFamily: 'Tj',
+                                      color: Colors.black,
+                                      fontSize: 18.sp,
+                                      fontWeight: FontWeight.bold),
+                                ),
                                 Text(
                                   _details[index].typeName,
                                   style: TextStyle(
@@ -269,6 +293,7 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                       fontSize: 18.sp,
                                       fontWeight: FontWeight.bold),
                                 ),
+                                 
                                 SizedBox(
                                   width: 40.w,
                                 ),
@@ -536,6 +561,7 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                               ),
                             ],
                           ),
+                           
 
                           Padding(
                             padding: const EdgeInsets.only(top: 25, left: 220),
@@ -561,6 +587,7 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                               ),
                             ),
                           ),
+                           
                           Padding(
                             padding: const EdgeInsets.only(top: 25, left: 220),
                             child: Text(
