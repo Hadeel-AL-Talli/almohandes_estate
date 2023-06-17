@@ -575,6 +575,7 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
+                          /**  todo this error  */
                           Padding(
                             padding: const EdgeInsets.only(left: 260, top: 10),
                             child: Text(
