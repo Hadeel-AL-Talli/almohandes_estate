@@ -467,7 +467,33 @@ class _SearchState extends State<Search> {
                       minimumSize: const Size(150, 50),
                     ),
                     onPressed: () {
-                      //to do this error 
+                      //todo this error
+                      for (int i = 0;
+                      i < controller.options!.categories.length;
+                      i++) {
+                        controller.options!.categories[i].selected =
+                        false;
+                      }
+                      for (int i = 0;
+                      i < controller.options!.types.length;
+                      i++) {
+                        controller.options!.types[i].selected =
+                        false;
+                      }
+                      for (int i = 0;
+                      i < controller.options!.cities.length;
+                      i++) {
+                        controller.options!.cities[i].selected =
+                        false;
+                      }
+
+
+                      setState(() {
+
+                       });
+
+                      print('here error') ;
+
                   },
                     child: Text('إعادة تعيين',
                         style: TextStyle(
