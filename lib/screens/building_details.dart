@@ -459,7 +459,7 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                             runSpacing: 5.0,
                             spacing: 5.0,
                             children: [
-                              Text(
+                          Text(
                                 'عدد الغرف ' + _details[index].rooms,
                                 style: TextStyle(
                                   fontFamily: 'Tj',
@@ -475,14 +475,14 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                 color: Color(0xff797979),
                               ),
 
-                              // SizedBox(
+                              SizedBox(
 
-                              //   width: 5.w,
+                                width: 10.w,
 
-                              // ),
+                              ),
 
                               Text(
-                                'رقم العقار ' + _details[index].number ??
+                                'رقم العقار :' + _details[index].number ??
                                     'الرقم لا يوجد ',
                                 style: TextStyle(
                                   fontFamily: 'Tj',
@@ -491,11 +491,11 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                 ),
                               ),
 
-                              // SizedBox(
+                              SizedBox(
 
-                              //   width: 5.w,
+                                width: 20.w,
 
-                              // ),
+                              ),
 
                               SvgPicture.asset(
                                 'images/num.svg',
@@ -504,11 +504,11 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                 color: Color(0xff797979),
                               ),
 
-                              // SizedBox(
+                              SizedBox(
 
-                              //   width: 5.w,
+                                width: 5.w,
 
-                              // ),
+                              ),
 
                               Text(
                                 _details[index].tabooName,
@@ -519,11 +519,11 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                 ),
                               ),
 
-                              // SizedBox(
+                              SizedBox(
 
-                              //   width: 5.w,
+                                width: 5.w,
 
-                              // ),
+                              ),
 
                               SvgPicture.asset(
                                 'images/cat.svg',
@@ -532,26 +532,26 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                 color: Color(0xff797979),
                               ),
 
-                              // SizedBox(
+                              SizedBox(
 
-                              //   width: 5.w,
+                                width: 5.w,
 
-                              // ),
+                              ),
 
-                              Text(
+                          Text(
                                 'طابق عدد ' + _details[index].floors,
                                 style: TextStyle(
                                   fontFamily: 'Tj',
                                   fontSize: 12.sp,
                                   color: Colors.black,
                                 ),
+                              ) ,
+
+                              SizedBox(
+
+                                width: 2.w,
+
                               ),
-
-                              // SizedBox(
-
-                              //   width: 5.w,
-
-                              // ),
 
                               SvgPicture.asset(
                                 'images/buliding.svg',
@@ -559,6 +559,36 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                 width: 18.w,
                                 color: Color(0xff797979),
                               ),
+
+
+
+                              SizedBox(
+                                width: 30.w,
+                               
+                              ),
+                          Text(
+                                'المساحة :' + _details[index].size,
+                                style: TextStyle(
+                                  fontFamily: 'Tj',
+                                  fontSize: 12.sp,
+                                  color: Colors.black,
+                                ),
+                              ) ,
+
+
+                              
+                              SizedBox(
+                                width: 60.w,
+                               
+                              ),
+                          Text(
+                                '  النزال:'  + _details[index].nzal,
+                                style: TextStyle(
+                                  fontFamily: 'Tj',
+                                  fontSize: 12.sp,
+                                  color: Colors.black,
+                                ),
+                              ) ,
                             ],
                           ),
                            
@@ -603,7 +633,7 @@ class _BuildingDetailsState extends State<BuildingDetails> {
 
                               child: Container(
                                 decoration: BoxDecoration(
-                                    color: Colors.blue.withOpacity(.5),
+                              //      color: Colors.blue.withOpacity(.5),
                                     border: Border.all(
                                         color: Colors.blue),
                                     borderRadius: BorderRadius.circular(10)),

@@ -416,6 +416,7 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
                               child: Center(
                                   child: Text(
                                       controller.options!.cities[index].name,
+                                      textAlign: TextAlign.center,
                                       style: TextStyle(
                                           fontFamily: 'Tj',
                                           fontSize: 14.sp,

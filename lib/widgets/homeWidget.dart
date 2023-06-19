@@ -57,7 +57,9 @@ final  HomeModel homeModel;
        // mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
          SizedBox(width: 10.w,),
-          SvgPicture.asset('images/max.svg', color:Color(0xff797979),),
+                   Text("م", style: TextStyle(fontFamily: 'Tj', fontSize: 14.sp, color: Colors.black,),),
+
+        //  SvgPicture.asset('images/max.svg', color:Color(0xff797979),),
           SizedBox(width: 10.w,),
           Text(homeModel.size, style: TextStyle(fontFamily: 'Tj', fontSize: 14.sp, color: Colors.black,),),
           SizedBox(width: 5.w,),
