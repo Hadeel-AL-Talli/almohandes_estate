@@ -35,6 +35,7 @@ class FavoriteApiController with ApiHelper {
     }
     );
     print(jsonDecode(response.body)['status'].toString()+"ahmed");
+
     if (response.statusCode == 200) {
       {
         showSnackBar(
@@ -64,7 +65,8 @@ class FavoriteApiController with ApiHelper {
           "property_id":id
         }
     );
-    print(jsonDecode(response.body)['status'].toString()+"ahmed");
+    print("${jsonDecode(response.body)['status']}ahmed");
+    print('rep == ${response.body}') ;
     if (response.statusCode == 200) {
       {
         showSnackBar(
@@ -133,8 +135,8 @@ if(response.statusCode == 200){
   //       context,
   //       message: jsonDecode(response.body)['message'],
   //     );
-      print(jsonDecode(response.body)['message']);
-  return true;
+      print(jsonDecode(response.body)['data']['isFavorite']);
+  return jsonDecode(response.body)['data']['isFavorite'];
 }
 else if (response.statusCode == 400) {
       var message = jsonDecode(response.body)['message'];

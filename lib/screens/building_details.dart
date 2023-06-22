@@ -42,16 +42,20 @@ class _BuildingDetailsState extends State<BuildingDetails> {
    
   final CarouselController _controller = CarouselController();
   ScrollController scrollController = ScrollController();
-   
+
   /** error to do   */
-   _viewFav() {
-    bool? isFav;
-    FavoriteApiController().isFav(context, widget.id.toString()).then((value){
+  bool? isFav;
+  _viewFav() async {
+    print('dfbvjhdfbvhjfbjdbfvjhdf') ;
 
-     isFav = value;
-   
+    try {
+    isFav = await  FavoriteApiController().isFav(context, widget.id.toString()) ;
+    }catch(e){
+    isFav = false  ;
+    }
+    setState(() {
 
-   } );
+    });
    
    }
   
@@ -62,6 +66,10 @@ class _BuildingDetailsState extends State<BuildingDetails> {
     super.initState();
     print('load data');
     _future = HomeApiController().getDetails(widget.id.toString());
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _viewFav();
+
+    });
   
     
 
@@ -200,16 +208,16 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                  
                
             
-                  /** error to do (isFavorite value ) */
+                  /** error todo (isFavorite value ) */
                                    Positioned(
                                       right: 30.w,
                                       child: FavoriteButton(
-                                       isFavorite:  _viewFav() ,
+                                       isFavorite:  isFav ,
                                         valueChanged: (_isFavorite) {
-                                         
-                                            
-                                          
-                                         
+
+
+
+
                                           print('Is Favorite : $_isFavorite');
                                           _isFavorite == false
                                               ? FavoriteApiController().unFavourite(
@@ -218,11 +226,11 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                               : FavoriteApiController()
                                                   .addToFavourite(context,
                                                       id: widget.id.toString());
-                              
-                                                    
+
+
                                         },
-                                        
-                                        
+
+
                                       )
                                       ),
 
