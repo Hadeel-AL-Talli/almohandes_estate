@@ -43,7 +43,7 @@ class _BuildingDetailsState extends State<BuildingDetails> {
   final CarouselController _controller = CarouselController();
   ScrollController scrollController = ScrollController();
    
-  
+  /** error to do   */
    _viewFav() {
     bool? isFav;
     FavoriteApiController().isFav(context, widget.id.toString()).then((value){
@@ -200,7 +200,7 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                  
                
             
-                  
+                  /** error to do (isFavorite value ) */
                                    Positioned(
                                       right: 30.w,
                                       child: FavoriteButton(
