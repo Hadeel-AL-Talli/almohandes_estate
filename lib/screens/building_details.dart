@@ -38,7 +38,7 @@ class _BuildingDetailsState extends State<BuildingDetails> {
   List<Details> _details = <Details>[];
  
   List<Images> _images = <Images>[];
- 
+
    
   final CarouselController _controller = CarouselController();
   ScrollController scrollController = ScrollController();
@@ -135,7 +135,7 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                       reverse: false,
                                       autoPlayInterval:
                                           const Duration(seconds: 3)),
-                                  itemCount: _images.length,
+                                  itemCount: _details.first.images.length,
                                   itemBuilder: (BuildContext context,
                                           int itemIndex, int pageViewIndex) =>
                                       FullScreenWidget(
@@ -149,7 +149,7 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                                 BorderRadius.circular(20),
                                             image: DecorationImage(
                                               image: NetworkImage(
-                                                  _details[index]
+                                                  _details.first
                                                       .images[itemIndex]
                                                       .image),
                                               fit: BoxFit.fitWidth,
