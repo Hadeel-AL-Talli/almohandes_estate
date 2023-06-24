@@ -141,12 +141,13 @@ List<AdModel> _myAd = <AdModel>[];
             children: [
               TextFormField(
                 onSaved: (value) {
+                  print('value === $value') ;
                   Provider.of<BuildingProvider>(context,
                       listen: false).sherch(text: value!);
                 },
                 onChanged: (value) {
-                  // Provider.of<BuildingProvider>(context,
-                  //     listen: false).sherch(text: value);
+                  Provider.of<BuildingProvider>(context,
+                       listen: false).sherch(text: value);
                 },
                 decoration: InputDecoration(
                   hintStyle: const TextStyle(fontFamily: 'Tj'),
@@ -250,7 +251,7 @@ List<AdModel> _myAd = <AdModel>[];
                     
                     Container(
                     //  width: 350.w,
-                  
+
                       child: Container(
           decoration: BoxDecoration(
             // border: Border.all(color: Colors.white10),
@@ -260,7 +261,7 @@ List<AdModel> _myAd = <AdModel>[];
               // )
               ),
                         width: 280.w,
-                      
+
                         child: Container(
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.white10),
@@ -269,6 +270,7 @@ List<AdModel> _myAd = <AdModel>[];
                           // Image.network(_myAd[index].images, fit: BoxFit.cover,)
                           child:promoCard(_myAd[index].images))),
                     ),
+                    //  | +typeName + city
                     Positioned(
                       bottom: 25.h,right: 28.w,
                       child: Row(

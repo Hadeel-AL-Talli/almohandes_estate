@@ -39,7 +39,8 @@ class BuildingProvider extends ChangeNotifier {
     notifyListeners();
     for(int i=0;i<listBased.length;i++)
     {
-      if(listBased[i].title.toLowerCase().contains(text.toLowerCase()))
+      //typeName + city
+      if(listBased[i].tabooName.toLowerCase().contains(text.toLowerCase()) || listBased[i].typeName.toLowerCase().contains(text.toLowerCase()) )
       {
         listSherch.add(listBased[i]);
       }
