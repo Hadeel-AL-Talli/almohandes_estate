@@ -18,7 +18,8 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # <<<<<<< HEAD
 # <<<<<<< HEAD
 
-version: 1.0.3+13
+version: 1.0.5+1
+
 
 # =======
 # version: 1.0.0+6

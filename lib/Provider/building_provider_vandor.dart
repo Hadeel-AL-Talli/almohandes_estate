@@ -37,6 +37,7 @@ class BuildingProvider extends ChangeNotifier {
     loding = true;
     listSherch.clear();
     notifyListeners();
+    /*
     for(int i=0;i<listBased.length;i++)
     {
       //typeName + city
@@ -45,6 +46,9 @@ class BuildingProvider extends ChangeNotifier {
         listSherch.add(listBased[i]);
       }
     }
+    
+     */
+    listSherch = listBased.where((element) => element.tabooName.toLowerCase().contains(text.toLowerCase()) || element.typeName.toLowerCase().contains(text.toLowerCase())).toList() ;
     listSelected=listSherch;
     loding = false;
     notifyListeners();
