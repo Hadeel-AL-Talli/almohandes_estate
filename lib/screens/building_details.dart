@@ -468,8 +468,8 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                             ),
                           ),
                           Wrap(
-                            runSpacing: 15.0,
-                            spacing: 12.0,
+                            runSpacing: 20.0,
+                            spacing: 5.0,
                             children: [
                           Text(
                                 'عدد الغرف ' + _details[index].rooms,
