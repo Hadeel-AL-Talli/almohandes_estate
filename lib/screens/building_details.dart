@@ -467,144 +467,214 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
-                          Wrap(
-                            runSpacing: 20.0,
-                            spacing: 5.0,
-                            children: [
-                          Text(
-                                'عدد الغرف ' + _details[index].rooms,
-                                style: TextStyle(
-                                  fontFamily: 'Tj',
-                                  fontSize: 15.sp,
-                                  color: Colors.black,
-                                ),
-                              ),
-
-                              // SvgPicture.asset(
-                              //   'images/house.svg',
-                              //   height: 18.h,
-                              //   width: 18.w,
-                              //   color: Color(0xff797979),
-                              // ),
-
-                              SizedBox(
-
-                                width: 10.w,
-
-                              ),
-
-                              Text(
-                                'رقم العقار :' + _details[index].number ??
-                                    'الرقم لا يوجد ',
-                                style: TextStyle(
-                                  fontFamily: 'Tj',
-                                  fontSize: 15.sp,
-                                  color: Colors.black,
-                                ),
-                              ),
-
-                              SizedBox(
-
-                                width: 20.w,
-
-                              ),
-
-                              // SvgPicture.asset(
-                              //   'images/num.svg',
-                              //   height: 18.h,
-                              //   width: 18.w,
-                              //   color: Color(0xff797979),
-                              // ),
-
-                              SizedBox(
-
-                                width: 20.w,
-
-                              ),
-
-                              Text(
-                                _details[index].tabooName,
-                                style: TextStyle(
-                                  fontFamily: 'Tj',
-                                  fontSize: 15.sp,
-                                  color: Colors.black,
-                                ),
-                              ),
-
-                              // SizedBox(
-
-                              //   width: 5.w,
-
-                              // ),
-
-                              // SvgPicture.asset(
-                              //   'images/cat.svg',
-                              //   height: 18.h,
-                              //   width: 18.w,
-                              //   color: Color(0xff797979),
-                              // ),
-
-                              // SizedBox(
-
-                              //   width: 5.w,
-
-                              // ),
-
-                          Text(
-                                'طابق عدد ' + _details[index].floors,
-                                style: TextStyle(
-                                  fontFamily: 'Tj',
-                                  fontSize: 15.sp,
-                                  color: Colors.black,
-                                ),
-                              ) ,
-
-                              // SizedBox(
-
-                              //   width: 2.w,
-
-                              // ),
-
-                              // SvgPicture.asset(
-                              //   'images/buliding.svg',
-                              //   height: 18.h,
-                              //   width: 18.w,
-                              //   color: Color(0xff797979),
-                              // ),
-
-
-
-                              SizedBox(
-                                width: 30.w,
-                               
-                              ),
-                          Text(
-                                'المساحة :' + _details[index].size,
-                                style: TextStyle(
-                                  fontFamily: 'Tj',
-                                  fontSize: 15.sp,
-                                  color: Colors.black,
-                                ),
-                              ) ,
-
-
+                          Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Row(
                               
-                              SizedBox(
-                                width: 60.w,
-                               
-                              ),
-                          Text(
-                                '  النزال:'  + _details[index].nzal,
-                                style: TextStyle(
-                                  fontFamily: 'Tj',
-                                  fontSize: 15.sp,
-                                  color: Colors.black,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              
+                              children: [
+                                
+                    Text(
+                                  'عدد الغرف ' + _details[index].rooms,
+                                  style: TextStyle(
+                                    fontFamily: 'Tj',
+                                    fontSize: 15.sp,
+                                    color: Colors.black,
+                                  ),
                                 ),
-                              ) ,
-                            ],
-                          ),
-                           
 
+                                // SvgPicture.asset(
+                                //   'images/house.svg',
+                                //   height: 18.h,
+                                //   width: 18.w,
+                                //   color: Color(0xff797979),
+                                // ),
+
+                                SizedBox(
+
+                                  width: 10.w,
+
+                                ),
+
+                                Text(
+                                  'رقم العقار' + _details[index].number ??
+                                      'الرقم لا يوجد ',
+                                  style: TextStyle(
+                                    fontFamily: 'Tj',
+                                    fontSize: 15.sp,
+                                    color: Colors.black,
+                                  ),
+                                ),
+
+                                SizedBox(
+
+                                  width: 20.w,
+
+                                ),
+
+                                // SvgPicture.asset(
+                                //   'images/num.svg',
+                                //   height: 18.h,
+                                //   width: 18.w,
+                                //   color: Color(0xff797979),
+                                // ),
+
+                                SizedBox(
+
+                                  width: 20.w,
+
+                                ),
+
+                                Text(
+                                  _details[index].tabooName,
+                                  style: TextStyle(
+                                    fontFamily: 'Tj',
+                                    fontSize: 15.sp,
+                                    color: Colors.black,
+                                  ),
+                                ),
+
+                                // SizedBox(
+
+                                //   width: 5.w,
+
+                                // ),
+
+                                // SvgPicture.asset(
+                                //   'images/cat.svg',
+                                //   height: 18.h,
+                                //   width: 18.w,
+                                //   color: Color(0xff797979),
+                                // ),
+
+                                // SizedBox(
+
+                                //   width: 5.w,
+
+                                // ),
+
+                         
+                              ],
+                            ),
+                          ),
+
+                       
+                           
+Padding(
+  padding: const EdgeInsets.all(15.0),
+  child:   Row(
+  
+    mainAxisAlignment: MainAxisAlignment.spaceAround,
+  
+    children: [
+  
+       Text(
+  
+                                  'طابق عدد ' + _details[index].floors,
+  
+                                  style: TextStyle(
+  
+                                    fontFamily: 'Tj',
+  
+                                    fontSize: 15.sp,
+  
+                                    color: Colors.black,
+  
+                                  ),
+  
+                                ) ,
+  
+  
+  
+                                // SizedBox(
+  
+  
+  
+                                //   width: 2.w,
+  
+  
+  
+                                // ),
+  
+  
+  
+                                // SvgPicture.asset(
+  
+                                //   'images/buliding.svg',
+  
+                                //   height: 18.h,
+  
+                                //   width: 18.w,
+  
+                                //   color: Color(0xff797979),
+  
+                                // ),
+  
+  
+  
+  
+  
+  
+  
+                                SizedBox(
+  
+                                  width: 30.w,
+  
+                                 
+  
+                                ),
+  
+                            Text(
+  
+                                  'المساحة :' + _details[index].size,
+  
+                                  style: TextStyle(
+  
+                                    fontFamily: 'Tj',
+  
+                                    fontSize: 15.sp,
+  
+                                    color: Colors.black,
+  
+                                  ),
+  
+                                ) ,
+  
+  
+  
+  
+  
+                                
+  
+                                SizedBox(
+  
+                                  width: 60.w,
+  
+                                 
+  
+                                ),
+  
+                            Text(
+  
+                                  '  النزال:'  + _details[index].nzal,
+  
+                                  style: TextStyle(
+  
+                                    fontFamily: 'Tj',
+  
+                                    fontSize: 15.sp,
+  
+                                    color: Colors.black,
+  
+                                  ),
+  
+                                ) ,
+  
+    ],
+  
+  ),
+),
                           Padding(
                             padding: const EdgeInsets.only(top: 25, left: 220),
                             child: Text(
