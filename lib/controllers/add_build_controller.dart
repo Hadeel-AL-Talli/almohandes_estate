@@ -49,7 +49,7 @@ class AddBuildingController  with ApiHelper{
          required String features,
          required String name,
          required String phone,
-         required List<XFile?> images,
+          List<XFile?>? images,
           UploadImageCallback?  uploadImageCallback
        }) async {
      var request = http.MultipartRequest("POST", Uri.parse(ApiSettings.propertyAdd));
@@ -79,11 +79,11 @@ class AddBuildingController  with ApiHelper{
      request.headers['Accept']="application/json";
 
      // request.headers['Authorization']="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxNSIsImp0aSI6IjlkZGIwNjk5NTBlODcxZmY5OWFlOGFmOGQ4OTNkN2EyZGZmYWJjODE3Yzc0ZTI5ZGRiMzA4ZTBjNmZmZjc3MmI4NDA2Y2Y0NmQxNmVkZjhlIiwiaWF0IjoxNjU4NDIzNzY2LjE5ODYxMSwibmJmIjoxNjU4NDIzNzY2LjE5ODYxNywiZXhwIjoxNjg5OTU5NzY2LjE5NDc4Nywic3ViIjoiMiIsInNjb3BlcyI6W119.rP1wl9JXao_nLFVqDjxa9A8f-Wjpn-PZOI4IVqNkNb7gXFeYDQgS7oVCm0DIGUHz4QhRjiLPBqm6xB4s6BojCdfN50QhEHmYe6tLNoBJMJmTICh8ce_fb9Zu4zQMVP63Yekcto-LywoQYzpC-vwJqHM4B4CQiLbLvlID-peRb_rhJeQIuzluD6nr0lgGg1UOlTOKoRS3vyYKoemqBW7VJ16E5ZhmNeDguhTtzbdSQiw63Cw6ZZ84u8zjjkRjrThYt9hLTYIK6KJV28gOyndD2kx2sshrfoNPUG43GNlKkUDUjhh3nWioHI_pgtVTKweLtbV1BbhmQ15POe6NWc5j3MG63lySYy5lmd20HzhghVby3cWUgP5XtL5sNHmuZ_5jBK2mwyINdQmJ34zZ-dm7nqm6UKxbhxLIgwPZy27c3Lk74seD6i5qSsRbsXc-oWKUH1rQVKCEz8vjapZjXeGEBp1n6mSzDTL60rNbNbPw2wSDjg82q74YvgwUSjyQolTxc3pR9EOJhLOo-TekUN1hESwhvK9m2C3rAcdGrjU5QqzqpOVmUuGCMUDvUKvwkFGJaF7E8jcpnccxCUz0QjnBOvqKReFMi-rEfgC00KYulokChOAh6XU1W_Njf3bgySlRqT2cC-KC7fP6N9GeE2b5KZCfXJTQJaQss3Br-tWYpO0";
-     if(images.isNotEmpty){
-       for(int i=0;i<images.length;i++){
-         request.files.add( await http.MultipartFile.fromPath('images[]', images[i]!.path));
-       }
-     }
+    //  if(images.isNotEmpty){
+    //    for(int i=0;i<images.length;i++){
+    //      request.files.add( await http.MultipartFile.fromPath('images[]', images[i]!.path));
+    //    }
+    //  }
      var response = await request.send();
      print('StatusCOde: ${response.statusCode}');
      response.stream.transform(utf8.decoder).listen((value) {
