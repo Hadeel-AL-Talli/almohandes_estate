@@ -337,7 +337,8 @@ void sendGoogleToken(String googleToken)async{
                        InkWell(
                         onTap: ()async{
                       //   const url = 'https://sites.google.com/view/almohands-iq/';
-                         const url = 'https://sites.google.com/view/almohands-iq/';
+                       //  const url = 'https://sites.google.com/view/almohands-iq/';
+                       const url = "https://app1.tp-iraq.com/privacy";
       if(await canLaunch(url)){
         await launch(url);
       }else {
