@@ -5,8 +5,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:share_plus/share_plus.dart';
-
 import 'package:url_launcher/url_launcher.dart';
+import 'dart:io' show Platform;
 
 import '../../controllers/auth_api_controller.dart';
 
@@ -192,21 +192,20 @@ await logout(context);
           ),
 
 
-          SizedBox(height: 20,),
+          const SizedBox(height: 20,),
 
-          
-  //         InkWell(
-  //   onTap: () async{
-  // await confirmDelete();
+           if(Platform.isIOS)
+         InkWell(
+    onTap: () async{await confirmDelete();
   
-  //   },
-  //   child: Row(
-  //     children: [
+     },
+    child: Row(
+     children: [
         
-  //         SizedBox(width: 60.w,),
-  //       Text('حذف حسابي ',style: TextStyle(fontFamily: 'Tj',fontSize: 14.sp ,fontWeight: FontWeight.bold, color: Colors.red),),
-  //     ],
-  //   )),
+        SizedBox(width: 60.w,),
+      Text('حذف حسابي ',style: TextStyle(fontFamily: 'Tj',fontSize: 14.sp ,fontWeight: FontWeight.bold, color: Colors.red),),
+    ],
+   )),
             ],
           ),
         )
