@@ -777,13 +777,33 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
                   ),
                 ),
               ),
-               Directionality(
+              //  Directionality(
+              //   textDirection: TextDirection.rtl,
+              //    child: Padding(
+              //     padding: const EdgeInsets.all(15.0),
+              //     child: Text('*اذا كنت لا تملك صورة للعقار ارفق اي صورة افتراضية', style: TextStyle(fontFamily: 'Tj', color: Colors.red),),
+              //                ),
+              //  ),
+              Directionality(
                 textDirection: TextDirection.rtl,
-                 child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Text('*اذا كنت لا تملك صورة للعقار ارفق اي صورة افتراضية', style: TextStyle(fontFamily: 'Tj', color: Colors.red),),
-                             ),
-               ),
+                child: Row(
+                  
+                      children: <Widget>[
+                      
+                        Checkbox(
+                          checkColor: Colors.white,
+                          value: isChecked,
+                          onChanged: (bool? value) {
+                setState(() {
+                  isChecked = value!;
+                });
+                          },
+                        ),
+                 Text('لا يوجد صورة ', style: TextStyle(fontFamily: 'Tj', color: Colors.red)),
+                      ],
+                    ),
+              ),
+   
               SizedBox(
                 height: 16.h,
               ),
