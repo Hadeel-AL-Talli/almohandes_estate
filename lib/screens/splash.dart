@@ -20,7 +20,7 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> {
   @override
   void initState() {
-    HomeApiController().  getPriceMaxMin();
+    //HomeApiController().  getPriceMaxMin();
     // TODO: implement initState
     super.initState();
      FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance; 

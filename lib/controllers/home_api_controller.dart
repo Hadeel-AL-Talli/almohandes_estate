@@ -54,20 +54,20 @@ class HomeApiController with ApiHelper {
     return [];
   }
 
-  Future<void> getPriceMaxMin() async {
-    var url = Uri.parse(ApiSettings.minmax);
-    var response = await http.get(url, headers: headers);
+  // Future<void> getPriceMaxMin() async {
+  //   var url = Uri.parse(ApiSettings.minmax);
+  //   var response = await http.get(url, headers: headers);
 
-    if (response.statusCode == 200) {
-      var categoriesJsonArray = jsonDecode(response.body)['data'] as List;
-      List<PriceMaxMin> list = categoriesJsonArray
-          .map((jsonObject) => PriceMaxMin.fromJson(jsonObject))
-          .toList();
-      if (list.isNotEmpty) {
-        await SharedPrefController().saveMaxMin(priceMaxMin: list[0]);
-      }
-    }
-  }
+  //   if (response.statusCode == 200) {
+  //     var categoriesJsonArray = jsonDecode(response.body)['data'] as List;
+  //     List<PriceMaxMin> list = categoriesJsonArray
+  //         .map((jsonObject) => PriceMaxMin.fromJson(jsonObject))
+  //         .toList();
+  //     if (list.isNotEmpty) {
+  //       await SharedPrefController().saveMaxMin(priceMaxMin: list[0]);
+  //     }
+  //   }
+  // }
      Future<List<Details>> getDetails(String id )async{
       var url = Uri.parse(ApiSettings.propertyDetails.replaceFirst("{id}", id));
       print(url);
@@ -84,14 +84,14 @@ class HomeApiController with ApiHelper {
 
 }
 
-class PriceMaxMin {
-  late String max;
-  late String min;
+// class PriceMaxMin {
+//   late String max;
+//   late String min;
 
-  PriceMaxMin({required this.max, required this.min});
+//   PriceMaxMin({required this.max, required this.min});
 
-  PriceMaxMin.fromJson(Map<String, dynamic> json) {
-    max = json['max'] ?? "";
-    min = json['min'] ?? "";
-  }
-}
+//   PriceMaxMin.fromJson(Map<String, dynamic> json) {
+//     max = json['max'] ?? "";
+//     min = json['min'] ?? "";
+//   }
+// }

@@ -38,12 +38,12 @@ await _sharedPreferences.setString(PrefKeys.token.toString(), 'Bearer '+ token);
      await _sharedPreferences.setString(PrefKeys.email.toString(),  userData.email.toString());
 
    }
-   Future<void> saveMaxMin ({required PriceMaxMin priceMaxMin }) async {
-     print('dddddddddd');
-     await _sharedPreferences.setString(PrefKeys.min.toString(), priceMaxMin.min);
-     await _sharedPreferences.setString(PrefKeys.max.toString(), priceMaxMin.max);
+  //  Future<void> saveMaxMin ({required PriceMaxMin priceMaxMin }) async {
+  //    print('dddddddddd');
+  //    await _sharedPreferences.setString(PrefKeys.min.toString(), priceMaxMin.min);
+  //    await _sharedPreferences.setString(PrefKeys.max.toString(), priceMaxMin.max);
 
-   }
+  //  }
    Future<void> updateProfile ({required String name,required String email,required String password, required String phone   }) async {
     await _sharedPreferences.setString(PrefKeys.name.toString(),name);
     await _sharedPreferences.setString(PrefKeys.email.toString(),email);
