@@ -335,15 +335,18 @@ void sendGoogleToken(String googleToken)async{
                      children: [
                       
                        InkWell(
-                        onTap: ()async{
+                        onTap: (){
                       //   const url = 'https://sites.google.com/view/almohands-iq/';
-                       //  const url = 'https://sites.google.com/view/almohands-iq/';
-                       const url = "https://app1.tp-iraq.com/privacy";
-      if(await canLaunch(url)){
-        await launch(url);
-      }else {
-        throw 'Could not launch $url';
-      }
+                      //  const url = 'https://sites.google.com/view/almohands-iq/';
+                      const url = "https://app1.tp-iraq.com/privacy";
+
+                      _launchURL(url);
+      // if(await canLaunch(url)){
+      //   await launch(url);
+      // }else {
+      //   throw 'Could not launch $url';
+      // }
+    
     
                         },
                          child: Text(
@@ -449,3 +452,13 @@ Future<void> performRegister() async{
     return user; 
   }
 }
+
+
+ _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+  

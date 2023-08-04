@@ -13,10 +13,10 @@ class HomeModel {
  late String front;
  late String street;
  late String description;
- late String tabooId;
- late String typeId;
- late String categoryId;
-  late String cityId;
+ late dynamic tabooId;
+ late dynamic typeId;
+ late dynamic categoryId;
+  late dynamic cityId;
  late String status;
  late String leaseType;
  late String rejectReason;

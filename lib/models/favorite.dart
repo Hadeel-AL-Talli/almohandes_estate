@@ -46,10 +46,10 @@ class FavoriteModel {
   late final String front;
   late final String street;
   late final String description;
-  late final String tabooId;
-  late final String typeId;
-  late final String categoryId;
-  late final String cityId;
+  late final dynamic tabooId;
+  late final dynamic typeId;
+  late final dynamic categoryId;
+  late final dynamic cityId;
   late final String status;
   late final Null leaseType;
   late final String rejectReason;
