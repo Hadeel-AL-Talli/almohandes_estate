@@ -111,15 +111,15 @@ class _FavoriteState extends State<Favorite> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              Text(
-                                _favourite[index].totalPrice + 'د.ع',
-                                textDirection: TextDirection.rtl,
-                                style: TextStyle(
-                                    fontFamily: 'Tj',
-                                    fontSize: 18.sp,
-                                    color: Color(0xff3D6CF0),
-                                    fontWeight: FontWeight.bold),
-                              ),
+                              // Text(
+                              //   _favourite[index].totalPrice + 'د.ع',
+                              //   textDirection: TextDirection.rtl,
+                              //   style: TextStyle(
+                              //       fontFamily: 'Tj',
+                              //       fontSize: 18.sp,
+                              //       color: Color(0xff3D6CF0),
+                              //       fontWeight: FontWeight.bold),
+                              // ),
                               Text(
                                 _favourite[index].title,
                                 textDirection: TextDirection.rtl,

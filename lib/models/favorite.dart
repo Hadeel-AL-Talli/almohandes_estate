@@ -35,7 +35,7 @@ class FavoriteModel {
   late final int id;
   late final String title;
   late final String location;
-  late final String totalPrice;
+  late final dynamic totalPrice;
   late final String meterPrice;
   late final String floors;
   late final String propertyFloor;
