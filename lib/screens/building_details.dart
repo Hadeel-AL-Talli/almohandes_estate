@@ -374,7 +374,7 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                 children: [
                                   Column(
                                     children: [
-                          _details[index].categoryId =="2"?           Text(
+                          _details[index].categoryId ==2?           Text(
                                         'السعر للمتر ',
                                         textDirection: TextDirection.rtl,
                                         style: TextStyle(
@@ -413,7 +413,7 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                     children: [
                                       Column(
                                         children: [
-                                     _details[index].categoryId =="2"?        Text(
+                                     _details[index].categoryId ==2?        Text(
                                             'السعر الكلي',
                                             textDirection: TextDirection.rtl,
                                             style: TextStyle(
@@ -421,7 +421,7 @@ class _BuildingDetailsState extends State<BuildingDetails> {
                                               fontSize: 14.sp,
                                               color: Color(0xff797979),
                                             ),
-                                          ) :  Text(
+                                          ) :   Text(
                                             'السعر السنوي ',
                                             textDirection: TextDirection.rtl,
                                             style: TextStyle(
