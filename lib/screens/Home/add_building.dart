@@ -61,6 +61,7 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
   int? selectedtype ;
   int? selectedcate;
   bool isChecked = false;
+  bool isChecked2 = false;
 
   // Future<void> _pickImage() async {
   //   XFile? imageFile = await _imagePicker.pickImage(
@@ -637,12 +638,12 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
                       width: 150.w,
                       child: AppTextField(
                         //controller.options!.categories.first.name =="بيع"? 
-                          hint:selectedcate ==1?'السعر للمتر':'السعر الشهري', controller: meter_price),
+                          hint:selectedcate ==2?'السعر للمتر':'السعر الشهري', controller: meter_price),
                     ),
                     Container(
                         width: 150.w,
                         child: AppTextField(
-                            hint: selectedcate==1?'السعر الاجمالي ':'السعر السنوي', controller: total_price)),
+                            hint: selectedcate==2?'السعر الاجمالي ':'السعر السنوي', controller: total_price)),
                   ],
                 ),
               ),
@@ -792,10 +793,10 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
                       
                         Checkbox(
                           checkColor: Colors.white,
-                          value: isChecked,
+                          value: isChecked2,
                           onChanged: (bool? value) {
                 setState(() {
-                  isChecked = value!;
+                  isChecked2 = value!;
                 });
                           },
                         ),
