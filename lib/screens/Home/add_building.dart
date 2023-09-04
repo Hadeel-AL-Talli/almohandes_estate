@@ -76,27 +76,40 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
   Future<void> _openCamera(BuildContext context) async {
     XFile? imageFile = await _imagePicker.pickImage(
         source: ImageSource.camera, imageQuality: 50);
+
+       
     if (imageFile != null) {
       setState(() {
         listImage.add(imageFile);
+       
       });
       // AppLocalizations.of(context)!.getstarted,
-    }
+    } 
+
+    
     // Navigator.pop(context);
+
+    
   }
 
   Future<void> _openGallery(BuildContext context) async {
+    
     final pickedFile = await _imagePicker.pickImage(
       source: ImageSource.gallery,
     );
+    print(pickedFile);
+   
     if (pickedFile != null) {
       setState(() {
         listImage.add(pickedFile);
-      });
-      // AppLocalizations.of(context)!.getstarted,
-    }
 
-    // Navigator.pop(context);
+       
+        
+      });
+      
+    }
+    
+  
   }
 
   @override
@@ -616,7 +629,7 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
                 height: 10,
               ),
               Visibility(
-                 visible: selectedcate!=0,
+                 visible: selectedcate!=1,
                 child: Padding(
                   padding: const EdgeInsets.only(right: 15.0, bottom: 10),
                   child: Text(
@@ -630,7 +643,7 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
                 ),
               ),
               Visibility(
-                visible: selectedcate!=0,
+                visible: selectedcate!=1,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -797,6 +810,7 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
                           onChanged: (bool? value) {
                 setState(() {
                   isChecked2 = value!;
+                  print(isChecked2);
                 });
                           },
                         ),
@@ -963,14 +977,16 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
         tabooId.isNotEmpty &&
         typeId.isNotEmpty &&
         featuresIdList.isNotEmpty&&point.text.isNotEmpty && phone.text.isNotEmpty) {
-      // if (listImage.isNotEmpty) {
+      // if (listImage.isEmpty  ) {
+       
       //   return true;
       // } else {
-      //   showSnackBar(
-      //     context: context,
-      //     message: 'يجب اضافة صورة واحدة على الاقل ',
-      //     error: true,
-      //   );
+      //   print(listImage);
+      //   // showSnackBar(
+      //   //   context: context,
+      //   //   message: ' يجب اضافة صورة واحدة على الاقل أو اختيار خيار لا يوجد صورة',
+      //   //   error: true,
+      //   // );
       // }
       return true;
     }
@@ -991,15 +1007,18 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
       }
     }
     print(featuresId+"featuresId");
+    
     await AddBuildingController().propertyAdd(
         uploadImageCallback: (
             {required String message,
             required String status,
             apiRespons}) async {
+            
           if (status == "200") {
             showSnackBar(context: context, message: message);
             Navigator.pushNamed(context, '/accepet');
           } else {
+          
             showSnackBar(context: context, message: message, error: true);
           }
         },
@@ -1026,15 +1045,7 @@ class _AddBuildingState extends State<AddBuilding> with Helpers {
         features: featuresId,
         images: listImage);
 
-    // if(apiRespons.state){
-    //   Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) =>  AddBulkDiscountProductScreen(
-    //         id: apiRespons.productid,
-    //       ),
-    //     ),
-    //   );
-    // }
+    
   }
+  
 }

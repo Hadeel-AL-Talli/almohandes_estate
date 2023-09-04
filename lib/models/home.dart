@@ -22,7 +22,7 @@ class HomeModel {
  late String rejectReason;
  late String tabooName;
  late String typeName;
-  late String? image;
+   String? image;
 
  late String categoryName;
  late String cityName;
@@ -67,7 +67,7 @@ late  List<Features> features;
     number = json['number'] ?? '';
     rooms = json['rooms']??'';
     nzal = json['nzal']??'';
-    image = json['image']??'https://app1.tp-iraq.com/property_images/default.png';
+    image = json['image'];
     //images = json['images']?? 'https://app1.tp-iraq.com/property_images/default.png';
     front = json['front']??'';
     street = json['street']??'';

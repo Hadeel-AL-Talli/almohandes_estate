@@ -34,6 +34,8 @@ final  HomeModel homeModel;
        Row(
        // mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
+                              Text(homeModel.categoryName  , style: TextStyle(fontFamily: 'Tj', color: Colors.black,fontSize: 14.sp),),
+                    Text(' | ', style: TextStyle(fontFamily: 'Tj', color: Colors.black,fontSize: 14.sp),),
                     Text(homeModel.tabooName  , style: TextStyle(fontFamily: 'Tj', color: Colors.black,fontSize: 14.sp),),
                     Text(' | ', style: TextStyle(fontFamily: 'Tj', color: Colors.black,fontSize: 14.sp),),
 
