@@ -13,20 +13,20 @@ class SocialButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       
-      height: 50.h,
-     width: 150.w,
+      height: 45.h,
+     width: 330.w,
       decoration: BoxDecoration(
         border: Border.all(color: Color(0xff3D6CF0)),
         borderRadius: BorderRadius.circular(15)
        
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(width: 10.w,),
          SvgPicture.asset(imagepath!),
          SizedBox(width: 10.w,),
-         Text(text!, style: TextStyle(fontFamily: 'Tj', color: Color(0xff797979), fontSize: 10.sp),),
+         Text(text!, style: TextStyle(fontFamily: 'Tj', color: Colors.black, fontSize: 15.sp, fontWeight: FontWeight.bold),),
          SizedBox(width: 10.w,),
          
         ],

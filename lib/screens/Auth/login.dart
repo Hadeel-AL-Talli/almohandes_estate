@@ -195,7 +195,7 @@ class _LoginState extends State<Login> with ApiHelper, FbNotifications {
           ),
           Center(
               child: Text(
-            ' سجل دخول على التطبيق باستخدام فيسبوك أو غوغل أو أبل ',
+            ' سجل دخول على التطبيق باستخدام  غوغل أو أبل ',
             style: TextStyle(
                 fontFamily: 'Tj', fontSize: 12.sp, color: Color(0xff797979)),
           )),
@@ -304,14 +304,14 @@ class _LoginState extends State<Login> with ApiHelper, FbNotifications {
               SizedBox(
                 width: 10.w,
               ),
-              InkWell(
-                  onTap: () async {
-                    _facebookLogin();
-                  },
-                  child: SocialButton(
-                    imagepath: 'images/facebook.svg',
-                    text: 'باستخدام فيسبوك ',
-                  )),
+              // InkWell(
+              //     onTap: () async {
+              //       _facebookLogin();
+              //     },
+              //     child: SocialButton(
+              //       imagepath: 'images/facebook.svg',
+              //       text: 'باستخدام فيسبوك ',
+              //     )),
                    
             ],
           ),
